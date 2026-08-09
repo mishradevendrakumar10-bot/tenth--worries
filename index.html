@@ -42,12 +42,13 @@
             background: var(--bg-outer); 
             background-image: radial-gradient(circle at 10% 20%, rgba(67, 24, 255, 0.05), transparent 30%), 
                               radial-gradient(circle at 90% 80%, rgba(5, 205, 153, 0.05), transparent 30%);
-            color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 2vh; overflow: hidden; 
+            color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; 
+            padding: 2vh; overflow: hidden; /* Hidden for desktop, overridden for mobile */
         }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
-        input, select, textarea { font-family: inherit; outline: none; border: none; color: var(--text-main); }
+        input, select, textarea { font-family: inherit; outline: none; border: none; color: var(--text-main); max-width: 100%;}
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 10px; opacity: 0.3; }
@@ -56,8 +57,9 @@
             width: 100%; max-width: 1600px; height: 96vh; background: var(--bg-inner);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: var(--glass-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); 
-            display: grid; grid-template-columns: 260px 1fr 340px; overflow: hidden; position: relative;
+            display: grid; grid-template-columns: 260px 1fr 340px; position: relative;
             opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
         }
         .app-window.unlocked { opacity: 1; transform: scale(1); }
         .text-gradient { background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -70,40 +72,42 @@
             background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             display: flex; justify-content: center; align-items: center; z-index: 99999;
             transition: opacity 0.5s ease, visibility 0.5s;
+            overflow: hidden; /* Prevent emoji overflow */
         }
         [data-theme="dark"] .login-overlay { background: rgba(11, 20, 55, 0.8); }
         .login-overlay.hidden { opacity: 0; visibility: hidden; }
         
         .bg-emoji { position: absolute; font-size: 3rem; animation: floatEmoji 6s infinite ease-in-out; opacity: 0.9; }
-        .bg-emoji:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; font-size: 4.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(2) { top: 25%; right: 25%; animation-delay: 1.5s; font-size: 3.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(3) { bottom: 20%; left: 30%; animation-delay: 3s; font-size: 4rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(4) { bottom: 30%; right: 20%; animation-delay: 4.5s; font-size: 3rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .bg-emoji:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; font-size: 4.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .bg-emoji:nth-child(2) { top: 25%; right: 10%; animation-delay: 1.5s; font-size: 3.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .bg-emoji:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 3s; font-size: 4rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .bg-emoji:nth-child(4) { bottom: 30%; right: 15%; animation-delay: 4.5s; font-size: 3rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
         @keyframes floatEmoji { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
 
         .login-card {
             background: linear-gradient(145deg, #ffffff, #fff5f7); padding: 50px 40px; border-radius: var(--radius-xl);
-            border: 4px solid #fff; box-shadow: 0 30px 60px rgba(255, 154, 158, 0.3); text-align: center; width: 90%; max-width: 420px;
+            border: 4px solid #fff; box-shadow: 0 30px 60px rgba(255, 154, 158, 0.3); text-align: center; 
+            width: 90%; max-width: 420px; margin: 0 auto;
             opacity: 0; animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s forwards; position: relative; z-index: 10;
         }
         [data-theme="dark"] .login-card { background: var(--bg-inner); border-color: rgba(255,255,255,0.1); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
         @keyframes popIn { 0% { transform: scale(0.5) translateY(50px); opacity: 0; } 70% { transform: scale(1.05) translateY(0); opacity: 1; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 
         .cute-avatar-wrap {
-            width: 100px; height: 100px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 3.5rem; margin: 0 auto 20px auto; box-shadow: 0 15px 25px rgba(0,0,0,0.1); animation: bounceAvatar 2s infinite ease-in-out; border: 3px solid var(--accent-purple);
+            width: 90px; height: 90px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 3rem; margin: 0 auto 20px auto; box-shadow: 0 15px 25px rgba(0,0,0,0.1); animation: bounceAvatar 2s infinite ease-in-out; border: 3px solid var(--accent-purple);
         }
         @keyframes bounceAvatar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        .login-card h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
-        .login-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 30px; font-weight: 700; }
+        .login-card h2 { font-size: 2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
+        .login-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; font-weight: 700; }
         .login-card input {
-            width: 100%; padding: 18px 25px; border-radius: 50px; background: var(--bg-outer); border: 3px solid transparent; text-align: center; font-size: 1.15rem; font-weight: 800;
-            margin-bottom: 25px; transition: var(--transition); color: var(--text-main); box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);
+            width: 100%; padding: 16px 20px; border-radius: 50px; background: var(--bg-outer); border: 3px solid transparent; text-align: center; font-size: 1.1rem; font-weight: 800;
+            margin-bottom: 20px; transition: var(--transition); color: var(--text-main); box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);
         }
         .login-card input:focus { border-color: #FECFEF; outline: none; box-shadow: 0 0 0 5px rgba(255, 154, 158, 0.3); transform: scale(1.03); background: #fff; }
         .login-card button { 
-            width: 100%; justify-content: center; padding: 18px; font-size: 1.2rem; font-weight: 800; border-radius: 50px; background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            width: 100%; justify-content: center; padding: 16px; font-size: 1.1rem; font-weight: 800; border-radius: 50px; background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
             color: #fff; box-shadow: 0 10px 20px rgba(161, 140, 209, 0.4); border: none; transition: transform 0.2s, box-shadow 0.2s;
         }
         .login-card button:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 25px rgba(161, 140, 209, 0.5); }
@@ -113,50 +117,52 @@
            4. SIDEBAR
            ========================================================================== */
         .sidebar { background: var(--bg-sidebar); padding: 30px 20px; display: flex; flex-direction: column; border-right: var(--glass-border); z-index: 20; }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 900; margin-bottom: 40px; padding-left: 10px; color: var(--text-main); }
-        .logo i { color: var(--accent-purple); font-size: 1.8rem; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.4rem; font-weight: 900; margin-bottom: 40px; padding-left: 10px; color: var(--text-main); }
+        .logo i { color: var(--accent-purple); font-size: 1.6rem; }
         .user-profile { text-align: center; margin-bottom: 30px; }
-        .user-profile img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--bg-outer); box-shadow: var(--shadow-md); transition: var(--transition);}
+        .user-profile img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--bg-outer); box-shadow: var(--shadow-md); transition: var(--transition);}
         .user-profile img:hover { transform: scale(1.1) rotate(5deg); border-color: var(--accent-teal);}
-        .user-profile h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
-        .user-profile p { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; background: var(--bg-input); padding: 4px 12px; border-radius: 20px; display: inline-block; }
+        .user-profile h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; word-wrap: break-word;}
+        .user-profile p { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; background: var(--bg-input); padding: 4px 12px; border-radius: 20px; display: inline-block; }
         
         .nav-menu li { margin-bottom: 8px; }
-        .nav-menu li a { display: flex; align-items: center; gap: 15px; padding: 15px 20px; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 700; font-size: 1rem; transition: var(--transition); }
-        .nav-menu li a i { font-size: 1.3rem; width: 24px; text-align: center; transition: var(--transition);}
+        .nav-menu li a { display: flex; align-items: center; gap: 15px; padding: 14px 20px; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 700; font-size: 0.95rem; transition: var(--transition); }
+        .nav-menu li a i { font-size: 1.2rem; width: 24px; text-align: center; transition: var(--transition);}
         .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-purple); background: var(--bg-input); transform: translateX(5px); box-shadow: var(--shadow-sm);}
         
         .mobile-header { display: none; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 20px;}
         .mobile-toggle { font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
-        .mobile-fab { display: none; position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; border-radius: 50%; background: var(--accent-purple); color: white; font-size: 1.6rem; box-shadow: 0 10px 25px rgba(67, 24, 255, 0.4); z-index: 99; justify-content: center; align-items: center; transition: var(--transition); border: 3px solid rgba(255,255,255,0.3);}
+        .mobile-fab { display: none; position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; border-radius: 50%; background: var(--accent-purple); color: white; font-size: 1.5rem; box-shadow: 0 10px 25px rgba(67, 24, 255, 0.4); z-index: 99; justify-content: center; align-items: center; transition: var(--transition); border: 3px solid rgba(255,255,255,0.3);}
         .mobile-fab:active { transform: scale(0.9); }
 
         /* ==========================================================================
            5. MAIN CONTENT & ANIMATIONS (CUTE DASHBOARD)
            ========================================================================== */
-        .main-content { padding: 40px 50px; overflow-y: auto; scroll-behavior: smooth; position: relative; }
-        .view-section { display: none; }
+        .main-content { padding: 40px 50px; overflow-y: auto; scroll-behavior: smooth; position: relative; overflow-x: hidden;}
+        .view-section { display: none; width: 100%; }
         .view-section.active { display: block; }
 
         @keyframes slideUpFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .animate-in { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
 
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .greeting h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 5px; letter-spacing: -0.5px; }
-        .greeting p { color: var(--text-muted); font-size: 1.1rem; font-weight: 700;}
-        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;}
+        .greeting h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; letter-spacing: -0.5px; word-wrap: break-word;}
+        .greeting p { color: var(--text-muted); font-size: 1.05rem; font-weight: 600;}
+        .header-actions { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; width: 100%; justify-content: flex-end;}
         
-        .search-box { background: var(--bg-input); padding: 14px 24px; border-radius: 50px; display: flex; align-items: center; gap: 10px; border: var(--glass-border); box-shadow: var(--shadow-sm); transition: var(--transition);}
+        .search-box { background: var(--bg-input); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px; border: var(--glass-border); box-shadow: var(--shadow-sm); transition: var(--transition); max-width: 100%;}
         .search-box:focus-within { box-shadow: 0 0 0 4px rgba(67, 24, 255, 0.1); border-color: var(--accent-purple);}
-        .search-box input { background: transparent; width: 220px; font-weight: 600;}
+        .search-box input { background: transparent; width: 200px; font-weight: 600; flex: 1;}
         
-        .btn-primary { background: var(--accent-purple); color: #fff; padding: 15px 30px; border-radius: 50px; font-weight: 800; font-size: 1rem; transition: var(--transition); box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); display: flex; align-items: center; gap: 10px;}
+        .btn-primary { background: var(--accent-purple); color: #fff; padding: 14px 28px; border-radius: 50px; font-weight: 800; font-size: 0.95rem; transition: var(--transition); box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); display: flex; align-items: center; gap: 10px; border: none; outline: none; cursor: pointer; white-space: nowrap;}
         .btn-primary:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 25px rgba(67, 24, 255, 0.3); background: #3311cc; }
 
         /* CUTE Dashboard Cards */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-bottom: 45px; }
-        .subject-card { border-radius: var(--radius-xl); padding: 30px; display: flex; flex-direction: column; justify-content: space-between; height: 190px; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; border: 3px solid rgba(255,255,255,0.6);}
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; margin-bottom: 45px; width: 100%;}
+        @media(min-width: 600px){ .cards-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
+        
+        .subject-card { border-radius: var(--radius-xl); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; border: 3px solid rgba(255,255,255,0.6);}
         .subject-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         
         .card-pink { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: var(--text-main); }
@@ -164,55 +170,58 @@
         .card-peach { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: var(--text-main); }
         
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; z-index: 2;}
-        .subject-card h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
-        .subject-card p { font-weight: 700; font-size: 0.95rem; color: var(--text-main); opacity: 0.8;}
+        .subject-card h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
+        .subject-card p { font-weight: 700; font-size: 0.9rem; color: var(--text-main); opacity: 0.8;}
         
-        .cute-card-icon { font-size: 3.5rem; animation: float 3s infinite ease-in-out; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
+        .cute-card-icon { font-size: 3rem; animation: float 3s infinite ease-in-out; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
         .delay-icon-2 { animation-delay: 1s; } .delay-icon-3 { animation-delay: 2s; }
 
         .progress-mini { height: 10px; width: 100%; background: rgba(255,255,255,0.6); border-radius: 10px; margin-top: 15px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);}
         .progress-mini-fill { height: 100%; border-radius: 10px; transition: 1.5s ease-out; width: 0%;}
-        
         .card-pink .progress-mini-fill { background: var(--accent-purple); }
         .card-mint .progress-mini-fill { background: var(--accent-teal); }
         .card-peach .progress-mini-fill { background: var(--accent-orange); }
 
         /* Lower Dashboard */
-        .lower-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; }
-        .section-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 25px; color: var(--text-main); display: flex; align-items: center; gap: 10px;}
+        .lower-grid { display: grid; grid-template-columns: 1fr; gap: 30px; width: 100%;}
+        @media(min-width: 1000px){ .lower-grid { grid-template-columns: 1.2fr 0.8fr; } }
+        
+        .section-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 20px; color: var(--text-main); display: flex; align-items: center; gap: 10px;}
         .task-list { display: flex; flex-direction: column; gap: 15px; }
-        .task-item { background: var(--bg-inner); border: var(--glass-border); padding: 22px 25px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); border-left: 6px solid var(--text-muted); cursor: pointer; box-shadow: var(--shadow-sm);}
-        .task-item:hover { transform: translateX(8px); box-shadow: var(--shadow-md); border-left-width: 10px;}
+        .task-item { background: var(--bg-inner); border: var(--glass-border); padding: 20px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); border-left: 5px solid var(--text-muted); cursor: pointer; box-shadow: var(--shadow-sm);}
+        .task-item:hover { transform: translateX(8px); box-shadow: var(--shadow-md); border-left-width: 8px;}
         .task-item.orange { border-left-color: var(--accent-orange); }
         .task-item.teal { border-left-color: var(--accent-teal); }
-        .task-info h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 5px; }
-        .task-info p { font-size: 0.95rem; color: var(--text-muted); font-weight: 600;}
+        .task-info h4 { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; word-wrap: break-word;}
+        .task-info p { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; word-wrap: break-word;}
 
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .stat-box { background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); text-align: center; border: var(--glass-border); transition: var(--transition); box-shadow: var(--shadow-sm);}
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+        .stat-box { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); text-align: center; border: var(--glass-border); transition: var(--transition); box-shadow: var(--shadow-sm);}
         .stat-box:hover { transform: translateY(-8px) scale(1.03); box-shadow: var(--shadow-md); border-color: var(--accent-teal);}
-        .stat-box h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main);}
-        .stat-box p { font-size: 1rem; color: var(--text-muted); font-weight: 700;}
+        .stat-box h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main);}
+        .stat-box p { font-size: 0.9rem; color: var(--text-muted); font-weight: 700;}
 
         /* ==========================================================================
            6. CUTE FLASHCARDS
            ========================================================================== */
-        .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; perspective: 1000px;}
-        .cute-card { width: 100%; height: 260px; cursor: pointer; background: transparent; transition: transform 0.2s; }
-        .cute-card:hover .card-inner { transform: rotateY(10deg) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; perspective: 1000px; width: 100%;}
+        @media(min-width: 600px){ .flashcard-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
+        
+        .cute-card { width: 100%; height: 250px; cursor: pointer; background: transparent; transition: transform 0.2s; }
+        .cute-card:hover .card-inner { transform: rotateY(10deg) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .cute-card.is-flipped .card-inner { transform: rotateY(180deg); }
         
         .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; border: 3px solid rgba(255,255,255,0.5); }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; border: 3px solid rgba(255,255,255,0.5); }
         
         .card-front { background: var(--bg-inner); color: var(--text-main); }
-        .card-front .emoji { font-size: 4rem; margin-bottom: 15px; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); animation: float 3s infinite ease-in-out;}
-        .card-front h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 5px; }
-        .card-front p { font-size: 0.95rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
+        .card-front .emoji { font-size: 3.5rem; margin-bottom: 12px; filter: drop-shadow(0 8px 8px rgba(0,0,0,0.1)); animation: float 3s infinite ease-in-out;}
+        .card-front h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; word-wrap: break-word;}
+        .card-front p { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
         
         .card-back { background: var(--accent-purple); color: white; transform: rotateY(180deg); }
-        .card-back h4 { font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
-        .card-back p { font-size: 1.05rem; font-weight: 600; line-height: 1.6; opacity: 0.9;}
+        .card-back h4 { font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; word-wrap: break-word;}
+        .card-back p { font-size: 0.95rem; font-weight: 600; line-height: 1.5; opacity: 0.9;}
 
         .theme-chem .card-back { background: linear-gradient(135deg, #FF9A9E, #FECFEF); color: #2B3674; }
         .theme-bio .card-back { background: linear-gradient(135deg, #A8EDEA, #FED6E3); color: #2B3674; }
@@ -224,80 +233,112 @@
         /* ==========================================================================
            7. KANBAN BOARD
            ========================================================================== */
-        .task-input-bar { display: grid; grid-template-columns: 2fr 3fr auto auto; gap: 15px; background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); margin-bottom: 30px; border: var(--glass-border); box-shadow: var(--shadow-sm);}
-        .task-input-bar input, .task-input-bar select { padding: 16px; border-radius: var(--radius-sm); background: var(--bg-input); font-size: 1rem; font-weight: 600;}
-        .kanban-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-        .kanban-col { background: var(--bg-input); padding: 25px 20px; border-radius: var(--radius-lg); min-height: 60vh; border: var(--glass-border); display: flex; flex-direction: column; }
-        .kanban-col h3 { font-size: 1.2rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; padding-bottom: 15px; border-bottom: 2px solid rgba(128,128,128,0.1);}
-        .kanban-col h3 span { background: var(--bg-inner); padding: 4px 14px; border-radius: 50px; font-size: 0.85rem; color: var(--text-main); box-shadow: var(--shadow-sm); }
-        .kanban-zone { flex: 1; display: flex; flex-direction: column; gap: 15px; padding-bottom: 50px; min-height: 100px; }
-        .kanban-card { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 6px solid var(--text-muted); cursor: grab; transition: transform 0.2s, box-shadow 0.2s; position: relative; border-top: var(--glass-border); border-right: var(--glass-border); border-bottom: var(--glass-border);}
+        .task-input-bar { display: grid; grid-template-columns: 1fr; gap: 15px; background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); margin-bottom: 30px; border: var(--glass-border); box-shadow: var(--shadow-sm); width: 100%;}
+        @media(min-width: 768px){ .task-input-bar { grid-template-columns: 2fr 3fr auto auto; } }
+        
+        .task-input-bar input, .task-input-bar select { padding: 14px; border-radius: var(--radius-sm); background: var(--bg-input); font-size: 0.95rem; font-weight: 600; width: 100%; border: none;}
+        .kanban-board { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%;}
+        @media(min-width: 900px){ .kanban-board { grid-template-columns: repeat(3, 1fr); } }
+        
+        .kanban-col { background: var(--bg-input); padding: 20px 15px; border-radius: var(--radius-lg); min-height: 40vh; border: var(--glass-border); display: flex; flex-direction: column; }
+        .kanban-col h3 { font-size: 1.1rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; padding-bottom: 12px; border-bottom: 2px solid rgba(128,128,128,0.1);}
+        .kanban-col h3 span { background: var(--bg-inner); padding: 3px 12px; border-radius: 50px; font-size: 0.8rem; color: var(--text-main); box-shadow: var(--shadow-sm); }
+        .kanban-zone { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 30px; min-height: 80px; }
+        .kanban-card { background: var(--bg-inner); padding: 18px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 5px solid var(--text-muted); cursor: grab; transition: transform 0.2s, box-shadow 0.2s; position: relative; border-top: var(--glass-border); border-right: var(--glass-border); border-bottom: var(--glass-border);}
         .kanban-card:active { cursor: grabbing; transform: scale(0.95) rotate(-2deg); box-shadow: var(--shadow-lg);}
-        .kanban-card h4 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-main); font-weight: 800;}
-        .kanban-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; font-weight: 600;}
-        .delete-btn { position: absolute; top: 15px; right: 15px; color: var(--text-muted); cursor: pointer; transition: 0.2s; font-size: 1.1rem;}
+        .kanban-card h4 { font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main); font-weight: 800; word-wrap: break-word; padding-right: 20px;}
+        .kanban-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; font-weight: 600; word-wrap: break-word;}
+        .delete-btn { position: absolute; top: 15px; right: 15px; color: var(--text-muted); cursor: pointer; transition: 0.2s; font-size: 1rem;}
         .delete-btn:hover { color: #ff4757; transform: scale(1.2); }
 
         /* ==========================================================================
            8. RIGHT PANEL, LOFI & TIMER
            ========================================================================== */
-        .right-panel { background: var(--bg-right-panel); padding: 40px 30px; border-left: var(--glass-border); overflow-y: auto; display: flex; flex-direction: column; gap: 30px; backdrop-filter: blur(20px);}
+        .right-panel { background: var(--bg-right-panel); padding: 40px 30px; border-left: var(--glass-border); overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 30px; backdrop-filter: blur(20px);}
         .close-panel-btn { display: none; font-size: 1.8rem; color: var(--text-main); text-align: right; cursor: pointer; }
         
         .lofi-widget { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: var(--glass-border); display: flex; align-items: center; gap: 15px; transition: var(--transition);}
         .lofi-widget:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .lofi-icon { width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #FF9A9E, #FECFEF); display: flex; justify-content: center; align-items: center; color: #E84393; font-size: 1.4rem; box-shadow: 0 4px 15px rgba(255,154,158,0.4); animation: spin 8s linear infinite; animation-play-state: paused;}
+        .lofi-icon { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9A9E, #FECFEF); display: flex; justify-content: center; align-items: center; color: #E84393; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(255,154,158,0.4); animation: spin 8s linear infinite; animation-play-state: paused;}
         .lofi-widget.playing .lofi-icon { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .lofi-info h4 { font-size: 1.05rem; font-weight: 900; color: var(--text-main); }
-        .lofi-info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 700;}
-        .lofi-controls { margin-left: auto; cursor: pointer; color: var(--accent-purple); font-size: 2rem; transition: var(--transition);}
+        .lofi-info h4 { font-size: 1rem; font-weight: 900; color: var(--text-main); }
+        .lofi-info p { font-size: 0.8rem; color: var(--text-muted); font-weight: 700;}
+        .lofi-controls { margin-left: auto; cursor: pointer; color: var(--accent-purple); font-size: 1.8rem; transition: var(--transition);}
         
-        .timer-container { background: var(--bg-inner); padding: 30px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; border: var(--glass-border); transition: var(--transition);}
+        .timer-container { background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; border: var(--glass-border); transition: var(--transition);}
         .timer-container:hover { transform: translateY(-5px); }
-        .timer-header { font-size: 1.2rem; font-weight: 900; margin-bottom: 25px; color: var(--text-main); display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .progress-ring { position: relative; width: 220px; height: 220px; margin: 0 auto 25px auto; display: flex; justify-content: center; align-items: center; }
+        .timer-header { font-size: 1.1rem; font-weight: 900; margin-bottom: 20px; color: var(--text-main); display: flex; justify-content: center; align-items: center; gap: 8px;}
+        .progress-ring { position: relative; width: 180px; height: 180px; margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center; }
         .progress-ring svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); filter: drop-shadow(0 4px 6px rgba(5,205,153,0.3));}
-        .progress-ring circle { fill: none; stroke-width: 16; stroke-linecap: round; }
+        .progress-ring circle { fill: none; stroke-width: 12; stroke-linecap: round; }
         .ring-bg { stroke: var(--bg-input); }
-        .ring-fill { stroke: var(--accent-teal); stroke-dasharray: 565.48; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; }
-        .time-display { font-size: 3.5rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; position: relative; z-index: 2; }
+        .ring-fill { stroke: var(--accent-teal); stroke-dasharray: 502; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; }
+        .time-display { font-size: 2.8rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; position: relative; z-index: 2; }
         
-        .timer-controls { display: flex; gap: 15px; }
-        .btn-timer { flex: 1; padding: 15px; border-radius: var(--radius-md); font-weight: 800; font-size: 1rem; background: var(--bg-input); color: var(--text-main); border: var(--glass-border); transition: var(--transition); cursor: pointer;}
+        .timer-controls { display: flex; gap: 10px; flex-wrap: wrap;}
+        .btn-timer { flex: 1; min-width: 80px; padding: 12px; border-radius: var(--radius-md); font-weight: 800; font-size: 0.95rem; background: var(--bg-input); color: var(--text-main); border: var(--glass-border); transition: var(--transition); cursor: pointer;}
         .btn-timer.primary { background: var(--accent-teal); color: #fff; box-shadow: 0 10px 20px rgba(5,205,153,0.3); border: none;}
         .btn-timer:hover { transform: translateY(-4px); }
 
         /* ==========================================================================
-           9. MOBILE RESPONSIVENESS
+           9. MOBILE RESPONSIVENESS (BULLETPROOF FIXES)
            ========================================================================== */
         @media (max-width: 1200px) {
             .app-window { grid-template-columns: 240px 1fr; }
-            .right-panel { position: fixed; right: -400px; top: 0; bottom: 0; width: 340px; border-radius: var(--radius-xl) 0 0 var(--radius-xl); box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 100; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+            .right-panel { position: fixed; right: -400px; top: 0; bottom: 0; width: 340px; max-width: 100vw; border-radius: var(--radius-xl) 0 0 var(--radius-xl); box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 100; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
             .right-panel.open { right: 0; }
             .mobile-fab { display: flex; }
             .close-panel-btn { display: block; }
         }
+
+        /* 100% MOBILE FIXES */
         @media (max-width: 900px) {
-            body { padding: 0; }
-            .app-window { display: block; height: 100dvh; border-radius: 0; overflow-y: auto; border: none;}
-            .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 280px; box-shadow: var(--shadow-lg); transition: 0.4s ease; border-radius: 0 20px 20px 0;}
+            body { 
+                padding: 0; 
+                overflow-x: hidden; 
+                overflow-y: auto; /* Enable native scrolling */
+                background: var(--bg-outer);
+            }
+            .app-window { 
+                display: block; 
+                height: auto; min-height: 100vh; 
+                border-radius: 0; overflow-x: hidden; 
+                overflow-y: visible; border: none; box-shadow: none;
+            }
+            .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 280px; box-shadow: var(--shadow-lg); transition: 0.4s ease; border-radius: 0 20px 20px 0; z-index: 1000;}
             .sidebar.open { left: 0; }
-            .main-content { padding: 25px 20px 100px 20px; height: auto; min-height: 100dvh; overflow: visible;}
+            
+            .main-content { 
+                padding: 20px 15px 100px 15px; 
+                height: auto; min-height: 100vh; 
+                overflow-x: hidden; overflow-y: visible;
+                width: 100%;
+            }
+            
             .mobile-header { display: flex; }
-            .top-bar { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 30px;}
-            .header-actions, .search-box, .search-box input, .btn-primary { width: 100%; }
-            .header-actions { flex-direction: column; }
-            .lower-grid, .cards-grid, .stats-grid, .task-input-bar, .kanban-board { grid-template-columns: 1fr; }
-            .right-panel { width: 100%; right: -100%; border-radius: 0; }
-            #toast-container { right: 50%; transform: translateX(50%); width: 90%; top: 10px;}
+            .top-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 25px; width: 100%;}
+            .greeting h1 { font-size: 1.8rem; }
+            
+            .header-actions { width: 100%; flex-direction: column; align-items: stretch; justify-content: center;}
+            .search-box { width: 100%; }
+            .search-box input { width: 100%; }
+            .btn-primary { justify-content: center; width: 100%; }
+            
+            .login-card { padding: 40px 25px; width: 95%;}
+            .login-card h2 { font-size: 1.8rem; }
+            
+            .right-panel { width: 100%; right: -100%; border-radius: 0; padding: 25px 20px;}
+            
+            /* Toasts for mobile */
+            #toast-container { right: 50%; transform: translateX(50%); width: 90%; top: 15px; }
         }
 
         /* Toasts */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 12px; max-width: 350px;}
-        .toast { background: var(--bg-inner); border-left: 5px solid var(--accent-teal); border-radius: var(--radius-md); box-shadow: 0 15px 35px rgba(0,0,0,0.15); backdrop-filter: blur(15px); overflow: hidden; position: relative; animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .toast-content { padding: 18px 20px; display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 700; font-size: 1rem; }
-        .toast-content i { font-size: 1.4rem; color: var(--accent-teal); }
+        .toast { background: var(--bg-inner); border-left: 5px solid var(--accent-teal); border-radius: var(--radius-md); box-shadow: 0 15px 35px rgba(0,0,0,0.15); backdrop-filter: blur(15px); overflow: hidden; position: relative; animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; width: 100%;}
+        .toast-content { padding: 16px 18px; display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 700; font-size: 0.95rem; }
+        .toast-content i { font-size: 1.3rem; color: var(--accent-teal); }
         .toast-progress { height: 4px; background: var(--accent-teal); width: 100%; animation: toastProgress 3s linear forwards; }
         @keyframes toastSlideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes toastSlideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(120%); opacity: 0; } }
@@ -344,7 +385,7 @@
         <main class="main-content">
             <div class="mobile-header">
                 <i class="fa-solid fa-bars mobile-toggle" onclick="document.getElementById('sidebar').classList.add('open')"></i>
-                <div class="logo" style="margin:0; padding:0; font-size:1.4rem;"><i class="fa-solid fa-graduation-cap"></i> 10th Warriors</div>
+                <div class="logo" style="margin:0; padding:0; font-size:1.3rem;"><i class="fa-solid fa-graduation-cap"></i> 10th Warriors</div>
             </div>
 
             <!-- DASHBOARD SECTION -->
@@ -357,7 +398,6 @@
                 </div>
 
                 <div class="cards-grid">
-                    <!-- Cute Pastel Cards -->
                     <div class="subject-card card-pink animate-in delay-1">
                         <div class="card-header">
                             <div><h3>Maths</h3><p>Real Numbers</p></div>
@@ -415,15 +455,15 @@
                     <div class="greeting"><h1 class="text-gradient">Study Vault</h1><p>Securely upload & access PDF resources.</p></div>
                 </div>
                 
-                <div class="upload-box animate-in delay-1" style="background: var(--bg-inner); padding: 30px; border-radius: var(--radius-lg); margin-bottom: 40px; border: 2px dashed var(--accent-teal); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm);">
-                    <input type="file" id="pdfUploader" accept="application/pdf" style="width: 100%; padding: 15px; background: var(--bg-input); border-radius: var(--radius-sm); font-weight: 700;">
+                <div class="upload-box animate-in delay-1" style="background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); margin-bottom: 30px; border: 2px dashed var(--accent-teal); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm);">
+                    <input type="file" id="pdfUploader" accept="application/pdf" style="width: 100%; padding: 12px; background: var(--bg-input); border-radius: var(--radius-sm); font-weight: 700;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:10px;">
-                        <button class="btn-primary" onclick="window.uploadPDFToAppwrite()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload to Cloud</button>
-                        <p id="uploadStatus" style="font-size: 1.1rem; color: var(--accent-orange); font-weight: 800;"></p>
+                        <button class="btn-primary" onclick="window.uploadPDFToAppwrite()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+                        <p id="uploadStatus" style="font-size: 1rem; color: var(--accent-orange); font-weight: 800;"></p>
                     </div>
                 </div>
                 
-                <div class="notes-grid animate-in delay-2" id="notesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
+                <div class="notes-grid animate-in delay-2" id="notesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
                     <!-- Uploaded PDFs -->
                 </div>
             </section>
@@ -435,99 +475,46 @@
                 </div>
 
                 <div class="flashcard-grid animate-in delay-1">
-                    <!-- Science Ch 1 -->
                     <div class="cute-card theme-chem" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">🧪</div>
-                                <h3>Chemical Reactions</h3>
-                                <p>Science • Chapter 1</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Exothermic Reaction</h4>
-                                <p>A reaction where heat is released along with the formation of products. (e.g., Respiration)</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">🧪</div><h3>Chemical Reactions</h3><p>Science • Chapter 1</p></div>
+                            <div class="card-back"><h4>Exothermic Reaction</h4><p>A reaction where heat is released along with the formation of products. (e.g., Respiration)</p></div>
                         </div>
                     </div>
-
-                    <!-- Science Ch 6 -->
                     <div class="cute-card theme-bio" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">🧬</div>
-                                <h3>Life Processes</h3>
-                                <p>Science • Chapter 6</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Xylem vs Phloem</h4>
-                                <p>Xylem transports water from roots to leaves. Phloem transports food from leaves to all parts.</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">🧬</div><h3>Life Processes</h3><p>Science • Chapter 6</p></div>
+                            <div class="card-back"><h4>Xylem vs Phloem</h4><p>Xylem transports water from roots to leaves. Phloem transports food from leaves to all parts.</p></div>
                         </div>
                     </div>
-
-                    <!-- Science Ch 10 -->
                     <div class="cute-card theme-phy" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">💡</div>
-                                <h3>Light: Reflection</h3>
-                                <p>Science • Chapter 10</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Mirror Formula</h4>
-                                <p>1/v + 1/u = 1/f <br><br>(v = image dist, u = object dist, f = focal length)</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">💡</div><h3>Light: Reflection</h3><p>Science • Chapter 10</p></div>
+                            <div class="card-back"><h4>Mirror Formula</h4><p>1/v + 1/u = 1/f <br><br>(v = image dist, u = object dist, f = focal length)</p></div>
                         </div>
                     </div>
-
-                    <!-- Math Ch 1 -->
                     <div class="cute-card theme-math" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">📐</div>
-                                <h3>Real Numbers</h3>
-                                <p>Maths • Chapter 1</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Fundamental Theorem</h4>
-                                <p>For any two positive integers a and b: <br><br>HCF(a,b) × LCM(a,b) = a × b</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">📐</div><h3>Real Numbers</h3><p>Maths • Chapter 1</p></div>
+                            <div class="card-back"><h4>Fundamental Theorem</h4><p>For any two positive integers a and b: <br><br>HCF(a,b) × LCM(a,b) = a × b</p></div>
                         </div>
                     </div>
-
-                    <!-- Geography Ch 1 -->
                     <div class="cute-card theme-geo" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">🌍</div>
-                                <h3>Resources</h3>
-                                <p>Geography • Chapter 1</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Sustainable Dev.</h4>
-                                <p>Development that meets the needs of the present without compromising the ability of future generations.</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">🌍</div><h3>Resources</h3><p>Geography • Chapter 1</p></div>
+                            <div class="card-back"><h4>Sustainable Dev.</h4><p>Development that meets the needs of the present without compromising the ability of future generations.</p></div>
                         </div>
                     </div>
-
-                    <!-- History Ch 1 -->
                     <div class="cute-card theme-hist" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front">
-                                <div class="emoji">👑</div>
-                                <h3>Nationalism in Europe</h3>
-                                <p>History • Chapter 1</p>
-                            </div>
-                            <div class="card-back">
-                                <h4>Treaty of Vienna</h4>
-                                <p>Signed in 1815. Its main goal was to undo the changes brought about by the Napoleonic Wars.</p>
-                            </div>
+                            <div class="card-front"><div class="emoji">👑</div><h3>Nationalism in Europe</h3><p>History • Chapter 1</p></div>
+                            <div class="card-back"><h4>Treaty of Vienna</h4><p>Signed in 1815. Its main goal was to undo the changes brought about by the Napoleonic Wars.</p></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- KANBAN BOARD SECTION (NOW SAVES LOCALLY) -->
+            <!-- KANBAN BOARD SECTION (SAVES LOCALLY) -->
             <section id="kanban" class="view-section">
                 <div class="top-bar animate-in">
                     <div class="greeting"><h1 class="text-gradient">Task Board</h1><p>Your tasks save automatically!</p></div>
@@ -541,7 +528,7 @@
                         <option value="teal">Science / Dev (Teal)</option>
                         <option value="orange">Creative / Other (Orange)</option>
                     </select>
-                    <button class="btn-primary" onclick="window.addKanbanTask()" style="justify-content:center;"><i class="fa-solid fa-plus"></i> Add Task</button>
+                    <button class="btn-primary" onclick="window.addKanbanTask()"><i class="fa-solid fa-plus"></i> Add</button>
                 </div>
 
                 <div class="kanban-board animate-in delay-2">
@@ -565,12 +552,12 @@
                 <div class="top-bar animate-in"><div class="greeting"><h1 class="text-gradient">Preferences</h1><p>Customize your workspace.</p></div></div>
                 <div class="lower-grid animate-in delay-1">
                     <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                        <div><h2 style="font-size:1.8rem;">Dark Mode</h2><p>Switch to night viewing.</p></div>
-                        <input type="checkbox" id="themeToggle" style="transform: scale(1.8); cursor:pointer;">
+                        <div><h2 style="font-size:1.5rem;">Dark Mode</h2><p>Switch to night viewing.</p></div>
+                        <input type="checkbox" id="themeToggle" style="transform: scale(1.5); cursor:pointer;">
                     </div>
                     <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                        <div><h2 style="font-size:1.8rem;">Account</h2><p>Sign out of workspace.</p></div>
-                        <button class="btn-primary" style="background:#ff4757;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                        <div><h2 style="font-size:1.5rem;">Account</h2><p>Sign out of workspace.</p></div>
+                        <button class="btn-primary" style="background:#ff4757; width: auto;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
                     </div>
                 </div>
             </section>
@@ -596,7 +583,7 @@
             <div class="timer-container">
                 <div class="timer-header"><i class="fa-solid fa-stopwatch" style="color:var(--accent-teal);"></i> Pomodoro Timer</div>
                 <div class="progress-ring">
-                    <svg><circle class="ring-bg" cx="110" cy="110" r="100"></circle><circle class="ring-fill" id="timerCircle" cx="110" cy="110" r="100"></circle></svg>
+                    <svg><circle class="ring-bg" cx="90" cy="90" r="80"></circle><circle class="ring-fill" id="timerCircle" cx="90" cy="90" r="80"></circle></svg>
                     <div class="time-display" id="timerDisplay">25:00</div>
                 </div>
                 <div class="timer-controls">
@@ -637,7 +624,7 @@
                 overlay.classList.add('hidden');
                 mainApp.classList.add('unlocked');
                 updateUIWithUsername(userName);
-                loadKanbanFromLocal(); // Load saved tasks
+                loadKanbanFromLocal(); 
             } else {
                 overlay.classList.remove('hidden');
                 mainApp.classList.remove('unlocked');
@@ -663,7 +650,6 @@
 
         function updateUIWithUsername(name) {
             const hour = new Date().getHours();
-            // Cute Greetings based on time!
             let greeting = hour < 12 ? "Good Morning ☀️" : hour < 18 ? "Good Afternoon 🌻" : "Good Evening 🌙";
             document.getElementById('greetingText').innerText = `${greeting}, ${name.split(' ')[0]}!`;
             document.getElementById('profileName').innerText = name;
@@ -684,7 +670,7 @@
             if (!file) return window.showToast("Please select a PDF file!");
             if (file.type !== "application/pdf") return window.showToast("Only PDF allowed.");
 
-            statusText.innerText = 'Uploading to Cloud...';
+            statusText.innerText = 'Uploading...';
 
             appwriteStorage.createFile(BUCKET_ID, ID.unique(), file).then((response) => {
                 statusText.innerText = 'Cloud Upload Success!';
@@ -710,7 +696,7 @@
             });
         }
 
-        // --- LOCAL KANBAN BOARD (SAVES ON REFRESH) ---
+        // --- LOCAL KANBAN BOARD ---
         let tasks = JSON.parse(localStorage.getItem('kanbanTasks')) || [];
         window.draggedItem = null;
 
@@ -722,7 +708,6 @@
             document.getElementById('zone-done').innerHTML = '';
             
             if(tasks.length === 0) {
-                // Add demo tasks if empty
                 tasks = [
                     { id: 'task-1', title: 'Science Revision', desc: 'Read Chapter 1 Flashcards', color: 'teal', status: 'todo' },
                     { id: 'task-2', title: 'Maths HW', desc: 'Solve Ex 1.2', color: 'purple', status: 'prog' }
@@ -773,11 +758,10 @@
             if(window.draggedItem) {
                 document.getElementById('zone-' + zoneId).appendChild(window.draggedItem);
                 
-                // Update Array & Save
                 const taskObj = tasks.find(t => t.id === window.draggedItem.id);
                 if(taskObj) { taskObj.status = zoneId; saveKanbanToLocal(); }
 
-                if(zoneId === 'done') { window.draggedItem.style.opacity = '0.7'; window.fireConfetti(); window.showToast("Awesome! Task Complete! 🎉"); }
+                if(zoneId === 'done') { window.draggedItem.style.opacity = '0.7'; window.fireConfetti(); window.showToast("Task Complete! 🎉"); }
                 else { window.draggedItem.style.opacity = '1'; }
                 
                 window.draggedItem = null; window.updateKanbanCounts();
@@ -826,7 +810,7 @@
         navBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); window.switchView(e.currentTarget.getAttribute('data-target')); }));
 
         // --- TIMER LOGIC ---
-        let timerInt; const FULL_DASH = 628.32; // 2 * pi * 100
+        let timerInt; const FULL_DASH = 502.65; // 2 * pi * 80 (since r=80 for mobile friendly circle)
         let timeLeft = 1500; const totalTime = 1500;
         const timerDisplay = document.getElementById('timerDisplay'); const timerCircle = document.getElementById('timerCircle');
         timerCircle.style.strokeDasharray = FULL_DASH; let isRunning = false;
