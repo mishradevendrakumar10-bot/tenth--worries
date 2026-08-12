@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>10th Warriors | Premium Learning</title>
+    <title>10th Warriors | Premium Learning Workspace</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -43,7 +43,7 @@
             background-image: radial-gradient(circle at 10% 20%, rgba(67, 24, 255, 0.05), transparent 30%), 
                               radial-gradient(circle at 90% 80%, rgba(5, 205, 153, 0.05), transparent 30%);
             color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; 
-            padding: 2vh; overflow: hidden; /* Hidden for desktop, overridden for mobile */
+            padding: 2vh; overflow: hidden;
         }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
@@ -65,63 +65,93 @@
         .text-gradient { background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* ==========================================================================
-           3. CUTE LOGIN OVERLAY
+           3. PROFESSIONAL AUTHENTICATION OVERLAY
            ========================================================================== */
         .login-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            background: rgba(244, 247, 254, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             display: flex; justify-content: center; align-items: center; z-index: 99999;
-            transition: opacity 0.5s ease, visibility 0.5s;
-            overflow: hidden; /* Prevent emoji overflow */
+            transition: opacity 0.6s ease, visibility 0.6s;
         }
-        [data-theme="dark"] .login-overlay { background: rgba(11, 20, 55, 0.8); }
+        [data-theme="dark"] .login-overlay { background: rgba(11, 20, 55, 0.9); }
         .login-overlay.hidden { opacity: 0; visibility: hidden; }
+
+        .professional-login {
+            background: var(--bg-inner);
+            border: var(--glass-border);
+            padding: 50px 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            width: 90%; max-width: 440px; margin: 0 auto;
+            opacity: 0; animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+        }
+
+        @keyframes fadeSlideUp { 
+            0% { transform: translateY(40px); opacity: 0; } 
+            100% { transform: translateY(0); opacity: 1; } 
+        }
+
+        .brand-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+            border-radius: 20px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 2.2rem; color: #fff;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 15px 30px rgba(67, 24, 255, 0.25);
+            transform: rotate(-5deg);
+            transition: var(--transition);
+        }
+        .professional-login:hover .brand-icon { transform: rotate(0deg) scale(1.05); }
+
+        .professional-login h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; color: var(--text-main); letter-spacing: -0.5px; }
+        .professional-login p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; font-weight: 600; }
         
-        .bg-emoji { position: absolute; font-size: 3rem; animation: floatEmoji 6s infinite ease-in-out; opacity: 0.9; }
-        .bg-emoji:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; font-size: 4.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(2) { top: 25%; right: 10%; animation-delay: 1.5s; font-size: 3.5rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 3s; font-size: 4rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        .bg-emoji:nth-child(4) { bottom: 30%; right: 15%; animation-delay: 4.5s; font-size: 3rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
-        @keyframes floatEmoji { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(15deg); } }
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .input-group i {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            color: var(--text-muted); font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .professional-login input {
+            width: 100%; padding: 18px 20px 18px 50px;
+            border-radius: var(--radius-sm); background: var(--bg-outer); 
+            border: 2px solid transparent; font-size: 1rem; font-weight: 700;
+            transition: var(--transition); color: var(--text-main);
+        }
+        .professional-login input:focus { 
+            border-color: var(--accent-purple); outline: none; 
+            background: var(--bg-inner);
+            box-shadow: 0 0 0 4px rgba(67, 24, 255, 0.1); 
+        }
+        .professional-login input:focus + i, .professional-login input:focus ~ i {
+            color: var(--accent-purple);
+        }
 
-        .login-card {
-            background: linear-gradient(145deg, #ffffff, #fff5f7); padding: 50px 40px; border-radius: var(--radius-xl);
-            border: 4px solid #fff; box-shadow: 0 30px 60px rgba(255, 154, 158, 0.3); text-align: center; 
-            width: 90%; max-width: 420px; margin: 0 auto;
-            opacity: 0; animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s forwards; position: relative; z-index: 10;
+        .auth-btn { 
+            width: 100%; padding: 18px; font-size: 1.05rem; font-weight: 800; 
+            border-radius: var(--radius-sm); background: var(--accent-purple);
+            color: #fff; box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); 
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+            transition: var(--transition); letter-spacing: 0.5px;
         }
-        [data-theme="dark"] .login-card { background: var(--bg-inner); border-color: rgba(255,255,255,0.1); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        @keyframes popIn { 0% { transform: scale(0.5) translateY(50px); opacity: 0; } 70% { transform: scale(1.05) translateY(0); opacity: 1; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
-
-        .cute-avatar-wrap {
-            width: 90px; height: 90px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 3rem; margin: 0 auto 20px auto; box-shadow: 0 15px 25px rgba(0,0,0,0.1); animation: bounceAvatar 2s infinite ease-in-out; border: 3px solid var(--accent-purple);
-        }
-        @keyframes bounceAvatar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        .login-card h2 { font-size: 2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
-        .login-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 25px; font-weight: 700; }
-        .login-card input {
-            width: 100%; padding: 16px 20px; border-radius: 50px; background: var(--bg-outer); border: 3px solid transparent; text-align: center; font-size: 1.1rem; font-weight: 800;
-            margin-bottom: 20px; transition: var(--transition); color: var(--text-main); box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .login-card input:focus { border-color: #FECFEF; outline: none; box-shadow: 0 0 0 5px rgba(255, 154, 158, 0.3); transform: scale(1.03); background: #fff; }
-        .login-card button { 
-            width: 100%; justify-content: center; padding: 16px; font-size: 1.1rem; font-weight: 800; border-radius: 50px; background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-            color: #fff; box-shadow: 0 10px 20px rgba(161, 140, 209, 0.4); border: none; transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .login-card button:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 15px 25px rgba(161, 140, 209, 0.5); }
-        .login-card button:active { transform: scale(0.95); }
+        .auth-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(67, 24, 255, 0.35); background: #3511cc; }
+        .auth-btn:active { transform: translateY(0); }
 
         /* ==========================================================================
            4. SIDEBAR
            ========================================================================== */
         .sidebar { background: var(--bg-sidebar); padding: 30px 20px; display: flex; flex-direction: column; border-right: var(--glass-border); z-index: 20; }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.4rem; font-weight: 900; margin-bottom: 40px; padding-left: 10px; color: var(--text-main); }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 900; margin-bottom: 40px; padding-left: 10px; color: var(--text-main); }
         .logo i { color: var(--accent-purple); font-size: 1.6rem; }
         .user-profile { text-align: center; margin-bottom: 30px; }
         .user-profile img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--bg-outer); box-shadow: var(--shadow-md); transition: var(--transition);}
-        .user-profile img:hover { transform: scale(1.1) rotate(5deg); border-color: var(--accent-teal);}
+        .user-profile img:hover { transform: scale(1.05); border-color: var(--accent-teal);}
         .user-profile h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; word-wrap: break-word;}
         .user-profile p { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; background: var(--bg-input); padding: 4px 12px; border-radius: 20px; display: inline-block; }
         
@@ -136,7 +166,7 @@
         .mobile-fab:active { transform: scale(0.9); }
 
         /* ==========================================================================
-           5. MAIN CONTENT & ANIMATIONS (CUTE DASHBOARD)
+           5. MAIN CONTENT & DASHBOARD
            ========================================================================== */
         .main-content { padding: 40px 50px; overflow-y: auto; scroll-behavior: smooth; position: relative; overflow-x: hidden;}
         .view-section { display: none; width: 100%; }
@@ -149,21 +179,16 @@
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;}
         .greeting h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; letter-spacing: -0.5px; word-wrap: break-word;}
         .greeting p { color: var(--text-muted); font-size: 1.05rem; font-weight: 600;}
-        .header-actions { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; width: 100%; justify-content: flex-end;}
         
-        .search-box { background: var(--bg-input); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px; border: var(--glass-border); box-shadow: var(--shadow-sm); transition: var(--transition); max-width: 100%;}
-        .search-box:focus-within { box-shadow: 0 0 0 4px rgba(67, 24, 255, 0.1); border-color: var(--accent-purple);}
-        .search-box input { background: transparent; width: 200px; font-weight: 600; flex: 1;}
-        
-        .btn-primary { background: var(--accent-purple); color: #fff; padding: 14px 28px; border-radius: 50px; font-weight: 800; font-size: 0.95rem; transition: var(--transition); box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); display: flex; align-items: center; gap: 10px; border: none; outline: none; cursor: pointer; white-space: nowrap;}
-        .btn-primary:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 15px 25px rgba(67, 24, 255, 0.3); background: #3311cc; }
+        .btn-primary { background: var(--accent-purple); color: #fff; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 800; font-size: 0.95rem; transition: var(--transition); box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); display: flex; align-items: center; gap: 10px; border: none; outline: none; cursor: pointer; white-space: nowrap;}
+        .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 15px 25px rgba(67, 24, 255, 0.3); background: #3311cc; }
 
-        /* CUTE Dashboard Cards */
+        /* Dashboard Cards */
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; margin-bottom: 45px; width: 100%;}
         @media(min-width: 600px){ .cards-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
         
-        .subject-card { border-radius: var(--radius-xl); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; border: 3px solid rgba(255,255,255,0.6);}
-        .subject-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .subject-card { border-radius: var(--radius-xl); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; border: var(--glass-border);}
+        .subject-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         
         .card-pink { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: var(--text-main); }
         .card-mint { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); color: var(--text-main); }
@@ -175,6 +200,7 @@
         
         .cute-card-icon { font-size: 3rem; animation: float 3s infinite ease-in-out; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
         .delay-icon-2 { animation-delay: 1s; } .delay-icon-3 { animation-delay: 2s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         .progress-mini { height: 10px; width: 100%; background: rgba(255,255,255,0.6); border-radius: 10px; margin-top: 15px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);}
         .progress-mini-fill { height: 100%; border-radius: 10px; transition: 1.5s ease-out; width: 0%;}
@@ -197,12 +223,12 @@
 
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
         .stat-box { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); text-align: center; border: var(--glass-border); transition: var(--transition); box-shadow: var(--shadow-sm);}
-        .stat-box:hover { transform: translateY(-8px) scale(1.03); box-shadow: var(--shadow-md); border-color: var(--accent-teal);}
+        .stat-box:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--accent-teal);}
         .stat-box h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main);}
         .stat-box p { font-size: 0.9rem; color: var(--text-muted); font-weight: 700;}
 
         /* ==========================================================================
-           6. CUTE FLASHCARDS
+           6. FLASHCARDS
            ========================================================================== */
         .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; perspective: 1000px; width: 100%;}
         @media(min-width: 600px){ .flashcard-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
@@ -212,7 +238,7 @@
         .cute-card.is-flipped .card-inner { transform: rotateY(180deg); }
         
         .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; border: 3px solid rgba(255,255,255,0.5); }
+        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; border: var(--glass-border); }
         
         .card-front { background: var(--bg-inner); color: var(--text-main); }
         .card-front .emoji { font-size: 3.5rem; margin-bottom: 12px; filter: drop-shadow(0 8px 8px rgba(0,0,0,0.1)); animation: float 3s infinite ease-in-out;}
@@ -229,6 +255,10 @@
         .theme-math .card-back { background: linear-gradient(135deg, #FDFBFB, #EBEDEE); color: #2B3674; }
         .theme-geo .card-back { background: linear-gradient(135deg, #E0C3FC, #8EC5FC); color: #2B3674; }
         .theme-hist .card-back { background: linear-gradient(135deg, #FFECD2, #FCB69F); color: #2B3674; }
+        
+        /* New Themes */
+        .theme-hindi .card-back { background: linear-gradient(135deg, #f6d365, #fda085); color: #2B3674; }
+        .theme-ai .card-back { background: linear-gradient(135deg, #30cfd0, #330867); color: white; }
 
         /* ==========================================================================
            7. KANBAN BOARD
@@ -244,7 +274,7 @@
         .kanban-col h3 { font-size: 1.1rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; padding-bottom: 12px; border-bottom: 2px solid rgba(128,128,128,0.1);}
         .kanban-col h3 span { background: var(--bg-inner); padding: 3px 12px; border-radius: 50px; font-size: 0.8rem; color: var(--text-main); box-shadow: var(--shadow-sm); }
         .kanban-zone { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 30px; min-height: 80px; }
-        .kanban-card { background: var(--bg-inner); padding: 18px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 5px solid var(--text-muted); cursor: grab; transition: transform 0.2s, box-shadow 0.2s; position: relative; border-top: var(--glass-border); border-right: var(--glass-border); border-bottom: var(--glass-border);}
+        .kanban-card { background: var(--bg-inner); padding: 18px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 5px solid var(--text-muted); cursor: grab; transition: transform 0.2s, box-shadow 0.2s; position: relative; border: var(--glass-border); border-left-width: 5px;}
         .kanban-card:active { cursor: grabbing; transform: scale(0.95) rotate(-2deg); box-shadow: var(--shadow-lg);}
         .kanban-card h4 { font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main); font-weight: 800; word-wrap: break-word; padding-right: 20px;}
         .kanban-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; font-weight: 600; word-wrap: break-word;}
@@ -259,7 +289,7 @@
         
         .lofi-widget { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: var(--glass-border); display: flex; align-items: center; gap: 15px; transition: var(--transition);}
         .lofi-widget:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .lofi-icon { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9A9E, #FECFEF); display: flex; justify-content: center; align-items: center; color: #E84393; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(255,154,158,0.4); animation: spin 8s linear infinite; animation-play-state: paused;}
+        .lofi-icon { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(67, 24, 255, 0.4); animation: spin 8s linear infinite; animation-play-state: paused;}
         .lofi-widget.playing .lofi-icon { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .lofi-info h4 { font-size: 1rem; font-weight: 900; color: var(--text-main); }
@@ -282,7 +312,7 @@
         .btn-timer:hover { transform: translateY(-4px); }
 
         /* ==========================================================================
-           9. MOBILE RESPONSIVENESS (BULLETPROOF FIXES)
+           9. MOBILE RESPONSIVENESS
            ========================================================================== */
         @media (max-width: 1200px) {
             .app-window { grid-template-columns: 240px 1fr; }
@@ -292,45 +322,18 @@
             .close-panel-btn { display: block; }
         }
 
-        /* 100% MOBILE FIXES */
         @media (max-width: 900px) {
-            body { 
-                padding: 0; 
-                overflow-x: hidden; 
-                overflow-y: auto; /* Enable native scrolling */
-                background: var(--bg-outer);
-            }
-            .app-window { 
-                display: block; 
-                height: auto; min-height: 100vh; 
-                border-radius: 0; overflow-x: hidden; 
-                overflow-y: visible; border: none; box-shadow: none;
-            }
+            body { padding: 0; overflow-x: hidden; overflow-y: auto; background: var(--bg-outer); }
+            .app-window { display: block; height: auto; min-height: 100vh; border-radius: 0; overflow-x: hidden; overflow-y: visible; border: none; box-shadow: none; }
             .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 280px; box-shadow: var(--shadow-lg); transition: 0.4s ease; border-radius: 0 20px 20px 0; z-index: 1000;}
             .sidebar.open { left: 0; }
-            
-            .main-content { 
-                padding: 20px 15px 100px 15px; 
-                height: auto; min-height: 100vh; 
-                overflow-x: hidden; overflow-y: visible;
-                width: 100%;
-            }
-            
+            .main-content { padding: 20px 15px 100px 15px; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: visible; width: 100%; }
             .mobile-header { display: flex; }
             .top-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 25px; width: 100%;}
             .greeting h1 { font-size: 1.8rem; }
-            
-            .header-actions { width: 100%; flex-direction: column; align-items: stretch; justify-content: center;}
-            .search-box { width: 100%; }
-            .search-box input { width: 100%; }
-            .btn-primary { justify-content: center; width: 100%; }
-            
-            .login-card { padding: 40px 25px; width: 95%;}
-            .login-card h2 { font-size: 1.8rem; }
-            
+            .professional-login { padding: 40px 25px; width: 95%;}
+            .professional-login h2 { font-size: 1.6rem; }
             .right-panel { width: 100%; right: -100%; border-radius: 0; padding: 25px 20px;}
-            
-            /* Toasts for mobile */
             #toast-container { right: 50%; transform: translateX(50%); width: 90%; top: 15px; }
         }
 
@@ -347,18 +350,19 @@
 </head>
 <body>
 
-    <!-- CUTE LOGIN OVERLAY -->
+    <!-- PROFESSIONAL LOGIN OVERLAY -->
     <div id="loginOverlay" class="login-overlay">
-        <div class="bg-emoji">✨</div>
-        <div class="bg-emoji">🚀</div>
-        <div class="bg-emoji">🌟</div>
-        <div class="bg-emoji">🎨</div>
-        <div class="login-card">
-            <div class="cute-avatar-wrap">🐼</div>
-            <h2>Hey there, Cutie! 🌸</h2>
-            <p>Ready to conquer Class 10? What's your name?</p>
-            <input type="text" id="loginName" placeholder="Type your sweet name..." onkeypress="handleEnter(event)">
-            <button class="btn-primary" onclick="processLogin()">Let's Go! 🎈</button>
+        <div class="professional-login">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h2>Tenth Warrior Champ</h2>
+            <p>Secure Student Portal Access</p>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="loginName" placeholder="Enter your full name..." onkeypress="handleEnter(event)">
+            </div>
+            <button class="auth-btn" onclick="processLogin()">Authenticate <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 
@@ -370,13 +374,14 @@
             <div class="user-profile">
                 <img src="https://ui-avatars.com/api/?name=User&background=4318FF&color=fff&size=150" alt="User" id="profileImg">
                 <h3 id="profileName">Loading...</h3>
-                <p>Class 10 Scholar 🎓</p>
+                <p>Class 10 Scholar</p>
             </div>
             <ul class="nav-menu" style="flex: 1;">
                 <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-border-all"></i> Dashboard</a></li>
                 <li><a href="#" class="nav-btn" data-target="vault"><i class="fa-solid fa-cloud-arrow-up"></i> Study Vault</a></li>
                 <li><a href="#" class="nav-btn" data-target="kanban"><i class="fa-solid fa-list-check"></i> Task Board</a></li>
                 <li><a href="#" class="nav-btn" data-target="flashcards"><i class="fa-solid fa-clone"></i> Flashcards</a></li>
+                <li><a href="#" class="nav-btn" data-target="profile"><i class="fa-solid fa-user"></i> Profile</a></li>
                 <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
             </ul>
         </aside>
@@ -392,7 +397,7 @@
             <section id="dashboard" class="view-section active">
                 <div class="top-bar animate-in">
                     <div class="greeting">
-                        <h1 id="greetingText" class="text-gradient">Welcome back!</h1>
+                        <h1 id="greetingText" class="text-gradient">Welcome back.</h1>
                         <p id="currentDate">Loading...</p>
                     </div>
                 </div>
@@ -401,7 +406,7 @@
                     <div class="subject-card card-pink animate-in delay-1">
                         <div class="card-header">
                             <div><h3>Maths</h3><p>Real Numbers</p></div>
-                            <div class="cute-card-icon">🐻</div>
+                            <div class="cute-card-icon">📐</div>
                         </div>
                         <div class="progress-mini"><div class="progress-mini-fill" id="mathProgress"></div></div>
                     </div>
@@ -409,7 +414,7 @@
                     <div class="subject-card card-mint animate-in delay-2">
                         <div class="card-header">
                             <div><h3>Science</h3><p>Chemical Rxns</p></div>
-                            <div class="cute-card-icon delay-icon-2">🦊</div>
+                            <div class="cute-card-icon delay-icon-2">🔬</div>
                         </div>
                         <div class="progress-mini"><div class="progress-mini-fill" id="sciProgress"></div></div>
                     </div>
@@ -417,7 +422,7 @@
                     <div class="subject-card card-peach animate-in delay-3">
                         <div class="card-header">
                             <div><h3>English</h3><p>Grammar Pro</p></div>
-                            <div class="cute-card-icon delay-icon-3">🐰</div>
+                            <div class="cute-card-icon delay-icon-3">📚</div>
                         </div>
                         <div class="progress-mini"><div class="progress-mini-fill" id="engProgress" style="width: 85%;"></div></div>
                     </div>
@@ -425,7 +430,7 @@
 
                 <div class="lower-grid animate-in delay-3">
                     <div>
-                        <h2 class="section-title"><i class="fa-solid fa-star" style="color:var(--accent-orange);"></i> Today's Quests 🎯</h2>
+                        <h2 class="section-title"><i class="fa-solid fa-crosshairs" style="color:var(--accent-orange);"></i> Active Quests</h2>
                         <div class="task-list">
                             <div class="task-item orange" onclick="this.classList.toggle('completed')">
                                 <div class="task-info"><h4>Complete Science Chapter 4</h4><p>Read PDF notes in Vault.</p></div>
@@ -438,7 +443,7 @@
                         </div>
                     </div>
                     <div>
-                        <h2 class="section-title"><i class="fa-solid fa-crown" style="color:var(--accent-purple);"></i> Super Stats 🌟</h2>
+                        <h2 class="section-title"><i class="fa-solid fa-chart-simple" style="color:var(--accent-purple);"></i> Performance Stats</h2>
                         <div class="stats-grid">
                             <div class="stat-box"><h2>32h</h2><p>Focused Study</p></div>
                             <div class="stat-box"><h2>14</h2><p>Quests Done</p></div>
@@ -449,7 +454,7 @@
                 </div>
             </section>
 
-            <!-- STUDY VAULT (APPWRITE UPLOAD) -->
+            <!-- STUDY VAULT -->
             <section id="vault" class="view-section">
                 <div class="top-bar animate-in">
                     <div class="greeting"><h1 class="text-gradient">Study Vault</h1><p>Securely upload & access PDF resources.</p></div>
@@ -458,7 +463,7 @@
                 <div class="upload-box animate-in delay-1" style="background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); margin-bottom: 30px; border: 2px dashed var(--accent-teal); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm);">
                     <input type="file" id="pdfUploader" accept="application/pdf" style="width: 100%; padding: 12px; background: var(--bg-input); border-radius: var(--radius-sm); font-weight: 700;">
                     <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:10px;">
-                        <button class="btn-primary" onclick="window.uploadPDFToAppwrite()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</button>
+                        <button class="btn-primary" onclick="window.uploadPDFToAppwrite()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Resource</button>
                         <p id="uploadStatus" style="font-size: 1rem; color: var(--accent-orange); font-weight: 800;"></p>
                     </div>
                 </div>
@@ -468,10 +473,10 @@
                 </div>
             </section>
 
-            <!-- CUTE FLASHCARDS SECTION -->
+            <!-- FLASHCARDS SECTION -->
             <section id="flashcards" class="view-section">
                 <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Smart Flashcards</h1><p>Tap a card to flip and reveal the answer!</p></div>
+                    <div class="greeting"><h1 class="text-gradient">Knowledge Cards</h1><p>Tap a card to reveal its concept.</p></div>
                 </div>
 
                 <div class="flashcard-grid animate-in delay-1">
@@ -499,25 +504,25 @@
                             <div class="card-back"><h4>Fundamental Theorem</h4><p>For any two positive integers a and b: <br><br>HCF(a,b) × LCM(a,b) = a × b</p></div>
                         </div>
                     </div>
-                    <div class="cute-card theme-geo" onclick="this.classList.toggle('is-flipped')">
+                    <div class="cute-card theme-hindi" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front"><div class="emoji">🌍</div><h3>Resources</h3><p>Geography • Chapter 1</p></div>
-                            <div class="card-back"><h4>Sustainable Dev.</h4><p>Development that meets the needs of the present without compromising the ability of future generations.</p></div>
+                            <div class="card-front"><div class="emoji">अ</div><h3>Vyakaran</h3><p>Hindi • Grammar</p></div>
+                            <div class="card-back"><h4>Samas (Compound)</h4><p>When two or more words combine to form a new meaningful word, the process is called Samas.</p></div>
                         </div>
                     </div>
-                    <div class="cute-card theme-hist" onclick="this.classList.toggle('is-flipped')">
+                    <div class="cute-card theme-ai" onclick="this.classList.toggle('is-flipped')">
                         <div class="card-inner">
-                            <div class="card-front"><div class="emoji">👑</div><h3>Nationalism in Europe</h3><p>History • Chapter 1</p></div>
-                            <div class="card-back"><h4>Treaty of Vienna</h4><p>Signed in 1815. Its main goal was to undo the changes brought about by the Napoleonic Wars.</p></div>
+                            <div class="card-front"><div class="emoji">🤖</div><h3>Machine Learning</h3><p>AI • Chapter 2</p></div>
+                            <div class="card-back"><h4>Supervised Learning</h4><p>The AI is trained on a labeled dataset, mapping inputs to correct outputs accurately over time.</p></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- KANBAN BOARD SECTION (SAVES LOCALLY) -->
+            <!-- KANBAN BOARD SECTION -->
             <section id="kanban" class="view-section">
                 <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Task Board</h1><p>Your tasks save automatically!</p></div>
+                    <div class="greeting"><h1 class="text-gradient">Task Board</h1><p>Organize and track your study workflow.</p></div>
                 </div>
                 
                 <div class="task-input-bar animate-in delay-1">
@@ -528,7 +533,7 @@
                         <option value="teal">Science / Dev (Teal)</option>
                         <option value="orange">Creative / Other (Orange)</option>
                     </select>
-                    <button class="btn-primary" onclick="window.addKanbanTask()"><i class="fa-solid fa-plus"></i> Add</button>
+                    <button class="btn-primary" onclick="window.addKanbanTask()"><i class="fa-solid fa-plus"></i> Add Task</button>
                 </div>
 
                 <div class="kanban-board animate-in delay-2">
@@ -547,17 +552,39 @@
                 </div>
             </section>
 
+            <!-- PROFILE SECTION -->
+            <section id="profile" class="view-section">
+                <div class="top-bar animate-in">
+                    <div class="greeting"><h1 class="text-gradient">Student Profile</h1><p>Manage your academic identity.</p></div>
+                </div>
+                
+                <div class="profile-container animate-in delay-1" style="background: var(--bg-inner); padding: 35px; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: var(--glass-border); display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start;">
+                    <div class="profile-avatar" style="text-align: center; flex: 1; min-width: 200px;">
+                        <img src="" id="profilePageImg" alt="Profile Avatar" style="width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--accent-purple); box-shadow: var(--shadow-md); margin-bottom: 15px; object-fit: cover;">
+                        <h3 id="profilePageName" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 5px;">Name</h3>
+                        <p class="text-muted" style="font-weight: 600; color: var(--text-muted); background: var(--bg-input); padding: 5px 15px; border-radius: 20px; display: inline-block;">Tenth Warrior Champ</p>
+                    </div>
+                    <div class="profile-details" style="flex: 2; min-width: 280px;">
+                        <div style="margin-bottom: 25px;">
+                            <label style="display:block; font-weight: 800; font-size: 0.95rem; margin-bottom: 10px; color: var(--text-main);">Display Name</label>
+                            <input type="text" id="updateNameInput" placeholder="Enter new name" style="width: 100%; padding: 15px 20px; border-radius: var(--radius-md); background: var(--bg-input); border: 2px solid transparent; color: var(--text-main); font-weight: 600; transition: var(--transition);">
+                        </div>
+                        <button class="btn-primary" onclick="updateProfileName()"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                    </div>
+                </div>
+            </section>
+
             <!-- SETTINGS SECTION -->
             <section id="settings" class="view-section">
-                <div class="top-bar animate-in"><div class="greeting"><h1 class="text-gradient">Preferences</h1><p>Customize your workspace.</p></div></div>
+                <div class="top-bar animate-in"><div class="greeting"><h1 class="text-gradient">System Preferences</h1><p>Customize your workspace environment.</p></div></div>
                 <div class="lower-grid animate-in delay-1">
                     <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
                         <div><h2 style="font-size:1.5rem;">Dark Mode</h2><p>Switch to night viewing.</p></div>
                         <input type="checkbox" id="themeToggle" style="transform: scale(1.5); cursor:pointer;">
                     </div>
                     <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                        <div><h2 style="font-size:1.5rem;">Account</h2><p>Sign out of workspace.</p></div>
-                        <button class="btn-primary" style="background:#ff4757; width: auto;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                        <div><h2 style="font-size:1.5rem;">Session</h2><p>Terminate current workspace session.</p></div>
+                        <button class="btn-primary" style="background:#ff4757; width: auto;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
                     </div>
                 </div>
             </section>
@@ -636,12 +663,12 @@
 
         function processLogin() {
             const inputName = document.getElementById('loginName').value.trim();
-            if (!inputName) return window.showToast("Please enter your sweet name! 🌸");
+            if (!inputName) return window.showToast("Please enter your full name.");
             localStorage.setItem('warriorName', inputName);
             document.getElementById('loginOverlay').classList.add('hidden');
             document.getElementById('mainApp').classList.add('unlocked');
             updateUIWithUsername(inputName);
-            window.showToast(`Yay! Welcome, ${inputName}! 🎈`);
+            window.showToast(`Authentication successful. Welcome, ${inputName}.`);
             loadKanbanFromLocal();
             if(typeof confetti === 'function') confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }});
         }
@@ -650,10 +677,27 @@
 
         function updateUIWithUsername(name) {
             const hour = new Date().getHours();
-            let greeting = hour < 12 ? "Good Morning ☀️" : hour < 18 ? "Good Afternoon 🌻" : "Good Evening 🌙";
-            document.getElementById('greetingText').innerText = `${greeting}, ${name.split(' ')[0]}!`;
+            let greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+            const firstName = name.split(' ')[0];
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=4318FF&color=fff&size=150&bold=true`;
+            
+            // Dashboard updates
+            document.getElementById('greetingText').innerText = `${greeting}, ${firstName}.`;
             document.getElementById('profileName').innerText = name;
-            document.getElementById('profileImg').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=4318FF&color=fff&size=150&bold=true`;
+            document.getElementById('profileImg').src = avatarUrl;
+            
+            // Profile section updates
+            document.getElementById('profilePageName').innerText = name;
+            document.getElementById('profilePageImg').src = avatarUrl;
+            document.getElementById('updateNameInput').value = name;
+        }
+
+        function updateProfileName() {
+            const newName = document.getElementById('updateNameInput').value.trim();
+            if (!newName) return window.showToast("Name cannot be empty.");
+            localStorage.setItem('warriorName', newName);
+            updateUIWithUsername(newName);
+            window.showToast("Profile updated successfully.");
         }
 
         // --- APPWRITE VAULT (PDF UPLOAD) ---
@@ -667,14 +711,14 @@
             const file = fileInput.files[0];
             const statusText = document.getElementById('uploadStatus');
 
-            if (!file) return window.showToast("Please select a PDF file!");
-            if (file.type !== "application/pdf") return window.showToast("Only PDF allowed.");
+            if (!file) return window.showToast("Please select a PDF file.");
+            if (file.type !== "application/pdf") return window.showToast("Invalid format. PDF only.");
 
             statusText.innerText = 'Uploading...';
 
             appwriteStorage.createFile(BUCKET_ID, ID.unique(), file).then((response) => {
-                statusText.innerText = 'Cloud Upload Success!';
-                window.showToast("PDF Saved to Cloud! ☁️");
+                statusText.innerText = 'Upload Complete';
+                window.showToast("Resource securely saved.");
                 fileInput.value = ""; 
                 const downloadURL = appwriteStorage.getFileView(BUCKET_ID, response.$id).href;
                 
@@ -691,8 +735,8 @@
                 grid.prepend(card);
             }).catch((error) => {
                 console.error("Appwrite Upload Error:", error);
-                statusText.innerText = 'Error!';
-                window.showToast("Upload Failed.");
+                statusText.innerText = 'Error';
+                window.showToast("Upload Failed. Check console.");
             });
         }
 
@@ -709,8 +753,8 @@
             
             if(tasks.length === 0) {
                 tasks = [
-                    { id: 'task-1', title: 'Science Revision', desc: 'Read Chapter 1 Flashcards', color: 'teal', status: 'todo' },
-                    { id: 'task-2', title: 'Maths HW', desc: 'Solve Ex 1.2', color: 'purple', status: 'prog' }
+                    { id: 'task-1', title: 'Science Revision', desc: 'Review AI Flashcards', color: 'teal', status: 'todo' },
+                    { id: 'task-2', title: 'Maths Assignment', desc: 'Solve Ex 4.2', color: 'purple', status: 'prog' }
                 ];
                 saveKanbanToLocal();
             }
@@ -731,7 +775,7 @@
             const title = document.getElementById('kbTitle').value.trim();
             const desc = document.getElementById('kbDesc').value.trim();
             const color = document.getElementById('kbColor').value;
-            if(!title) return window.showToast("Enter a task title!");
+            if(!title) return window.showToast("Task title is required.");
 
             const newTask = { id: 'task-' + Date.now(), title, desc, color, status: 'todo' };
             tasks.push(newTask); saveKanbanToLocal();
@@ -743,12 +787,12 @@
             document.getElementById('zone-todo').prepend(card);
             
             document.getElementById('kbTitle').value = ''; document.getElementById('kbDesc').value = '';
-            window.updateKanbanCounts(); window.showToast("Task Saved! ✅");
+            window.updateKanbanCounts(); window.showToast("Task added to workflow.");
         }
 
         window.deleteKanbanTask = function(id, btn) {
             tasks = tasks.filter(t => t.id !== id); saveKanbanToLocal();
-            btn.parentElement.remove(); window.updateKanbanCounts(); window.showToast("Task Deleted! 🗑️");
+            btn.parentElement.remove(); window.updateKanbanCounts(); window.showToast("Task removed.");
         }
 
         window.drag = function(ev) { window.draggedItem = ev.target; ev.dataTransfer.setData("text", ev.target.id); }
@@ -761,7 +805,7 @@
                 const taskObj = tasks.find(t => t.id === window.draggedItem.id);
                 if(taskObj) { taskObj.status = zoneId; saveKanbanToLocal(); }
 
-                if(zoneId === 'done') { window.draggedItem.style.opacity = '0.7'; window.fireConfetti(); window.showToast("Task Complete! 🎉"); }
+                if(zoneId === 'done') { window.draggedItem.style.opacity = '0.7'; window.fireConfetti(); window.showToast("Task completed!"); }
                 else { window.draggedItem.style.opacity = '1'; }
                 
                 window.draggedItem = null; window.updateKanbanCounts();
@@ -781,6 +825,12 @@
             const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', opts);
             setTimeout(() => { document.getElementById('mathProgress').style.width = '96%'; document.getElementById('sciProgress').style.width = '70%'; }, 800);
+            
+            // Fix input focusing for profile edit field styling
+            const profileInput = document.getElementById('updateNameInput');
+            profileInput.addEventListener('focus', () => profileInput.style.borderColor = 'var(--accent-purple)');
+            profileInput.addEventListener('blur', () => profileInput.style.borderColor = 'transparent');
+            
             if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeToggle').checked = true; }
         });
 
@@ -788,14 +838,14 @@
         document.getElementById('themeToggle').addEventListener('change', (e) => {
             document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
             localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
-            window.showToast(e.target.checked ? 'Dark Mode On 🌙' : 'Light Mode On ☀️');
+            window.showToast(e.target.checked ? 'Dark Mode Activated' : 'Light Mode Activated');
         });
 
         let isPlaying = false;
         window.toggleLofi = function() {
             const audio = document.getElementById('lofiAudio'); const widget = document.getElementById('lofiWidget'); const btn = document.getElementById('lofiPlayBtn');
             if(isPlaying) { audio.pause(); widget.classList.remove('playing'); btn.className = "fa-solid fa-circle-play"; isPlaying = false; } 
-            else { audio.volume = 0.4; audio.play(); widget.classList.add('playing'); btn.className = "fa-solid fa-circle-pause"; isPlaying = true; window.showToast("Playing Beats 🎧"); }
+            else { audio.volume = 0.4; audio.play(); widget.classList.add('playing'); btn.className = "fa-solid fa-circle-pause"; isPlaying = true; window.showToast("Focus Beats Playing"); }
         }
 
         const navBtns = document.querySelectorAll('.nav-btn'); const sections = document.querySelectorAll('.view-section');
@@ -810,7 +860,7 @@
         navBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); window.switchView(e.currentTarget.getAttribute('data-target')); }));
 
         // --- TIMER LOGIC ---
-        let timerInt; const FULL_DASH = 502.65; // 2 * pi * 80 (since r=80 for mobile friendly circle)
+        let timerInt; const FULL_DASH = 502.65; 
         let timeLeft = 1500; const totalTime = 1500;
         const timerDisplay = document.getElementById('timerDisplay'); const timerCircle = document.getElementById('timerCircle');
         timerCircle.style.strokeDasharray = FULL_DASH; let isRunning = false;
@@ -824,7 +874,7 @@
             isRunning = true; btn.innerText = "Pause"; btn.style.background = "#ff4757"; btn.style.color = "#fff";
             timerInt = setInterval(() => {
                 if(timeLeft > 0) { timeLeft--; timerDisplay.innerText = formatTime(timeLeft); setCircleProgress(timeLeft / totalTime); } 
-                else { clearInterval(timerInt); isRunning = false; btn.innerText = "Start"; window.showToast("Time's Up! ⏰"); window.fireConfetti(); }
+                else { clearInterval(timerInt); isRunning = false; btn.innerText = "Start"; window.showToast("Focus Session Complete"); window.fireConfetti(); }
             }, 1000);
         }
         window.resetTimer = function() {
