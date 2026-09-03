@@ -1,886 +1,888 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" class="h-full bg-[#FDFBF7]">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>10th Warriors | Premium Learning Workspace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    
-    <style>
-        /* ==========================================================================
-           1. CORE VARIABLES & PREMIUM THEMES
-           ========================================================================== */
-        :root {
-            --bg-outer: #F4F7FE; --bg-inner: rgba(255, 255, 255, 0.9); 
-            --bg-sidebar: rgba(255, 255, 255, 0.95); --bg-right-panel: rgba(252, 248, 246, 0.9); 
-            --bg-input: #F4F7FE; --text-main: #2B3674; --text-muted: #8F9BBA; 
-            --accent-purple: #4318FF; --accent-teal: #05CD99; --accent-orange: #FF7B49; 
-            --shadow-sm: 0 4px 15px rgba(0,0,0,0.03); 
-            --shadow-md: 0 15px 35px rgba(112, 144, 176, 0.1); 
-            --shadow-lg: 0 20px 40px rgba(44,42,74,0.08);
-            --radius-xl: 30px; --radius-lg: 20px; --radius-md: 16px; --radius-sm: 12px;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PM SHRI KV No. 1 AFS Gorakhpur | English Reading Club</title>
+  <meta name="description" content="Official English Reading Club portal of PM SHRI KV No. 1 AFS Gorakhpur featuring reading activities, student initiatives, suggested books, events and literary achievements.">
+  
+  <!-- Added Favicon Here -->
+  <link rel="icon" type="image/jpeg" href="logo.jpeg">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandNavy: '#0B192C',
+            brandGold: '#D4AF37',
+            brandCream: '#FDFBF7',
+            brandMutedBlue: '#1E3E62',
+            brandRedDot: '#EF4444'
+          },
+          fontFamily: {
+            serif: ['Georgia', 'Cambria', 'serif'],
+            sans: ['system-ui', '-apple-system', 'sans-serif']
+          }
         }
+      }
+    }
+  </script>
 
-        [data-theme="dark"] {
-            --bg-outer: #0B1437; --bg-inner: rgba(17, 28, 68, 0.85); 
-            --bg-sidebar: rgba(17, 28, 68, 0.95); --bg-right-panel: rgba(15, 23, 58, 0.9); 
-            --bg-input: #1B2559; --text-main: #FFFFFF; --text-muted: #A3AED0; 
-            --shadow-sm: 0 4px 15px rgba(0,0,0,0.3); 
-            --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.4); 
-            --glass-border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* ==========================================================================
-           2. BASE STYLES & LAYOUT
-           ========================================================================== */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
-        body { 
-            background: var(--bg-outer); 
-            background-image: radial-gradient(circle at 10% 20%, rgba(67, 24, 255, 0.05), transparent 30%), 
-                              radial-gradient(circle at 90% 80%, rgba(5, 205, 153, 0.05), transparent 30%);
-            color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; 
-            padding: 2vh; overflow: hidden;
-        }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        button { cursor: pointer; border: none; outline: none; background: none; font-family: inherit; }
-        input, select, textarea { font-family: inherit; outline: none; border: none; color: var(--text-main); max-width: 100%;}
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 10px; opacity: 0.3; }
-
-        .app-window {
-            width: 100%; max-width: 1600px; height: 96vh; background: var(--bg-inner);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: var(--glass-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); 
-            display: grid; grid-template-columns: 260px 1fr 340px; position: relative;
-            opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-        }
-        .app-window.unlocked { opacity: 1; transform: scale(1); }
-        .text-gradient { background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* ==========================================================================
-           3. PROFESSIONAL AUTHENTICATION OVERLAY
-           ========================================================================== */
-        .login-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            background: rgba(244, 247, 254, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            display: flex; justify-content: center; align-items: center; z-index: 99999;
-            transition: opacity 0.6s ease, visibility 0.6s;
-        }
-        [data-theme="dark"] .login-overlay { background: rgba(11, 20, 55, 0.9); }
-        .login-overlay.hidden { opacity: 0; visibility: hidden; }
-
-        .professional-login {
-            background: var(--bg-inner);
-            border: var(--glass-border);
-            padding: 50px 40px;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-            width: 90%; max-width: 440px; margin: 0 auto;
-            opacity: 0; animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-        }
-
-        @keyframes fadeSlideUp { 
-            0% { transform: translateY(40px); opacity: 0; } 
-            100% { transform: translateY(0); opacity: 1; } 
-        }
-
-        .brand-icon {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
-            border-radius: 20px;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 2.2rem; color: #fff;
-            margin: 0 auto 25px auto;
-            box-shadow: 0 15px 30px rgba(67, 24, 255, 0.25);
-            transform: rotate(-5deg);
-            transition: var(--transition);
-        }
-        .professional-login:hover .brand-icon { transform: rotate(0deg) scale(1.05); }
-
-        .professional-login h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; color: var(--text-main); letter-spacing: -0.5px; }
-        .professional-login p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; font-weight: 600; }
-        
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .input-group i {
-            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
-            color: var(--text-muted); font-size: 1.1rem;
-            transition: var(--transition);
-        }
-        .professional-login input {
-            width: 100%; padding: 18px 20px 18px 50px;
-            border-radius: var(--radius-sm); background: var(--bg-outer); 
-            border: 2px solid transparent; font-size: 1rem; font-weight: 700;
-            transition: var(--transition); color: var(--text-main);
-        }
-        .professional-login input:focus { 
-            border-color: var(--accent-purple); outline: none; 
-            background: var(--bg-inner);
-            box-shadow: 0 0 0 4px rgba(67, 24, 255, 0.1); 
-        }
-        .professional-login input:focus + i, .professional-login input:focus ~ i {
-            color: var(--accent-purple);
-        }
-
-        .auth-btn { 
-            width: 100%; padding: 18px; font-size: 1.05rem; font-weight: 800; 
-            border-radius: var(--radius-sm); background: var(--accent-purple);
-            color: #fff; box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); 
-            display: flex; justify-content: center; align-items: center; gap: 10px;
-            transition: var(--transition); letter-spacing: 0.5px;
-        }
-        .auth-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(67, 24, 255, 0.35); background: #3511cc; }
-        .auth-btn:active { transform: translateY(0); }
-
-        /* ==========================================================================
-           4. SIDEBAR
-           ========================================================================== */
-        .sidebar { background: var(--bg-sidebar); padding: 30px 20px; display: flex; flex-direction: column; border-right: var(--glass-border); z-index: 20; }
-        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 900; margin-bottom: 40px; padding-left: 10px; color: var(--text-main); }
-        .logo i { color: var(--accent-purple); font-size: 1.6rem; }
-        .user-profile { text-align: center; margin-bottom: 30px; }
-        .user-profile img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--bg-outer); box-shadow: var(--shadow-md); transition: var(--transition);}
-        .user-profile img:hover { transform: scale(1.05); border-color: var(--accent-teal);}
-        .user-profile h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; word-wrap: break-word;}
-        .user-profile p { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; background: var(--bg-input); padding: 4px 12px; border-radius: 20px; display: inline-block; }
-        
-        .nav-menu li { margin-bottom: 8px; }
-        .nav-menu li a { display: flex; align-items: center; gap: 15px; padding: 14px 20px; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 700; font-size: 0.95rem; transition: var(--transition); }
-        .nav-menu li a i { font-size: 1.2rem; width: 24px; text-align: center; transition: var(--transition);}
-        .nav-menu li a:hover, .nav-menu li a.active { color: var(--accent-purple); background: var(--bg-input); transform: translateX(5px); box-shadow: var(--shadow-sm);}
-        
-        .mobile-header { display: none; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 20px;}
-        .mobile-toggle { font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
-        .mobile-fab { display: none; position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; border-radius: 50%; background: var(--accent-purple); color: white; font-size: 1.5rem; box-shadow: 0 10px 25px rgba(67, 24, 255, 0.4); z-index: 99; justify-content: center; align-items: center; transition: var(--transition); border: 3px solid rgba(255,255,255,0.3);}
-        .mobile-fab:active { transform: scale(0.9); }
-
-        /* ==========================================================================
-           5. MAIN CONTENT & DASHBOARD
-           ========================================================================== */
-        .main-content { padding: 40px 50px; overflow-y: auto; scroll-behavior: smooth; position: relative; overflow-x: hidden;}
-        .view-section { display: none; width: 100%; }
-        .view-section.active { display: block; }
-
-        @keyframes slideUpFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { opacity: 0; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
-
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;}
-        .greeting h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; letter-spacing: -0.5px; word-wrap: break-word;}
-        .greeting p { color: var(--text-muted); font-size: 1.05rem; font-weight: 600;}
-        
-        .btn-primary { background: var(--accent-purple); color: #fff; padding: 14px 28px; border-radius: var(--radius-sm); font-weight: 800; font-size: 0.95rem; transition: var(--transition); box-shadow: 0 10px 20px rgba(67, 24, 255, 0.2); display: flex; align-items: center; gap: 10px; border: none; outline: none; cursor: pointer; white-space: nowrap;}
-        .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 15px 25px rgba(67, 24, 255, 0.3); background: #3311cc; }
-
-        /* Dashboard Cards */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; margin-bottom: 45px; width: 100%;}
-        @media(min-width: 600px){ .cards-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
-        
-        .subject-card { border-radius: var(--radius-xl); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; min-height: 180px; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; position: relative; overflow: hidden; border: var(--glass-border);}
-        .subject-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        
-        .card-pink { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: var(--text-main); }
-        .card-mint { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); color: var(--text-main); }
-        .card-peach { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: var(--text-main); }
-        
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; z-index: 2;}
-        .subject-card h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
-        .subject-card p { font-weight: 700; font-size: 0.9rem; color: var(--text-main); opacity: 0.8;}
-        
-        .cute-card-icon { font-size: 3rem; animation: float 3s infinite ease-in-out; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); }
-        .delay-icon-2 { animation-delay: 1s; } .delay-icon-3 { animation-delay: 2s; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        .progress-mini { height: 10px; width: 100%; background: rgba(255,255,255,0.6); border-radius: 10px; margin-top: 15px; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);}
-        .progress-mini-fill { height: 100%; border-radius: 10px; transition: 1.5s ease-out; width: 0%;}
-        .card-pink .progress-mini-fill { background: var(--accent-purple); }
-        .card-mint .progress-mini-fill { background: var(--accent-teal); }
-        .card-peach .progress-mini-fill { background: var(--accent-orange); }
-
-        /* Lower Dashboard */
-        .lower-grid { display: grid; grid-template-columns: 1fr; gap: 30px; width: 100%;}
-        @media(min-width: 1000px){ .lower-grid { grid-template-columns: 1.2fr 0.8fr; } }
-        
-        .section-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 20px; color: var(--text-main); display: flex; align-items: center; gap: 10px;}
-        .task-list { display: flex; flex-direction: column; gap: 15px; }
-        .task-item { background: var(--bg-inner); border: var(--glass-border); padding: 20px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; transition: var(--transition); border-left: 5px solid var(--text-muted); cursor: pointer; box-shadow: var(--shadow-sm);}
-        .task-item:hover { transform: translateX(8px); box-shadow: var(--shadow-md); border-left-width: 8px;}
-        .task-item.orange { border-left-color: var(--accent-orange); }
-        .task-item.teal { border-left-color: var(--accent-teal); }
-        .task-info h4 { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; word-wrap: break-word;}
-        .task-info p { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; word-wrap: break-word;}
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
-        .stat-box { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); text-align: center; border: var(--glass-border); transition: var(--transition); box-shadow: var(--shadow-sm);}
-        .stat-box:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--accent-teal);}
-        .stat-box h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 5px; color: var(--text-main);}
-        .stat-box p { font-size: 0.9rem; color: var(--text-muted); font-weight: 700;}
-
-        /* ==========================================================================
-           6. FLASHCARDS
-           ========================================================================== */
-        .flashcard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); gap: 25px; perspective: 1000px; width: 100%;}
-        @media(min-width: 600px){ .flashcard-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
-        
-        .cute-card { width: 100%; height: 250px; cursor: pointer; background: transparent; transition: transform 0.2s; }
-        .cute-card:hover .card-inner { transform: rotateY(10deg) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-        .cute-card.is-flipped .card-inner { transform: rotateY(180deg); }
-        
-        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius-xl); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; border: var(--glass-border); }
-        
-        .card-front { background: var(--bg-inner); color: var(--text-main); }
-        .card-front .emoji { font-size: 3.5rem; margin-bottom: 12px; filter: drop-shadow(0 8px 8px rgba(0,0,0,0.1)); animation: float 3s infinite ease-in-out;}
-        .card-front h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; word-wrap: break-word;}
-        .card-front p { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .card-back { background: var(--accent-purple); color: white; transform: rotateY(180deg); }
-        .card-back h4 { font-size: 1.3rem; font-weight: 900; margin-bottom: 15px; word-wrap: break-word;}
-        .card-back p { font-size: 0.95rem; font-weight: 600; line-height: 1.5; opacity: 0.9;}
-
-        .theme-chem .card-back { background: linear-gradient(135deg, #FF9A9E, #FECFEF); color: #2B3674; }
-        .theme-bio .card-back { background: linear-gradient(135deg, #A8EDEA, #FED6E3); color: #2B3674; }
-        .theme-phy .card-back { background: linear-gradient(135deg, #667EEA, #764BA2); color: white; }
-        .theme-math .card-back { background: linear-gradient(135deg, #FDFBFB, #EBEDEE); color: #2B3674; }
-        .theme-geo .card-back { background: linear-gradient(135deg, #E0C3FC, #8EC5FC); color: #2B3674; }
-        .theme-hist .card-back { background: linear-gradient(135deg, #FFECD2, #FCB69F); color: #2B3674; }
-        
-        /* New Themes */
-        .theme-hindi .card-back { background: linear-gradient(135deg, #f6d365, #fda085); color: #2B3674; }
-        .theme-ai .card-back { background: linear-gradient(135deg, #30cfd0, #330867); color: white; }
-
-        /* ==========================================================================
-           7. KANBAN BOARD
-           ========================================================================== */
-        .task-input-bar { display: grid; grid-template-columns: 1fr; gap: 15px; background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); margin-bottom: 30px; border: var(--glass-border); box-shadow: var(--shadow-sm); width: 100%;}
-        @media(min-width: 768px){ .task-input-bar { grid-template-columns: 2fr 3fr auto auto; } }
-        
-        .task-input-bar input, .task-input-bar select { padding: 14px; border-radius: var(--radius-sm); background: var(--bg-input); font-size: 0.95rem; font-weight: 600; width: 100%; border: none;}
-        .kanban-board { display: grid; grid-template-columns: 1fr; gap: 25px; width: 100%;}
-        @media(min-width: 900px){ .kanban-board { grid-template-columns: repeat(3, 1fr); } }
-        
-        .kanban-col { background: var(--bg-input); padding: 20px 15px; border-radius: var(--radius-lg); min-height: 40vh; border: var(--glass-border); display: flex; flex-direction: column; }
-        .kanban-col h3 { font-size: 1.1rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 900; padding-bottom: 12px; border-bottom: 2px solid rgba(128,128,128,0.1);}
-        .kanban-col h3 span { background: var(--bg-inner); padding: 3px 12px; border-radius: 50px; font-size: 0.8rem; color: var(--text-main); box-shadow: var(--shadow-sm); }
-        .kanban-zone { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 30px; min-height: 80px; }
-        .kanban-card { background: var(--bg-inner); padding: 18px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border-left: 5px solid var(--text-muted); cursor: grab; transition: transform 0.2s, box-shadow 0.2s; position: relative; border: var(--glass-border); border-left-width: 5px;}
-        .kanban-card:active { cursor: grabbing; transform: scale(0.95) rotate(-2deg); box-shadow: var(--shadow-lg);}
-        .kanban-card h4 { font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main); font-weight: 800; word-wrap: break-word; padding-right: 20px;}
-        .kanban-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; font-weight: 600; word-wrap: break-word;}
-        .delete-btn { position: absolute; top: 15px; right: 15px; color: var(--text-muted); cursor: pointer; transition: 0.2s; font-size: 1rem;}
-        .delete-btn:hover { color: #ff4757; transform: scale(1.2); }
-
-        /* ==========================================================================
-           8. RIGHT PANEL, LOFI & TIMER
-           ========================================================================== */
-        .right-panel { background: var(--bg-right-panel); padding: 40px 30px; border-left: var(--glass-border); overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 30px; backdrop-filter: blur(20px);}
-        .close-panel-btn { display: none; font-size: 1.8rem; color: var(--text-main); text-align: right; cursor: pointer; }
-        
-        .lofi-widget { background: var(--bg-inner); padding: 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: var(--glass-border); display: flex; align-items: center; gap: 15px; transition: var(--transition);}
-        .lofi-widget:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .lofi-icon { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(67, 24, 255, 0.4); animation: spin 8s linear infinite; animation-play-state: paused;}
-        .lofi-widget.playing .lofi-icon { animation-play-state: running; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .lofi-info h4 { font-size: 1rem; font-weight: 900; color: var(--text-main); }
-        .lofi-info p { font-size: 0.8rem; color: var(--text-muted); font-weight: 700;}
-        .lofi-controls { margin-left: auto; cursor: pointer; color: var(--accent-purple); font-size: 1.8rem; transition: var(--transition);}
-        
-        .timer-container { background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; border: var(--glass-border); transition: var(--transition);}
-        .timer-container:hover { transform: translateY(-5px); }
-        .timer-header { font-size: 1.1rem; font-weight: 900; margin-bottom: 20px; color: var(--text-main); display: flex; justify-content: center; align-items: center; gap: 8px;}
-        .progress-ring { position: relative; width: 180px; height: 180px; margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center; }
-        .progress-ring svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); filter: drop-shadow(0 4px 6px rgba(5,205,153,0.3));}
-        .progress-ring circle { fill: none; stroke-width: 12; stroke-linecap: round; }
-        .ring-bg { stroke: var(--bg-input); }
-        .ring-fill { stroke: var(--accent-teal); stroke-dasharray: 502; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; }
-        .time-display { font-size: 2.8rem; font-weight: 900; color: var(--text-main); font-variant-numeric: tabular-nums; position: relative; z-index: 2; }
-        
-        .timer-controls { display: flex; gap: 10px; flex-wrap: wrap;}
-        .btn-timer { flex: 1; min-width: 80px; padding: 12px; border-radius: var(--radius-md); font-weight: 800; font-size: 0.95rem; background: var(--bg-input); color: var(--text-main); border: var(--glass-border); transition: var(--transition); cursor: pointer;}
-        .btn-timer.primary { background: var(--accent-teal); color: #fff; box-shadow: 0 10px 20px rgba(5,205,153,0.3); border: none;}
-        .btn-timer:hover { transform: translateY(-4px); }
-
-        /* ==========================================================================
-           9. MOBILE RESPONSIVENESS
-           ========================================================================== */
-        @media (max-width: 1200px) {
-            .app-window { grid-template-columns: 240px 1fr; }
-            .right-panel { position: fixed; right: -400px; top: 0; bottom: 0; width: 340px; max-width: 100vw; border-radius: var(--radius-xl) 0 0 var(--radius-xl); box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 100; transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-            .right-panel.open { right: 0; }
-            .mobile-fab { display: flex; }
-            .close-panel-btn { display: block; }
-        }
-
-        @media (max-width: 900px) {
-            body { padding: 0; overflow-x: hidden; overflow-y: auto; background: var(--bg-outer); }
-            .app-window { display: block; height: auto; min-height: 100vh; border-radius: 0; overflow-x: hidden; overflow-y: visible; border: none; box-shadow: none; }
-            .sidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 280px; box-shadow: var(--shadow-lg); transition: 0.4s ease; border-radius: 0 20px 20px 0; z-index: 1000;}
-            .sidebar.open { left: 0; }
-            .main-content { padding: 20px 15px 100px 15px; height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: visible; width: 100%; }
-            .mobile-header { display: flex; }
-            .top-bar { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 25px; width: 100%;}
-            .greeting h1 { font-size: 1.8rem; }
-            .professional-login { padding: 40px 25px; width: 95%;}
-            .professional-login h2 { font-size: 1.6rem; }
-            .right-panel { width: 100%; right: -100%; border-radius: 0; padding: 25px 20px;}
-            #toast-container { right: 50%; transform: translateX(50%); width: 90%; top: 15px; }
-        }
-
-        /* Toasts */
-        #toast-container { position: fixed; top: 20px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 12px; max-width: 350px;}
-        .toast { background: var(--bg-inner); border-left: 5px solid var(--accent-teal); border-radius: var(--radius-md); box-shadow: 0 15px 35px rgba(0,0,0,0.15); backdrop-filter: blur(15px); overflow: hidden; position: relative; animation: toastSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; width: 100%;}
-        .toast-content { padding: 16px 18px; display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 700; font-size: 0.95rem; }
-        .toast-content i { font-size: 1.3rem; color: var(--accent-teal); }
-        .toast-progress { height: 4px; background: var(--accent-teal); width: 100%; animation: toastProgress 3s linear forwards; }
-        @keyframes toastSlideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes toastSlideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(120%); opacity: 0; } }
-        @keyframes toastProgress { from { width: 100%; } to { width: 0%; } }
-    </style>
+  <style>
+    .bg-pattern {
+      background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px);
+      background-size: 16px 16px;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B192C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+  </style>
 </head>
-<body>
+<body class="flex flex-col min-h-full font-sans text-brandNavy bg-brandCream antialiased selection:bg-brandGold selection:text-brandNavy">
 
-    <!-- PROFESSIONAL LOGIN OVERLAY -->
-    <div id="loginOverlay" class="login-overlay">
-        <div class="professional-login">
-            <div class="brand-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <h2>Tenth Warrior Champ</h2>
-            <p>Secure Student Portal Access</p>
-            <div class="input-group">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="loginName" placeholder="Enter your full name..." onkeypress="handleEnter(event)">
-            </div>
-            <button class="auth-btn" onclick="processLogin()">Authenticate <i class="fa-solid fa-arrow-right"></i></button>
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-6 py-3 rounded-lg shadow-2xl text-white font-medium flex items-center gap-2 bg-brandNavy border border-brandGold">
+    <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-brandGold"></i>
+    <span id="toast-message">Action completed successfully</span>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-brandNavy text-white shadow-xl border-b border-brandGold/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+        <img src="logo.jpeg" alt="English Reading Club Logo" class="h-14 w-14 rounded-full border-2 border-brandGold object-cover shadow-md group-hover:scale-105 transition-transform" />
+        <div>
+          <div class="text-[10px] sm:text-xs tracking-widest text-brandGold uppercase font-semibold">PM SHRI KV NO. 1 AFS GORAKHPUR</div>
+          <div class="text-base sm:text-lg font-serif font-bold tracking-wide text-brandCream">ENGLISH READING CLUB</div>
         </div>
-    </div>
+      </a>
 
-    <!-- MAIN APP WRAPPER -->
-    <div class="app-window" id="mainApp">
-        <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-            <div class="logo"><i class="fa-solid fa-graduation-cap"></i> 10th Warriors</div>
-            <div class="user-profile">
-                <img src="https://ui-avatars.com/api/?name=User&background=4318FF&color=fff&size=150" alt="User" id="profileImg">
-                <h3 id="profileName">Loading...</h3>
-                <p>Class 10 Scholar</p>
-            </div>
-            <ul class="nav-menu" style="flex: 1;">
-                <li><a href="#" class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-border-all"></i> Dashboard</a></li>
-                <li><a href="#" class="nav-btn" data-target="vault"><i class="fa-solid fa-cloud-arrow-up"></i> Study Vault</a></li>
-                <li><a href="#" class="nav-btn" data-target="kanban"><i class="fa-solid fa-list-check"></i> Task Board</a></li>
-                <li><a href="#" class="nav-btn" data-target="flashcards"><i class="fa-solid fa-clone"></i> Flashcards</a></li>
-                <li><a href="#" class="nav-btn" data-target="profile"><i class="fa-solid fa-user"></i> Profile</a></li>
-                <li><a href="#" class="nav-btn" data-target="settings"><i class="fa-solid fa-gear"></i> Settings</a></li>
-            </ul>
-        </aside>
+      <nav class="hidden md:flex items-center space-x-5 text-xs font-semibold tracking-wider">
+        <button onclick="navigateTo('home')" class="nav-btn text-brandGold hover:text-brandGold transition-colors py-1" data-target="home">HOME</button>
+        <button onclick="navigateTo('about')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="about">ABOUT</button>
+        <button onclick="navigateTo('activities')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="activities">ACTIVITIES</button>
+        <button onclick="navigateTo('gallery')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="gallery">GALLERY</button>
+        <button onclick="navigateTo('books')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="books">BOOKS</button>
+        <button onclick="navigateTo('students')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="students">STUDENTS</button>
+        <button onclick="navigateTo('achievements')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="achievements">ACHIEVEMENTS</button>
+      </nav>
 
-        <!-- MAIN CONTENT AREA -->
-        <main class="main-content">
-            <div class="mobile-header">
-                <i class="fa-solid fa-bars mobile-toggle" onclick="document.getElementById('sidebar').classList.add('open')"></i>
-                <div class="logo" style="margin:0; padding:0; font-size:1.3rem;"><i class="fa-solid fa-graduation-cap"></i> 10th Warriors</div>
-            </div>
-
-            <!-- DASHBOARD SECTION -->
-            <section id="dashboard" class="view-section active">
-                <div class="top-bar animate-in">
-                    <div class="greeting">
-                        <h1 id="greetingText" class="text-gradient">Welcome back.</h1>
-                        <p id="currentDate">Loading...</p>
-                    </div>
-                </div>
-
-                <div class="cards-grid">
-                    <div class="subject-card card-pink animate-in delay-1">
-                        <div class="card-header">
-                            <div><h3>Maths</h3><p>Real Numbers</p></div>
-                            <div class="cute-card-icon">📐</div>
-                        </div>
-                        <div class="progress-mini"><div class="progress-mini-fill" id="mathProgress"></div></div>
-                    </div>
-                    
-                    <div class="subject-card card-mint animate-in delay-2">
-                        <div class="card-header">
-                            <div><h3>Science</h3><p>Chemical Rxns</p></div>
-                            <div class="cute-card-icon delay-icon-2">🔬</div>
-                        </div>
-                        <div class="progress-mini"><div class="progress-mini-fill" id="sciProgress"></div></div>
-                    </div>
-                    
-                    <div class="subject-card card-peach animate-in delay-3">
-                        <div class="card-header">
-                            <div><h3>English</h3><p>Grammar Pro</p></div>
-                            <div class="cute-card-icon delay-icon-3">📚</div>
-                        </div>
-                        <div class="progress-mini"><div class="progress-mini-fill" id="engProgress" style="width: 85%;"></div></div>
-                    </div>
-                </div>
-
-                <div class="lower-grid animate-in delay-3">
-                    <div>
-                        <h2 class="section-title"><i class="fa-solid fa-crosshairs" style="color:var(--accent-orange);"></i> Active Quests</h2>
-                        <div class="task-list">
-                            <div class="task-item orange" onclick="this.classList.toggle('completed')">
-                                <div class="task-info"><h4>Complete Science Chapter 4</h4><p>Read PDF notes in Vault.</p></div>
-                                <div class="task-check"><i class="fa-solid fa-check" style="color:var(--text-muted)"></i></div>
-                            </div>
-                            <div class="task-item teal" onclick="this.classList.toggle('completed')">
-                                <div class="task-info"><h4>Mathematics Mock Test</h4><p>Target score: 95%+</p></div>
-                                <div class="task-check"><i class="fa-solid fa-check" style="color:var(--text-muted)"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h2 class="section-title"><i class="fa-solid fa-chart-simple" style="color:var(--accent-purple);"></i> Performance Stats</h2>
-                        <div class="stats-grid">
-                            <div class="stat-box"><h2>32h</h2><p>Focused Study</p></div>
-                            <div class="stat-box"><h2>14</h2><p>Quests Done</p></div>
-                            <div class="stat-box"><h2>A+</h2><p>Mock Average</p></div>
-                            <div class="stat-box"><h2>5</h2><p>Day Streak</p></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- STUDY VAULT -->
-            <section id="vault" class="view-section">
-                <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Study Vault</h1><p>Securely upload & access PDF resources.</p></div>
-                </div>
-                
-                <div class="upload-box animate-in delay-1" style="background: var(--bg-inner); padding: 25px; border-radius: var(--radius-lg); margin-bottom: 30px; border: 2px dashed var(--accent-teal); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm);">
-                    <input type="file" id="pdfUploader" accept="application/pdf" style="width: 100%; padding: 12px; background: var(--bg-input); border-radius: var(--radius-sm); font-weight: 700;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:10px;">
-                        <button class="btn-primary" onclick="window.uploadPDFToAppwrite()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Resource</button>
-                        <p id="uploadStatus" style="font-size: 1rem; color: var(--accent-orange); font-weight: 800;"></p>
-                    </div>
-                </div>
-                
-                <div class="notes-grid animate-in delay-2" id="notesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
-                    <!-- Uploaded PDFs -->
-                </div>
-            </section>
-
-            <!-- FLASHCARDS SECTION -->
-            <section id="flashcards" class="view-section">
-                <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Knowledge Cards</h1><p>Tap a card to reveal its concept.</p></div>
-                </div>
-
-                <div class="flashcard-grid animate-in delay-1">
-                    <div class="cute-card theme-chem" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">🧪</div><h3>Chemical Reactions</h3><p>Science • Chapter 1</p></div>
-                            <div class="card-back"><h4>Exothermic Reaction</h4><p>A reaction where heat is released along with the formation of products. (e.g., Respiration)</p></div>
-                        </div>
-                    </div>
-                    <div class="cute-card theme-bio" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">🧬</div><h3>Life Processes</h3><p>Science • Chapter 6</p></div>
-                            <div class="card-back"><h4>Xylem vs Phloem</h4><p>Xylem transports water from roots to leaves. Phloem transports food from leaves to all parts.</p></div>
-                        </div>
-                    </div>
-                    <div class="cute-card theme-phy" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">💡</div><h3>Light: Reflection</h3><p>Science • Chapter 10</p></div>
-                            <div class="card-back"><h4>Mirror Formula</h4><p>1/v + 1/u = 1/f <br><br>(v = image dist, u = object dist, f = focal length)</p></div>
-                        </div>
-                    </div>
-                    <div class="cute-card theme-math" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">📐</div><h3>Real Numbers</h3><p>Maths • Chapter 1</p></div>
-                            <div class="card-back"><h4>Fundamental Theorem</h4><p>For any two positive integers a and b: <br><br>HCF(a,b) × LCM(a,b) = a × b</p></div>
-                        </div>
-                    </div>
-                    <div class="cute-card theme-hindi" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">अ</div><h3>Vyakaran</h3><p>Hindi • Grammar</p></div>
-                            <div class="card-back"><h4>Samas (Compound)</h4><p>When two or more words combine to form a new meaningful word, the process is called Samas.</p></div>
-                        </div>
-                    </div>
-                    <div class="cute-card theme-ai" onclick="this.classList.toggle('is-flipped')">
-                        <div class="card-inner">
-                            <div class="card-front"><div class="emoji">🤖</div><h3>Machine Learning</h3><p>AI • Chapter 2</p></div>
-                            <div class="card-back"><h4>Supervised Learning</h4><p>The AI is trained on a labeled dataset, mapping inputs to correct outputs accurately over time.</p></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- KANBAN BOARD SECTION -->
-            <section id="kanban" class="view-section">
-                <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Task Board</h1><p>Organize and track your study workflow.</p></div>
-                </div>
-                
-                <div class="task-input-bar animate-in delay-1">
-                    <input type="text" id="kbTitle" placeholder="Task Title (e.g. Math 4.2)">
-                    <input type="text" id="kbDesc" placeholder="Brief details...">
-                    <select id="kbColor">
-                        <option value="purple">Math / Logic (Purple)</option>
-                        <option value="teal">Science / Dev (Teal)</option>
-                        <option value="orange">Creative / Other (Orange)</option>
-                    </select>
-                    <button class="btn-primary" onclick="window.addKanbanTask()"><i class="fa-solid fa-plus"></i> Add Task</button>
-                </div>
-
-                <div class="kanban-board animate-in delay-2">
-                    <div class="kanban-col">
-                        <h3>To Do <span id="count-todo">0</span></h3>
-                        <div class="kanban-zone" id="zone-todo" ondragover="allowDrop(event)" ondrop="drop(event, 'todo')"></div>
-                    </div>
-                    <div class="kanban-col">
-                        <h3>In Progress <span id="count-prog">0</span></h3>
-                        <div class="kanban-zone" id="zone-prog" ondragover="allowDrop(event)" ondrop="drop(event, 'prog')"></div>
-                    </div>
-                    <div class="kanban-col">
-                        <h3>Completed <span id="count-done">0</span></h3>
-                        <div class="kanban-zone" id="zone-done" ondragover="allowDrop(event)" ondrop="drop(event, 'done')"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PROFILE SECTION -->
-            <section id="profile" class="view-section">
-                <div class="top-bar animate-in">
-                    <div class="greeting"><h1 class="text-gradient">Student Profile</h1><p>Manage your academic identity.</p></div>
-                </div>
-                
-                <div class="profile-container animate-in delay-1" style="background: var(--bg-inner); padding: 35px; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border: var(--glass-border); display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start;">
-                    <div class="profile-avatar" style="text-align: center; flex: 1; min-width: 200px;">
-                        <img src="" id="profilePageImg" alt="Profile Avatar" style="width: 160px; height: 160px; border-radius: 50%; border: 4px solid var(--accent-purple); box-shadow: var(--shadow-md); margin-bottom: 15px; object-fit: cover;">
-                        <h3 id="profilePageName" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 5px;">Name</h3>
-                        <p class="text-muted" style="font-weight: 600; color: var(--text-muted); background: var(--bg-input); padding: 5px 15px; border-radius: 20px; display: inline-block;">Tenth Warrior Champ</p>
-                    </div>
-                    <div class="profile-details" style="flex: 2; min-width: 280px;">
-                        <div style="margin-bottom: 25px;">
-                            <label style="display:block; font-weight: 800; font-size: 0.95rem; margin-bottom: 10px; color: var(--text-main);">Display Name</label>
-                            <input type="text" id="updateNameInput" placeholder="Enter new name" style="width: 100%; padding: 15px 20px; border-radius: var(--radius-md); background: var(--bg-input); border: 2px solid transparent; color: var(--text-main); font-weight: 600; transition: var(--transition);">
-                        </div>
-                        <button class="btn-primary" onclick="updateProfileName()"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SETTINGS SECTION -->
-            <section id="settings" class="view-section">
-                <div class="top-bar animate-in"><div class="greeting"><h1 class="text-gradient">System Preferences</h1><p>Customize your workspace environment.</p></div></div>
-                <div class="lower-grid animate-in delay-1">
-                    <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                        <div><h2 style="font-size:1.5rem;">Dark Mode</h2><p>Switch to night viewing.</p></div>
-                        <input type="checkbox" id="themeToggle" style="transform: scale(1.5); cursor:pointer;">
-                    </div>
-                    <div class="stat-box" style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
-                        <div><h2 style="font-size:1.5rem;">Session</h2><p>Terminate current workspace session.</p></div>
-                        <button class="btn-primary" style="background:#ff4757; width: auto;" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- RIGHT PANEL (TIMER & LOFI) -->
-        <aside class="right-panel" id="rightPanel">
-            <div class="close-panel-btn" onclick="document.getElementById('rightPanel').classList.remove('open')"><i class="fa-solid fa-xmark"></i></div>
-            
-            <div class="lofi-widget" id="lofiWidget">
-                <div class="lofi-icon"><i class="fa-solid fa-headphones"></i></div>
-                <div class="lofi-info">
-                    <h4>Focus Beats</h4><p>Lofi Study Mix</p>
-                </div>
-                <div class="lofi-controls" onclick="window.toggleLofi()">
-                    <i class="fa-solid fa-circle-play" id="lofiPlayBtn"></i>
-                </div>
-                <audio id="lofiAudio" loop preload="none">
-                    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-
-            <div class="timer-container">
-                <div class="timer-header"><i class="fa-solid fa-stopwatch" style="color:var(--accent-teal);"></i> Pomodoro Timer</div>
-                <div class="progress-ring">
-                    <svg><circle class="ring-bg" cx="90" cy="90" r="80"></circle><circle class="ring-fill" id="timerCircle" cx="90" cy="90" r="80"></circle></svg>
-                    <div class="time-display" id="timerDisplay">25:00</div>
-                </div>
-                <div class="timer-controls">
-                    <button class="btn-timer primary" id="startBtn" onclick="window.startTimer()">Start</button>
-                    <button class="btn-timer" onclick="window.resetTimer()">Reset</button>
-                </div>
-            </div>
-        </aside>
-        
-        <button class="mobile-fab" onclick="document.getElementById('rightPanel').classList.add('open')">
-            <i class="fa-solid fa-stopwatch"></i>
+      <div class="flex items-center gap-3">
+        <button onclick="openSettingsPortal()" class="relative p-2.5 rounded-full bg-brandMutedBlue hover:bg-brandGold hover:text-brandNavy transition-all border border-brandGold/40 text-white" title="Settings & Admin Portal">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+          <span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-brandRedDot border-2 border-brandNavy"></span>
         </button>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-200 hover:text-brandGold">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- APPWRITE CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+    <div id="mobile-menu" class="hidden md:hidden bg-brandNavy border-b border-brandGold/30 px-6 py-4 space-y-3">
+      <button onclick="navigateTo('home')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">HOME</button>
+      <button onclick="navigateTo('about')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ABOUT</button>
+      <button onclick="navigateTo('activities')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ACTIVITIES</button>
+      <button onclick="navigateTo('gallery')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">GALLERY</button>
+      <button onclick="navigateTo('books')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">BOOKS</button>
+      <button onclick="navigateTo('students')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">STUDENTS</button>
+      <button onclick="navigateTo('achievements')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ACHIEVEMENTS</button>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <section id="page-home" class="page-view space-y-16">
+      <div class="relative bg-brandNavy text-brandCream py-20 md:py-28 px-4 sm:px-6 lg:px-8 border-b-4 border-brandGold overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-pattern"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
+          <img src="logo.jpeg" alt="PM SHRI Official Logo" class="h-36 w-36 sm:h-44 sm:w-44 mx-auto rounded-full border-4 border-brandGold shadow-2xl object-cover hover:rotate-2 transition-transform duration-500" />
+          
+          <div class="space-y-2">
+            <p class="text-xs sm:text-sm text-brandGold tracking-[0.25em] font-semibold uppercase">PM SHRI KV NO. 1 AFS GORAKHPUR</p>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-extrabold text-brandCream tracking-tight">ENGLISH READING CLUB</h1>
+            <p class="text-base sm:text-lg text-brandGold font-medium tracking-[0.3em] pt-2">SPEAK • EXPRESS • INSPIRE</p>
+          </div>
+
+          <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-200 italic font-serif leading-relaxed">
+            "Discover the joy of reading, express your ideas confidently, and inspire others through the power of English."
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-4 pt-4">
+            <button onclick="navigateTo('activities')" class="bg-brandGold text-brandNavy font-bold px-8 py-3.5 rounded-lg shadow-lg hover:bg-yellow-500 transition-all text-xs tracking-wider uppercase">EXPLORE ACTIVITIES</button>
+            <button onclick="navigateTo('books')" class="bg-transparent text-brandCream border-2 border-brandGold font-bold px-8 py-3.5 rounded-lg shadow-lg hover:bg-brandGold/10 transition-all text-xs tracking-wider uppercase">EXPLORE BOOKS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
+            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
+              <i data-lucide="book-open" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-brandNavy">READ</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">Explore books, stories, poems, and classic literature to cultivate a lifelong love for reading.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
+            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
+              <i data-lucide="feather" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-brandNavy">EXPRESS</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">Share ideas articulately through public speaking, storytelling sessions, and creative writing.</p>
+          </div>
+
+          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
+            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
+              <i data-lucide="sparkles" class="w-7 h-7"></i>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-brandNavy">INSPIRE</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">Encourage peers through collaborative literary initiatives, competitions, and outstanding achievements.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-brandNavy text-white rounded-2xl border-2 border-brandGold p-8 shadow-xl space-y-6">
+          <div class="flex items-center gap-3 border-b border-brandGold/30 pb-4">
+            <i data-lucide="bell" class="w-6 h-6 text-brandGold"></i>
+            <h2 class="text-xl font-serif font-bold text-brandCream">LATEST ANNOUNCEMENTS</h2>
+          </div>
+          <div id="home-announcements-list" class="space-y-4">
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-about" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-12">
+      <div class="text-center space-y-3">
+        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-brandNavy">ABOUT THE ENGLISH READING CLUB</h1>
+        <div class="h-1 w-24 bg-brandGold mx-auto"></div>
+      </div>
+
+      <div id="about-content-display" class="bg-white p-8 md:p-12 rounded-2xl border border-brandGold/30 shadow-lg space-y-6 text-gray-700 leading-relaxed">
+        </div>
+    </section>
+
+    <section id="page-activities" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-serif font-bold text-brandNavy">ACTIVITY SERIES</h1>
+        <p class="text-sm text-gray-600">Chronicle of literary workshops, storytelling sessions, and public speaking competitions.</p>
+      </div>
+
+      <div id="activities-list" class="grid md:grid-cols-2 gap-8">
+        </div>
+    </section>
+
+    <section id="page-gallery" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-serif font-bold text-brandNavy">ACTIVITY GALLERY</h1>
+        <p class="text-sm text-gray-600">Visual archives of student workshops, competitions, and literary events.</p>
+      </div>
+
+      <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        </div>
+    </section>
+
+    <section id="page-books" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-serif font-bold text-brandNavy">SUGGESTED BOOKS</h1>
+        <p class="text-sm text-gray-600">Curated digital library recommendations for students across reading levels.</p>
+      </div>
+
+      <div id="books-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        </div>
+    </section>
+
+    <section id="page-students" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-8">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-serif font-bold text-brandNavy">CLUB MEMBERS</h1>
+        <p class="text-sm text-gray-600">Registered student participants in the English Reading Club.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow border border-brandGold/30 overflow-hidden">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-brandNavy text-brandGold text-xs font-semibold uppercase tracking-wider">
+              <th class="py-4 px-6">Student Name</th>
+              <th class="py-4 px-6">Class</th>
+            </tr>
+          </thead>
+          <tbody id="public-students-table" class="divide-y divide-gray-100 text-sm">
+            </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="page-achievements" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-10">
+      <div class="text-center space-y-2">
+        <h1 class="text-3xl font-serif font-bold text-brandNavy">STUDENT ACHIEVEMENTS</h1>
+        <p class="text-sm text-gray-600">Celebrating excellence in English literature, debates, and creative writing.</p>
+      </div>
+
+      <div id="achievements-list" class="space-y-6">
+        </div>
+    </section>
+
+    <section id="page-admin" class="page-view hidden max-w-7xl mx-auto px-4 py-12 space-y-8">
+      <div class="bg-brandNavy text-white p-6 rounded-2xl border-2 border-brandGold flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl">
+        <div class="flex items-center gap-4">
+          <img src="logo.jpeg" alt="Admin Badge" class="h-12 w-12 rounded-full border border-brandGold object-cover" />
+          <div>
+            <h1 class="text-2xl font-serif font-bold text-brandCream">ADMINISTRATION DASHBOARD</h1>
+            <p class="text-xs text-brandGold">PM SHRI KV NO. 1 AFS GORAKHPUR • ENGLISH READING CLUB</p>
+          </div>
+        </div>
+        <button onclick="adminLogout()" class="flex items-center gap-2 bg-red-600/80 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition-colors">
+          <i data-lucide="log-out" class="w-4 h-4"></i> LOGOUT
+        </button>
+      </div>
+
+      <div class="flex border-b border-gray-300 gap-4 overflow-x-auto pb-1">
+        <button onclick="switchAdminTab('overview')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-brandGold text-brandNavy" data-tab="overview">OVERVIEW</button>
+        <button onclick="switchAdminTab('students')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy" data-tab="students">STUDENTS (PRIVATE)</button>
+        <button onclick="switchAdminTab('activities')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy" data-tab="activities">ACTIVITIES</button>
+        <button onclick="switchAdminTab('books')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy" data-tab="books">BOOKS</button>
+        <button onclick="switchAdminTab('announcements')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy" data-tab="announcements">ANNOUNCEMENTS</button>
+        <button onclick="switchAdminTab('security')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy" data-tab="security">SECURITY</button>
+      </div>
+
+      <div id="admin-tab-overview" class="admin-tab-content space-y-6">
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
+            <div class="flex justify-between items-center text-gray-400">
+              <span class="text-xs font-bold uppercase text-gray-500">Total Members</span>
+              <i data-lucide="users" class="w-5 h-5 text-brandGold"></i>
+            </div>
+            <div id="stat-students" class="text-3xl font-serif font-bold text-brandNavy">0</div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
+            <div class="flex justify-between items-center text-gray-400">
+              <span class="text-xs font-bold uppercase text-gray-500">Activities</span>
+              <i data-lucide="award" class="w-5 h-5 text-brandGold"></i>
+            </div>
+            <div id="stat-activities" class="text-3xl font-serif font-bold text-brandNavy">0</div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
+            <div class="flex justify-between items-center text-gray-400">
+              <span class="text-xs font-bold uppercase text-gray-500">Books Listed</span>
+              <i data-lucide="book-open" class="w-5 h-5 text-brandGold"></i>
+            </div>
+            <div id="stat-books" class="text-3xl font-serif font-bold text-brandNavy">0</div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
+            <div class="flex justify-between items-center text-gray-400">
+              <span class="text-xs font-bold uppercase text-gray-500">Security</span>
+              <i data-lucide="shield-check" class="w-5 h-5 text-brandGold"></i>
+            </div>
+            <div class="text-lg font-serif font-bold text-green-600">VERIFIED</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="admin-tab-students" class="admin-tab-content hidden space-y-8">
+        <form onsubmit="handleAddStudent(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
+          <h3 class="text-base font-serif font-bold text-brandNavy">Add Student Member (Private Record)</h3>
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <input type="text" id="admin-st-name" placeholder="Student Name" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-st-class" placeholder="Class (e.g. VIII-A)" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-st-phone" placeholder="Phone (Private)" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
+            <select id="admin-st-quality" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold">
+              <option value="Excellent">Excellent</option>
+              <option value="Very Good">Very Good</option>
+              <option value="Good">Good</option>
+              <option value="Need Improvement">Need Improvement</option>
+            </select>
+          </div>
+          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ ADD STUDENT RECORD</button>
+        </form>
+
+        <div class="bg-white rounded-xl shadow border border-brandGold/30 overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-brandNavy text-brandGold text-xs font-semibold uppercase">
+                <th class="py-4 px-6">Name</th>
+                <th class="py-4 px-6">Class</th>
+                <th class="py-4 px-6">Phone (Private)</th>
+                <th class="py-4 px-6">Quality (Private)</th>
+                <th class="py-4 px-6">Action</th>
+              </tr>
+            </thead>
+            <tbody id="admin-students-table" class="divide-y divide-gray-100 text-sm">
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="admin-tab-activities" class="admin-tab-content hidden space-y-8">
+        <form onsubmit="handleAddActivity(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
+          <h3 class="text-base font-serif font-bold text-brandNavy">Create New Activity Series Event</h3>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <input type="text" id="admin-act-title" placeholder="Activity Title" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="date" id="admin-act-date" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-act-cat" placeholder="Category (e.g. Storytelling)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-act-participants" placeholder="Participants (e.g. Classes VI - VIII)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+            <input type="text" id="admin-act-coordinator" placeholder="Coordinator" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+            <input type="text" id="admin-act-image" placeholder="Image URL" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+          </div>
+          <textarea id="admin-act-desc" placeholder="Activity Description..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-24" required></textarea>
+          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ PUBLISH ACTIVITY</button>
+        </form>
+
+        <div id="admin-activities-list" class="space-y-4">
+          </div>
+      </div>
+
+      <div id="admin-tab-books" class="admin-tab-content hidden space-y-8">
+        <form onsubmit="handleAddBook(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
+          <h3 class="text-base font-serif font-bold text-brandNavy">Add Book to Digital Bookshelf</h3>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <input type="text" id="admin-book-title" placeholder="Book Title" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-book-author" placeholder="Author" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-book-genre" placeholder="Genre (e.g. Fiction)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
+            <input type="text" id="admin-book-recommended" placeholder="Recommended By" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+            <input type="text" id="admin-book-level" placeholder="Reading Level (e.g. Intermediate)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+            <input type="text" id="admin-book-cover" placeholder="Cover Image URL" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
+          </div>
+          <textarea id="admin-book-review" placeholder="Short Book Review..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-20" required></textarea>
+          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ ADD BOOK</button>
+        </form>
+
+        <div id="admin-books-list" class="space-y-4">
+          </div>
+      </div>
+
+      <div id="admin-tab-announcements" class="admin-tab-content hidden space-y-8">
+        <form onsubmit="handleAddAnnouncement(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
+          <h3 class="text-base font-serif font-bold text-brandNavy">Post New Notice / Announcement</h3>
+          <input type="text" id="admin-ann-title" placeholder="Announcement Title" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
+          <textarea id="admin-ann-content" placeholder="Content details..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-20" required></textarea>
+          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ POST ANNOUNCEMENT</button>
+        </form>
+
+        <div id="admin-announcements-list" class="space-y-4">
+          </div>
+      </div>
+
+      <div id="admin-tab-security" class="admin-tab-content hidden max-w-xl mx-auto space-y-6">
+        <form onsubmit="handleChangePassword(event)" class="bg-white p-8 rounded-2xl border border-brandGold/30 shadow-lg space-y-4">
+          <h3 class="text-lg font-serif font-bold text-brandNavy">Change Administrator Password</h3>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Current Password</label>
+            <input type="password" id="admin-curr-pass" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">New Password</label>
+            <input type="password" id="admin-new-pass" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
+          </div>
+          <button type="submit" class="w-full bg-brandNavy text-brandGold font-bold py-3 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">UPDATE PASSWORD</button>
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="login-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-brandNavy text-white w-full max-w-md rounded-2xl border-2 border-brandGold p-8 shadow-2xl relative space-y-6">
+      <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center space-y-2">
+        <img src="logo.jpeg" alt="Logo" class="h-16 w-16 mx-auto rounded-full border border-brandGold object-cover" />
+        <h2 class="text-2xl font-serif font-bold text-brandCream">ADMIN LOGIN</h2>
+        <p class="text-xs text-brandGold">Enter credentials to unlock administrative controls</p>
+      </div>
+
+      <div id="login-error" class="hidden bg-red-600/30 border border-red-500 text-red-200 text-xs p-3 rounded text-center">
+        Invalid Admin ID or Password.
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-sm">
+        <div>
+          <label class="block text-xs font-semibold text-brandGold mb-1">ADMIN ID</label>
+          <input type="text" id="login-id" class="w-full bg-brandMutedBlue border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-brandGold" placeholder="e.g. KVS-1-2026" required />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-brandGold mb-1">PASSWORD</label>
+          <div class="relative">
+            <input type="password" id="login-pass" class="w-full bg-brandMutedBlue border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-brandGold" placeholder="••••••••" required />
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-2.5 text-gray-400 hover:text-white">
+              <i id="pass-eye-icon" data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-brandGold text-brandNavy font-bold rounded-lg hover:bg-yellow-500 transition-colors tracking-wide uppercase text-xs">SIGN IN</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-brandNavy text-white border-t-2 border-brandGold pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <img src="logo.jpeg" alt="Logo Footer" class="h-16 w-16 mx-auto rounded-full border-2 border-brandGold object-cover" />
+      <div class="text-xl font-serif font-bold text-brandCream">PM SHRI KV NO. 1 AFS GORAKHPUR</div>
+      <div class="text-xs text-brandGold font-semibold tracking-widest uppercase">ENGLISH READING CLUB</div>
+      <div class="text-xs text-gray-300 font-medium tracking-widest">SPEAK • EXPRESS • INSPIRE</div>
+      <div class="text-xs text-gray-400">Gorakhpur, Uttar Pradesh, India</div>
+
+      <div class="pt-6 border-t border-gray-800 text-[11px] text-gray-400">
+        © <span id="current-year">2026</span> PM SHRI KV NO. 1 AFS Gorakhpur English Reading Club. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- 🔥 FIREBASE INTEGRATION ADDED HERE 🔥 -->
+  <script type="module">
+    // Import the functions you need from the SDKs via Google CDN 
+    // This allows Firebase to run directly in your HTML without needing Webpack or npm build tools!
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBaGVr4okkjuuckNgKqxAm-JNf3aewg4AE",
+      authDomain: "project-a2b3c96f-ba88-4984-83d.firebaseapp.com",
+      projectId: "project-a2b3c96f-ba88-4984-83d",
+      storageBucket: "project-a2b3c96f-ba88-4984-83d.firebasestorage.app",
+      messagingSenderId: "975150029204",
+      appId: "1:975150029204:web:bd6bedd9643a27ccbb1781",
+      measurementId: "G-9CG17FH09E"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
     
-    <script>
-        // --- TOAST NOTIFICATIONS ---
-        window.showToast = function(msg) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `<div class="toast-content"><i class="fa-solid fa-circle-check"></i> <span>${msg}</span></div><div class="toast-progress"></div>`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.animation = 'toastSlideOut 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
+    console.log("Firebase has been successfully initialized!");
+  </script>
+
+  <script>
+    // System Data State
+    const state = {
+      isAdminLoggedIn: false,
+      adminCredentials: {
+        id: "KVS-1-2026",
+        pass: "UZL-2026-KVS"
+      },
+      aboutContent: {
+        intro: "The English Reading Club at PM SHRI KV No. 1 AFS Gorakhpur is dedicated to fostering a lifelong love for reading, enhancing creative expression, and cultivating confident communicators.",
+        mission: "Our mission is to create a vibrant literary ecosystem where students engage with classic and contemporary literature, refine public speaking ability, expand vocabulary, and articulate ideas effectively."
+      },
+      students: [
+        { id: "1", name: "Aarav Sharma", class: "VIII-A", phone: "+91 98765 43210", quality: "Excellent" },
+        { id: "2", name: "Ananya Verma", class: "IX-B", phone: "+91 98123 45678", quality: "Very Good" },
+        { id: "3", name: "Rohan Gupta", class: "VII-C", phone: "+91 99887 76655", quality: "Good" }
+      ],
+      activities: [
+        {
+          id: "1",
+          title: "STORYTELLING SESSION",
+          date: "12 August 2026",
+          category: "Expression",
+          description: "Students participated in an interactive storytelling session designed to improve confidence, vocabulary, and expression.",
+          participants: "Classes VI to VIII",
+          coordinator: "English Department",
+          coverImage: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=800"
         }
-
-        // --- LOGIN LOGIC ---
-        function checkLogin() {
-            const userName = localStorage.getItem('warriorName');
-            const overlay = document.getElementById('loginOverlay');
-            const mainApp = document.getElementById('mainApp');
-            if (userName) {
-                overlay.classList.add('hidden');
-                mainApp.classList.add('unlocked');
-                updateUIWithUsername(userName);
-                loadKanbanFromLocal(); 
-            } else {
-                overlay.classList.remove('hidden');
-                mainApp.classList.remove('unlocked');
-                document.getElementById('loginName').focus();
-            }
+      ],
+      books: [
+        {
+          id: "1",
+          title: "The Blue Umbrella",
+          author: "Ruskin Bond",
+          genre: "Fiction",
+          recommendedBy: "Club Coordinator",
+          review: "A heartwarming novella that captures Indian rural life and human emotion beautifully.",
+          level: "Intermediate",
+          coverImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600"
         }
+      ],
+      announcements: [
+        { id: "1", title: "Annual Poetry Recitation Competition", content: "Registrations are open for classes VI to XII until September 10, 2026.", date: "2026-09-01" }
+      ],
+      achievements: [
+        { id: "1", title: "Regional Debate Champions 2026", student: "Aarav Sharma & Team", desc: "Secured First Position in the Inter-School KVS Regional Debate Competition." }
+      ]
+    };
 
-        function handleEnter(e) { if (e.key === 'Enter') processLogin(); }
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      renderAllContent();
+    });
 
-        function processLogin() {
-            const inputName = document.getElementById('loginName').value.trim();
-            if (!inputName) return window.showToast("Please enter your full name.");
-            localStorage.setItem('warriorName', inputName);
-            document.getElementById('loginOverlay').classList.add('hidden');
-            document.getElementById('mainApp').classList.add('unlocked');
-            updateUIWithUsername(inputName);
-            window.showToast(`Authentication successful. Welcome, ${inputName}.`);
-            loadKanbanFromLocal();
-            if(typeof confetti === 'function') confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }});
+    // Navigation Handler
+    function navigateTo(pageId) {
+      document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+      const targetPage = document.getElementById(`page-${pageId}`);
+      if (targetPage) targetPage.classList.remove('hidden');
+
+      // Update Nav Buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.target === pageId) {
+          btn.className = "nav-btn text-brandGold font-bold border-b-2 border-brandGold pb-1";
+        } else {
+          btn.className = "nav-btn text-gray-300 hover:text-brandGold transition-colors py-1";
         }
+      });
 
-        function logout() { localStorage.removeItem('warriorName'); location.reload(); }
+      // Close mobile menu
+      document.getElementById('mobile-menu').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        function updateUIWithUsername(name) {
-            const hour = new Date().getHours();
-            let greeting = hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-            const firstName = name.split(' ')[0];
-            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=4318FF&color=fff&size=150&bold=true`;
-            
-            // Dashboard updates
-            document.getElementById('greetingText').innerText = `${greeting}, ${firstName}.`;
-            document.getElementById('profileName').innerText = name;
-            document.getElementById('profileImg').src = avatarUrl;
-            
-            // Profile section updates
-            document.getElementById('profilePageName').innerText = name;
-            document.getElementById('profilePageImg').src = avatarUrl;
-            document.getElementById('updateNameInput').value = name;
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Portal Access Handler
+    function openSettingsPortal() {
+      if (state.isAdminLoggedIn) {
+        navigateTo('admin');
+      } else {
+        document.getElementById('login-modal').classList.remove('hidden');
+      }
+    }
+
+    function closeLoginModal() {
+      document.getElementById('login-modal').classList.add('hidden');
+      document.getElementById('login-error').classList.add('hidden');
+    }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('login-pass');
+      const eyeIcon = document.getElementById('pass-eye-icon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+      } else {
+        passInput.type = 'password';
+      }
+    }
+
+    // Auth Handling
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const idInput = document.getElementById('login-id').value;
+      const passInput = document.getElementById('login-pass').value;
+
+      if (idInput === state.adminCredentials.id && passInput === state.adminCredentials.pass) {
+        state.isAdminLoggedIn = true;
+        closeLoginModal();
+        showToast("Authenticated as Administrator");
+        navigateTo('admin');
+        renderAdminTables();
+      } else {
+        document.getElementById('login-error').classList.remove('hidden');
+      }
+    }
+
+    function adminLogout() {
+      state.isAdminLoggedIn = false;
+      showToast("Logged out successfully");
+      navigateTo('home');
+    }
+
+    // Render Data Across Components
+    function renderAllContent() {
+      // 1. About Content
+      document.getElementById('about-content-display').innerHTML = `
+        <p class="text-lg font-serif italic text-brandNavy border-l-4 border-brandGold pl-4">
+          "${state.aboutContent.intro}"
+        </p>
+        <h2 class="text-xl font-serif font-bold text-brandNavy pt-4">Our Vision & Mission</h2>
+        <p>${state.aboutContent.mission}</p>
+      `;
+
+      // 2. Public Students (Excludes Phone & Quality)
+      const publicTable = document.getElementById('public-students-table');
+      publicTable.innerHTML = state.students.map(s => `
+        <tr class="hover:bg-gray-50">
+          <td class="py-4 px-6 font-medium text-brandNavy">${escapeHtml(s.name)}</td>
+          <td class="py-4 px-6 text-gray-600">${escapeHtml(s.class)}</td>
+        </tr>
+      `).join('');
+
+      // 3. Activities Public Grid
+      const actList = document.getElementById('activities-list');
+      actList.innerHTML = state.activities.map(a => `
+        <div class="bg-white rounded-xl overflow-hidden border border-brandGold/30 shadow-md flex flex-col">
+          ${a.coverImage ? `<img src="${a.coverImage}" class="h-56 w-full object-cover" alt="Activity Cover" />` : ''}
+          <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-center text-xs font-semibold text-brandGold uppercase tracking-wider mb-2">
+                <span>${escapeHtml(a.category)}</span>
+                <span>${escapeHtml(a.date)}</span>
+              </div>
+              <h2 class="text-xl font-serif font-bold text-brandNavy mb-2">${escapeHtml(a.title)}</h2>
+              <p class="text-gray-600 text-sm leading-relaxed">${escapeHtml(a.description)}</p>
+            </div>
+            <div class="pt-4 border-t border-gray-100 text-xs text-gray-500 space-y-1">
+              <div><span class="font-semibold text-gray-700">Participants:</span> ${escapeHtml(a.participants || 'N/A')}</div>
+              <div><span class="font-semibold text-gray-700">Coordinator:</span> ${escapeHtml(a.coordinator || 'N/A')}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // 4. Books Public Grid
+      const booksGrid = document.getElementById('books-grid');
+      booksGrid.innerHTML = state.books.map(b => `
+        <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            ${b.coverImage ? `<img src="${b.coverImage}" class="h-56 mx-auto object-cover rounded shadow border" />` : ''}
+            <div>
+              <span class="text-xs font-bold text-brandGold uppercase tracking-wider">${escapeHtml(b.genre)}</span>
+              <h3 class="text-lg font-serif font-bold text-brandNavy">${escapeHtml(b.title)}</h3>
+              <p class="text-xs text-gray-500 italic">By ${escapeHtml(b.author)}</p>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">${escapeHtml(b.review)}</p>
+          </div>
+          <div class="pt-4 border-t border-gray-100 text-xs text-gray-500 flex justify-between">
+            <span>Level: <strong>${escapeHtml(b.level || 'General')}</strong></span>
+            <span>Rec: ${escapeHtml(b.recommendedBy || 'Club')}</span>
+          </div>
+        </div>
+      `).join('');
+
+      // 5. Announcements List
+      const annList = document.getElementById('home-announcements-list');
+      annList.innerHTML = state.announcements.map(an => `
+        <div class="border-l-2 border-brandGold pl-4 space-y-1">
+          <h4 class="font-serif font-bold text-brandCream text-sm">${escapeHtml(an.title)}</h4>
+          <p class="text-xs text-gray-300">${escapeHtml(an.content)}</p>
+          <span class="text-[10px] text-brandGold">${escapeHtml(an.date)}</span>
+        </div>
+      `).join('');
+
+      // 6. Achievements List
+      const achList = document.getElementById('achievements-list');
+      achList.innerHTML = state.achievements.map(ac => `
+        <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow flex items-center gap-4">
+          <div class="h-12 w-12 bg-brandNavy text-brandGold rounded-full flex items-center justify-center flex-shrink-0 border border-brandGold">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-brandNavy text-base">${escapeHtml(ac.title)}</h3>
+            <p class="text-xs font-bold text-brandGold">${escapeHtml(ac.student)}</p>
+            <p class="text-xs text-gray-600 pt-1">${escapeHtml(ac.desc)}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // 7. Admin Render
+      renderAdminTables();
+    }
+
+    // Render Private Admin Tables
+    function renderAdminTables() {
+      // Statistics
+      document.getElementById('stat-students').textContent = state.students.length;
+      document.getElementById('stat-activities').textContent = state.activities.length;
+      document.getElementById('stat-books').textContent = state.books.length;
+
+      // Admin Student Table (Private Fields Included)
+      const adminStTable = document.getElementById('admin-students-table');
+      adminStTable.innerHTML = state.students.map(s => `
+        <tr class="hover:bg-gray-50">
+          <td class="py-3 px-6 font-medium text-brandNavy">${escapeHtml(s.name)}</td>
+          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.class)}</td>
+          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.phone)}</td>
+          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.quality)}</td>
+          <td class="py-3 px-6">
+            <button onclick="deleteStudent('${s.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Admin Activities List
+      const adminActList = document.getElementById('admin-activities-list');
+      adminActList.innerHTML = state.activities.map(a => `
+        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
+          <div>
+            <strong class="text-brandNavy text-sm">${escapeHtml(a.title)}</strong> (${escapeHtml(a.date)})
+            <p class="text-gray-500">${escapeHtml(a.category)}</p>
+          </div>
+          <button onclick="deleteActivity('${a.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div>
+      `).join('');
+
+      // Admin Books List
+      const adminBookList = document.getElementById('admin-books-list');
+      adminBookList.innerHTML = state.books.map(b => `
+        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
+          <div>
+            <strong class="text-brandNavy text-sm">${escapeHtml(b.title)}</strong> - ${escapeHtml(b.author)}
+            <p class="text-gray-500">${escapeHtml(b.genre)}</p>
+          </div>
+          <button onclick="deleteBook('${b.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div>
+      `).join('');
+
+      // Admin Announcements List
+      const adminAnnList = document.getElementById('admin-announcements-list');
+      adminAnnList.innerHTML = state.announcements.map(an => `
+        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
+          <div>
+            <strong class="text-brandNavy text-sm">${escapeHtml(an.title)}</strong>
+            <p class="text-gray-500">${escapeHtml(an.content)}</p>
+          </div>
+          <button onclick="deleteAnnouncement('${an.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Switch Admin Sub-tabs
+    function switchAdminTab(tabId) {
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`admin-tab-${tabId}`).classList.remove('hidden');
+
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        if (btn.dataset.tab === tabId) {
+          btn.className = "admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-brandGold text-brandNavy";
+        } else {
+          btn.className = "admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy";
         }
+      });
+    }
 
-        function updateProfileName() {
-            const newName = document.getElementById('updateNameInput').value.trim();
-            if (!newName) return window.showToast("Name cannot be empty.");
-            localStorage.setItem('warriorName', newName);
-            updateUIWithUsername(newName);
-            window.showToast("Profile updated successfully.");
-        }
+    // Dynamic Admin Handlers
+    function handleAddStudent(e) {
+      e.preventDefault();
+      const name = document.getElementById('admin-st-name').value;
+      const cls = document.getElementById('admin-st-class').value;
+      const phone = document.getElementById('admin-st-phone').value;
+      const quality = document.getElementById('admin-st-quality').value;
 
-        // --- APPWRITE VAULT (PDF UPLOAD) ---
-        const { Client, Storage, ID } = window.Appwrite;
-        const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject('nyc-tenth-worriers44');
-        const appwriteStorage = new Storage(client);
-        const BUCKET_ID = 'tenth-worriers44'; 
+      state.students.push({ id: Date.now().toString(), name, class: cls, phone, quality });
+      e.target.reset();
+      showToast("Student record added successfully");
+      renderAllContent();
+    }
 
-        window.uploadPDFToAppwrite = function() {
-            const fileInput = document.getElementById('pdfUploader');
-            const file = fileInput.files[0];
-            const statusText = document.getElementById('uploadStatus');
+    function deleteStudent(id) {
+      if (confirm("Are you sure you want to permanently delete this student record?")) {
+        state.students = state.students.filter(s => s.id !== id);
+        showToast("Student deleted successfully");
+        renderAllContent();
+      }
+    }
 
-            if (!file) return window.showToast("Please select a PDF file.");
-            if (file.type !== "application/pdf") return window.showToast("Invalid format. PDF only.");
+    function handleAddActivity(e) {
+      e.preventDefault();
+      const title = document.getElementById('admin-act-title').value;
+      const date = document.getElementById('admin-act-date').value;
+      const category = document.getElementById('admin-act-cat').value;
+      const participants = document.getElementById('admin-act-participants').value;
+      const coordinator = document.getElementById('admin-act-coordinator').value;
+      const coverImage = document.getElementById('admin-act-image').value;
+      const description = document.getElementById('admin-act-desc').value;
 
-            statusText.innerText = 'Uploading...';
+      state.activities.push({ id: Date.now().toString(), title, date, category, participants, coordinator, coverImage, description });
+      e.target.reset();
+      showToast("Activity published successfully");
+      renderAllContent();
+    }
 
-            appwriteStorage.createFile(BUCKET_ID, ID.unique(), file).then((response) => {
-                statusText.innerText = 'Upload Complete';
-                window.showToast("Resource securely saved.");
-                fileInput.value = ""; 
-                const downloadURL = appwriteStorage.getFileView(BUCKET_ID, response.$id).href;
-                
-                const grid = document.getElementById('notesGrid');
-                const card = document.createElement('div');
-                card.style.cssText = "background: var(--bg-inner); padding: 25px 20px; border-radius: var(--radius-lg); text-align: center; border: var(--glass-border); box-shadow: var(--shadow-md); animation: slideUpFade 0.5s forwards;";
-                card.innerHTML = `
-                    <div style="width: 70px; height: 70px; margin: 0 auto 15px auto; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; background: rgba(5,205,153,0.1); color: var(--accent-teal);">
-                        <i class="fa-solid fa-file-pdf"></i>
-                    </div>
-                    <h4 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main); word-wrap: break-word;">${file.name}</h4>
-                    <a href="${downloadURL}" target="_blank" class="btn-primary" style="justify-content:center; width:100%;">View Document</a>
-                `;
-                grid.prepend(card);
-            }).catch((error) => {
-                console.error("Appwrite Upload Error:", error);
-                statusText.innerText = 'Error';
-                window.showToast("Upload Failed. Check console.");
-            });
-        }
+    function deleteActivity(id) {
+      if (confirm("Delete activity entry?")) {
+        state.activities = state.activities.filter(a => a.id !== id);
+        showToast("Activity deleted");
+        renderAllContent();
+      }
+    }
 
-        // --- LOCAL KANBAN BOARD ---
-        let tasks = JSON.parse(localStorage.getItem('kanbanTasks')) || [];
-        window.draggedItem = null;
+    function handleAddBook(e) {
+      e.preventDefault();
+      const title = document.getElementById('admin-book-title').value;
+      const author = document.getElementById('admin-book-author').value;
+      const genre = document.getElementById('admin-book-genre').value;
+      const recommendedBy = document.getElementById('admin-book-recommended').value;
+      const level = document.getElementById('admin-book-level').value;
+      const coverImage = document.getElementById('admin-book-cover').value;
+      const review = document.getElementById('admin-book-review').value;
 
-        function saveKanbanToLocal() { localStorage.setItem('kanbanTasks', JSON.stringify(tasks)); }
+      state.books.push({ id: Date.now().toString(), title, author, genre, recommendedBy, level, coverImage, review });
+      e.target.reset();
+      showToast("Book added to digital library");
+      renderAllContent();
+    }
 
-        function loadKanbanFromLocal() {
-            document.getElementById('zone-todo').innerHTML = '';
-            document.getElementById('zone-prog').innerHTML = '';
-            document.getElementById('zone-done').innerHTML = '';
-            
-            if(tasks.length === 0) {
-                tasks = [
-                    { id: 'task-1', title: 'Science Revision', desc: 'Review AI Flashcards', color: 'teal', status: 'todo' },
-                    { id: 'task-2', title: 'Maths Assignment', desc: 'Solve Ex 4.2', color: 'purple', status: 'prog' }
-                ];
-                saveKanbanToLocal();
-            }
+    function deleteBook(id) {
+      if (confirm("Remove book from database?")) {
+        state.books = state.books.filter(b => b.id !== id);
+        showToast("Book deleted");
+        renderAllContent();
+      }
+    }
 
-            tasks.forEach(task => {
-                const card = document.createElement('div');
-                card.className = 'kanban-card'; card.draggable = true; card.id = task.id;
-                card.style.borderLeftColor = `var(--accent-${task.color})`;
-                card.ondragstart = window.drag;
-                if(task.status === 'done') card.style.opacity = '0.7';
-                card.innerHTML = `<h4>${task.title}</h4><p>${task.desc}</p><i class="fa-solid fa-trash delete-btn" onclick="window.deleteKanbanTask('${task.id}', this)"></i>`;
-                document.getElementById(`zone-${task.status}`).appendChild(card);
-            });
-            window.updateKanbanCounts();
-        }
+    function handleAddAnnouncement(e) {
+      e.preventDefault();
+      const title = document.getElementById('admin-ann-title').value;
+      const content = document.getElementById('admin-ann-content').value;
 
-        window.addKanbanTask = function() {
-            const title = document.getElementById('kbTitle').value.trim();
-            const desc = document.getElementById('kbDesc').value.trim();
-            const color = document.getElementById('kbColor').value;
-            if(!title) return window.showToast("Task title is required.");
+      state.announcements.push({ id: Date.now().toString(), title, content, date: new Date().toISOString().split('T')[0] });
+      e.target.reset();
+      showToast("Announcement published");
+      renderAllContent();
+    }
 
-            const newTask = { id: 'task-' + Date.now(), title, desc, color, status: 'todo' };
-            tasks.push(newTask); saveKanbanToLocal();
+    function deleteAnnouncement(id) {
+      state.announcements = state.announcements.filter(an => an.id !== id);
+      showToast("Announcement deleted");
+      renderAllContent();
+    }
 
-            const card = document.createElement('div');
-            card.className = 'kanban-card'; card.draggable = true; card.id = newTask.id;
-            card.style.borderLeftColor = `var(--accent-${color})`; card.ondragstart = window.drag;
-            card.innerHTML = `<h4>${title}</h4><p>${desc}</p><i class="fa-solid fa-trash delete-btn" onclick="window.deleteKanbanTask('${newTask.id}', this)"></i>`;
-            document.getElementById('zone-todo').prepend(card);
-            
-            document.getElementById('kbTitle').value = ''; document.getElementById('kbDesc').value = '';
-            window.updateKanbanCounts(); window.showToast("Task added to workflow.");
-        }
+    function handleChangePassword(e) {
+      e.preventDefault();
+      const curr = document.getElementById('admin-curr-pass').value;
+      const next = document.getElementById('admin-new-pass').value;
 
-        window.deleteKanbanTask = function(id, btn) {
-            tasks = tasks.filter(t => t.id !== id); saveKanbanToLocal();
-            btn.parentElement.remove(); window.updateKanbanCounts(); window.showToast("Task removed.");
-        }
+      if (curr === state.adminCredentials.pass) {
+        state.adminCredentials.pass = next;
+        e.target.reset();
+        showToast("Password changed successfully");
+      } else {
+        alert("Incorrect current password");
+      }
+    }
 
-        window.drag = function(ev) { window.draggedItem = ev.target; ev.dataTransfer.setData("text", ev.target.id); }
-        window.allowDrop = function(ev) { ev.preventDefault(); }
-        window.drop = function(ev, zoneId) {
-            ev.preventDefault();
-            if(window.draggedItem) {
-                document.getElementById('zone-' + zoneId).appendChild(window.draggedItem);
-                
-                const taskObj = tasks.find(t => t.id === window.draggedItem.id);
-                if(taskObj) { taskObj.status = zoneId; saveKanbanToLocal(); }
+    // Utilities
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
 
-                if(zoneId === 'done') { window.draggedItem.style.opacity = '0.7'; window.fireConfetti(); window.showToast("Task completed!"); }
-                else { window.draggedItem.style.opacity = '1'; }
-                
-                window.draggedItem = null; window.updateKanbanCounts();
-            }
-        }
-
-        window.fireConfetti = function() { if(typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#4318FF', '#05CD99', '#FF7B49'] }); }
-        window.updateKanbanCounts = function() {
-            document.getElementById('count-todo').innerText = document.getElementById('zone-todo').children.length;
-            document.getElementById('count-prog').innerText = document.getElementById('zone-prog').children.length;
-            document.getElementById('count-done').innerText = document.getElementById('zone-done').children.length;
-        }
-
-        // --- NAVIGATION & UI ---
-        document.addEventListener("DOMContentLoaded", () => {
-            checkLogin();
-            const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', opts);
-            setTimeout(() => { document.getElementById('mathProgress').style.width = '96%'; document.getElementById('sciProgress').style.width = '70%'; }, 800);
-            
-            // Fix input focusing for profile edit field styling
-            const profileInput = document.getElementById('updateNameInput');
-            profileInput.addEventListener('focus', () => profileInput.style.borderColor = 'var(--accent-purple)');
-            profileInput.addEventListener('blur', () => profileInput.style.borderColor = 'transparent');
-            
-            if(localStorage.getItem('theme') === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); document.getElementById('themeToggle').checked = true; }
-        });
-
-        document.querySelector('.main-content').addEventListener('click', () => { if(window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open'); });
-        document.getElementById('themeToggle').addEventListener('change', (e) => {
-            document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light');
-            localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
-            window.showToast(e.target.checked ? 'Dark Mode Activated' : 'Light Mode Activated');
-        });
-
-        let isPlaying = false;
-        window.toggleLofi = function() {
-            const audio = document.getElementById('lofiAudio'); const widget = document.getElementById('lofiWidget'); const btn = document.getElementById('lofiPlayBtn');
-            if(isPlaying) { audio.pause(); widget.classList.remove('playing'); btn.className = "fa-solid fa-circle-play"; isPlaying = false; } 
-            else { audio.volume = 0.4; audio.play(); widget.classList.add('playing'); btn.className = "fa-solid fa-circle-pause"; isPlaying = true; window.showToast("Focus Beats Playing"); }
-        }
-
-        const navBtns = document.querySelectorAll('.nav-btn'); const sections = document.querySelectorAll('.view-section');
-        window.switchView = function(targetId) {
-            navBtns.forEach(b => { b.classList.remove('active'); if(b.getAttribute('data-target') === targetId) b.classList.add('active'); });
-            sections.forEach(sec => sec.classList.remove('active'));
-            const targetSection = document.getElementById(targetId); targetSection.classList.add('active');
-            targetSection.querySelectorAll('.animate-in').forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = null; });
-            if(window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
-            document.querySelector('.main-content').scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        navBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); window.switchView(e.currentTarget.getAttribute('data-target')); }));
-
-        // --- TIMER LOGIC ---
-        let timerInt; const FULL_DASH = 502.65; 
-        let timeLeft = 1500; const totalTime = 1500;
-        const timerDisplay = document.getElementById('timerDisplay'); const timerCircle = document.getElementById('timerCircle');
-        timerCircle.style.strokeDasharray = FULL_DASH; let isRunning = false;
-
-        function formatTime(secs) { return `${Math.floor(secs/60).toString().padStart(2,'0')}:${(secs%60).toString().padStart(2,'0')}`; }
-        function setCircleProgress(percent) { timerCircle.style.strokeDashoffset = FULL_DASH - (percent * FULL_DASH); }
-
-        window.startTimer = function() {
-            const btn = document.getElementById('startBtn');
-            if(isRunning) { clearInterval(timerInt); isRunning = false; btn.innerText = "Resume"; btn.style.background = "var(--bg-input)"; btn.style.color = "var(--text-main)"; return; }
-            isRunning = true; btn.innerText = "Pause"; btn.style.background = "#ff4757"; btn.style.color = "#fff";
-            timerInt = setInterval(() => {
-                if(timeLeft > 0) { timeLeft--; timerDisplay.innerText = formatTime(timeLeft); setCircleProgress(timeLeft / totalTime); } 
-                else { clearInterval(timerInt); isRunning = false; btn.innerText = "Start"; window.showToast("Focus Session Complete"); window.fireConfetti(); }
-            }, 1000);
-        }
-        window.resetTimer = function() {
-            clearInterval(timerInt); isRunning = false; timeLeft = totalTime; timerDisplay.innerText = formatTime(timeLeft); setCircleProgress(1);
-            const btn = document.getElementById('startBtn'); btn.innerText = "Start"; btn.style.background = "var(--accent-teal)"; btn.style.color = "#fff";
-        }
-    </script>
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
 </body>
 </html>
