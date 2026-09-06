@@ -1,1163 +1,641 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#FDFBF7]">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PM SHRI KV No. 1 AFS Gorakhpur | English Reading Club</title>
-  <meta name="description" content="Official English Reading Club portal of PM SHRI KV No. 1 AFS Gorakhpur featuring reading activities, student initiatives, suggested books, events and literary achievements.">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Firebase Compat Libraries -->
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database-compat.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandNavy: '#0B192C',
-            brandGold: '#D4AF37',
-            brandCream: '#FDFBF7',
-            brandMutedBlue: '#1E3E62',
-            brandRedDot: '#EF4444'
-          },
-          fontFamily: {
-            serif: ['Georgia', 'Cambria', 'serif'],
-            sans: ['system-ui', '-apple-system', 'sans-serif']
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teacher's Day | Aviral Khurana Sir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF9F0;
+            --navy: #172554;
+            --gold: #F4B942;
+            --blue: #DBEAFE;
+            --white: #FFFFFF;
+            --pink: #FCE7F3;
+            --font-main: 'Poppins', sans-serif;
+            --font-serif: 'Playfair Display', serif;
         }
-      }
-    }
-  </script>
 
-  <style>
-    .bg-pattern {
-      background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px);
-      background-size: 16px 16px;
-    }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0B192C;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #D4AF37;
-      border-radius: 4px;
-    }
-  </style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--cream);
+            color: var(--navy);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            margin-bottom: 15px;
+        }
+        p {
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .glow-btn {
+            background: linear-gradient(135deg, var(--gold), #ff9a44);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-family: var(--font-main);
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(244, 185, 66, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(244, 185, 66, 0.6);
+        }
+
+        /* Navigation */
+        .glass-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 10px 30px;
+            border-radius: 30px;
+        }
+        .glass-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .glass-nav a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .glass-nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Sections */
+        .fullscreen {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Welcome Page */
+        .floating-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .float-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatAnim 6s ease-in-out infinite alternate;
+            opacity: 0.6;
+        }
+        .float-item:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .float-item:nth-child(2) { top: 60%; left: 10%; animation-delay: 1s; }
+        .float-item:nth-child(3) { top: 30%; right: 20%; animation-delay: 2s; }
+        .float-item:nth-child(4) { top: 70%; right: 15%; animation-delay: 0.5s; }
+        .float-item:nth-child(5) { top: 10%; right: 40%; animation-delay: 1.5s; }
+        .float-item:nth-child(6) { top: 80%; left: 40%; animation-delay: 2.5s; }
+
+        @keyframes floatAnim {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Greeting */
+        .elegant-title {
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            margin-top: 50px;
+            color: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        .scroll-indicator .arrow {
+            font-size: 2rem;
+            color: var(--gold);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin-top: 40px;
+        }
+        .special-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .special-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(244, 185, 66, 0.2);
+        }
+        .special-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Memories Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 40px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(23, 37, 84, 0.15);
+            border: 4px solid var(--white);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px; /* Gives the box structure even if image fails to load */
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(23, 37, 84, 0.25);
+            z-index: 2;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Quote Section */
+        .cinematic {
+            background: radial-gradient(circle at center, var(--navy), #0a1128);
+            color: var(--cream);
+        }
+        .quote-content {
+            max-width: 800px;
+        }
+        .quote-content h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        /* Gift Box */
+        .gift-container {
+            margin: 40px 0;
+            cursor: pointer;
+        }
+        .gift {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        .gift-box {
+            width: 150px;
+            height: 120px;
+            background: var(--pink);
+            position: absolute;
+            bottom: 0;
+            border-radius: 5px;
+            box-shadow: inset -10px 0 20px rgba(0,0,0,0.1);
+        }
+        .gift-lid {
+            width: 160px;
+            height: 30px;
+            background: var(--gold);
+            position: absolute;
+            top: 0;
+            left: -5px;
+            border-radius: 3px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease-in-out;
+        }
+        .gift-ribbon-v {
+            width: 20px;
+            height: 100%;
+            background: var(--gold);
+            position: absolute;
+            left: 65px;
+        }
+        .gift-ribbon-h {
+            width: 100%;
+            height: 20px;
+            background: var(--gold);
+            position: absolute;
+            top: 50px;
+        }
+        .gift-open .gift-lid {
+            transform: translateY(-50px) rotate(-15deg);
+            opacity: 0;
+        }
+        #final-message {
+            margin-top: 30px;
+            animation: fadeIn 2s forwards;
+        }
+        #final-message h1 { color: var(--navy); }
+
+        /* Floating Controls */
+        .floating-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: none;
+            background: var(--white);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .icon-btn:hover { background: var(--pink); }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        .reveal { opacity: 0; transform: scale(0.9); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: scale(1); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Confetti System (DOM) */
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; padding: 0 15px; }
+            .elegant-title { font-size: 2.5rem; }
+            .glass-nav { bottom: 20px; top: auto; width: 90%; }
+            .glass-nav ul { justify-content: center; padding: 0; gap: 15px; }
+            .floating-controls { bottom: 80px; }
+        }
+    </style>
 </head>
-<body class="flex flex-col min-h-full font-sans text-brandNavy bg-brandCream antialiased selection:bg-brandGold selection:text-brandNavy">
+<body>
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
 
-  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none px-6 py-3 rounded-lg shadow-2xl text-white font-medium flex items-center gap-2 bg-brandNavy border border-brandGold">
-    <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-brandGold"></i>
-    <span id="toast-message">Action completed successfully</span>
-  </div>
+    <!-- Navigation -->
+    <nav class="glass-nav hidden" id="main-nav">
+        <ul>
+            <li><a href="#greeting">Home</a></li>
+            <li><a href="#memories">Memories</a></li>
+            <li><a href="#special">Special</a></li>
+            <li><a href="#surprise">Surprise</a></li>
+        </ul>
+    </nav>
 
-  <!-- Creator Banner -->
-  <div class="bg-brandGold text-brandNavy text-center text-[10px] font-bold py-1.5 tracking-[0.2em] uppercase w-full relative z-50">
-    Made by Aviral khurana
-  </div>
-
-  <header class="sticky top-0 z-40 bg-brandNavy text-white shadow-xl border-b border-brandGold/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center gap-3 group">
-        <img src="logo.jpeg" alt="English Reading Club Logo" class="h-14 w-14 rounded-full border-2 border-brandGold object-cover shadow-md group-hover:scale-105 transition-transform bg-white" />
-        <div>
-          <div class="text-[10px] sm:text-xs tracking-widest text-brandGold uppercase font-semibold">PM SHRI KV NO. 1 AFS GORAKHPUR</div>
-          <div class="text-base sm:text-lg font-serif font-bold tracking-wide text-brandCream">ENGLISH READING CLUB</div>
+    <!-- Page 1: Welcome Screen -->
+    <section id="welcome" class="fullscreen">
+        <div class="floating-bg">
+            <span class="float-item">📚</span>
+            <span class="float-item">✏️</span>
+            <span class="float-item">⭐</span>
+            <span class="float-item">🎓</span>
+            <span class="float-item">💫</span>
+            <span class="float-item">🌸</span>
         </div>
-      </a>
+        <div class="welcome-content">
+            <h1>A Little Surprise For You, Sir ❤️</h1>
+            <p>Made with gratitude, respect & lots of love.</p>
+            <button id="open-surprise-btn" class="glow-btn">🎁 OPEN YOUR SURPRISE</button>
+        </div>
+    </section>
 
-      <nav class="hidden lg:flex items-center space-x-5 text-xs font-semibold tracking-wider">
-        <button onclick="navigateTo('home')" class="nav-btn text-brandGold hover:text-brandGold transition-colors py-1" data-target="home">HOME</button>
-        <button onclick="navigateTo('about')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="about">ABOUT</button>
-        <button onclick="navigateTo('events')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="events">EVENTS</button>
-        <button onclick="navigateTo('activities')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="activities">ACTIVITIES</button>
-        <button onclick="navigateTo('gallery')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="gallery">GALLERY</button>
-        <button onclick="navigateTo('books')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="books">BOOKS</button>
-        <button onclick="navigateTo('students')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="students">STUDENTS</button>
-        <button onclick="navigateTo('achievements')" class="nav-btn text-gray-300 hover:text-brandGold transition-colors py-1" data-target="achievements">ACHIEVEMENTS</button>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button onclick="openSettingsPortal()" class="relative p-2.5 rounded-full bg-brandMutedBlue hover:bg-brandGold hover:text-brandNavy transition-all border border-brandGold/40 text-white" title="Settings & Admin Portal">
-          <i data-lucide="settings" class="w-5 h-5"></i>
-          <span class="absolute top-0 right-0 h-3 w-3 rounded-full bg-brandRedDot border-2 border-brandNavy"></span>
-        </button>
-
-        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-200 hover:text-brandGold">
-          <i data-lucide="menu" class="w-6 h-6"></i>
-        </button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden lg:hidden bg-brandNavy border-b border-brandGold/30 px-6 py-4 space-y-3">
-      <button onclick="navigateTo('home')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">HOME</button>
-      <button onclick="navigateTo('about')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ABOUT</button>
-      <button onclick="navigateTo('events')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">EVENTS</button>
-      <button onclick="navigateTo('activities')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ACTIVITIES</button>
-      <button onclick="navigateTo('gallery')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">GALLERY</button>
-      <button onclick="navigateTo('books')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">BOOKS</button>
-      <button onclick="navigateTo('students')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">STUDENTS</button>
-      <button onclick="navigateTo('achievements')" class="block w-full text-left py-1 text-gray-200 hover:text-brandGold font-semibold text-sm">ACHIEVEMENTS</button>
-    </div>
-  </header>
-
-  <main class="flex-grow">
-
-    <section id="page-home" class="page-view space-y-16">
-      <!-- Hero Section with KVS Background -->
-      <div class="relative bg-brandNavy text-brandCream py-20 md:py-28 px-4 sm:px-6 lg:px-8 border-b-4 border-brandGold overflow-hidden bg-cover bg-center" style="background-image: url('image.png');">
-        <div class="absolute inset-0 bg-brandNavy/85 mix-blend-multiply"></div>
-        <div class="absolute inset-0 opacity-20 bg-pattern mix-blend-overlay"></div>
+    <!-- Main Content Wrapper (Hidden initially) -->
+    <div id="main-content" class="hidden">
         
-        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
-          <img src="logo.jpeg" alt="PM SHRI Official Logo" class="h-36 w-36 sm:h-44 sm:w-44 mx-auto rounded-full border-4 border-brandGold shadow-2xl object-cover bg-white hover:rotate-2 transition-transform duration-500" onerror="this.src='https://ui-avatars.com/api/?name=ERC&background=D4AF37&color=0B192C'" />
-          
-          <div class="space-y-2">
-            <p class="text-xs sm:text-sm text-brandGold tracking-[0.25em] font-semibold uppercase drop-shadow-md">PM SHRI KV NO. 1 AFS GORAKHPUR</p>
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-extrabold text-brandCream tracking-tight drop-shadow-lg">ENGLISH READING CLUB</h1>
-            <p class="text-base sm:text-lg text-brandGold font-medium tracking-[0.3em] pt-2 drop-shadow-md">SPEAK • EXPRESS • INSPIRE</p>
-          </div>
-
-          <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-200 italic font-serif leading-relaxed drop-shadow">
-            "Discover the joy of reading, express your ideas confidently, and inspire others through the power of English."
-          </p>
-
-          <div class="flex flex-wrap justify-center gap-4 pt-4">
-            <button onclick="navigateTo('activities')" class="bg-brandGold text-brandNavy font-bold px-8 py-3.5 rounded-lg shadow-lg hover:bg-yellow-500 transition-all text-xs tracking-wider uppercase">EXPLORE ACTIVITIES</button>
-            <button onclick="navigateTo('events')" class="bg-brandNavy/50 backdrop-blur-sm text-brandCream border-2 border-brandGold font-bold px-8 py-3.5 rounded-lg shadow-lg hover:bg-brandGold/20 transition-all text-xs tracking-wider uppercase">UPCOMING EVENTS</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
-            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
-              <i data-lucide="book-open" class="w-7 h-7"></i>
+        <!-- Page 2: Personal Greeting -->
+        <section id="greeting" class="section">
+            <h3 class="fade-up">HAPPY TEACHER'S DAY</h3>
+            <h1 class="elegant-title fade-up delay-1">AVIRAL KHURANA SIR</h1>
+            <p class="fade-up delay-2">To an incredible teacher, mentor and inspiration…</p>
+            
+            <!-- Replaced Book SVG with Bouncing Scroll Indicator -->
+            <div class="scroll-indicator fade-up delay-3">
+                <p>Scroll Down</p>
+                <div class="arrow">↓</div>
             </div>
-            <h3 class="text-xl font-serif font-bold text-brandNavy">READ</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">Explore books, stories, poems, and classic literature to cultivate a lifelong love for reading.</p>
-          </div>
+        </section>
 
-          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
-            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
-              <i data-lucide="feather" class="w-7 h-7"></i>
+        <!-- Page 3: Cherished Memories -->
+        <section id="memories" class="section">
+            <h2 class="section-title reveal">Cherished Memories</h2>
+            <p class="reveal delay-1">Some wonderful moments captured forever.</p>
+            <div class="gallery-grid">
+                <!-- Ensure images are in the exact same folder and names are exactly matching -->
+                <div class="gallery-item reveal">
+                    <img src="Gemini_Generated_Image_qvoc21qvoc21qvoc.png" alt="Aviral Sir Portrait">
+                </div>
+                <div class="gallery-item reveal delay-1">
+                    <img src="Screenshot 2026-09-06 170203.png" alt="Awards Event">
+                </div>
+                <div class="gallery-item reveal delay-2">
+                    <img src="Screenshot 2026-09-06 170347.png" alt="You are the best teacher Gible Artwork">
+                </div>
             </div>
-            <h3 class="text-xl font-serif font-bold text-brandNavy">EXPRESS</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">Share ideas articulately through public speaking, storytelling sessions, and creative writing.</p>
-          </div>
+        </section>
 
-          <div class="bg-white p-8 rounded-xl border border-brandGold/30 shadow-md hover:shadow-xl transition-shadow text-center space-y-4">
-            <div class="h-16 w-16 mx-auto bg-brandNavy text-brandGold rounded-full flex items-center justify-center border-2 border-brandGold">
-              <i data-lucide="sparkles" class="w-7 h-7"></i>
+        <!-- Page 4: Why You Are Special -->
+        <section id="special" class="section">
+            <h2 class="section-title reveal">Why You Are Special</h2>
+            <div class="cards-grid">
+                <div class="special-card reveal">
+                    <div class="icon">📚</div>
+                    <h4>Knowledge</h4>
+                    <p>Thank you for making learning interesting.</p>
+                </div>
+                <div class="special-card reveal">
+                    <div class="icon">💡</div>
+                    <h4>Inspiration</h4>
+                    <p>Your words motivate us to aim higher.</p>
+                </div>
+                <div class="special-card reveal">
+                    <div class="icon">❤️</div>
+                    <h4>Patience</h4>
+                    <p>Thank you for always guiding us with patience.</p>
+                </div>
+                <div class="special-card reveal">
+                    <div class="icon">🚀</div>
+                    <h4>Motivation</h4>
+                    <p>You encourage us to believe that we can achieve more.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-serif font-bold text-brandNavy">INSPIRE</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">Encourage peers through collaborative literary initiatives, competitions, and outstanding achievements.</p>
-          </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-brandNavy text-white rounded-2xl border-2 border-brandGold p-8 shadow-xl space-y-6">
-          <div class="flex items-center gap-3 border-b border-brandGold/30 pb-4">
-            <i data-lucide="bell" class="w-6 h-6 text-brandGold"></i>
-            <h2 class="text-xl font-serif font-bold text-brandCream">LATEST ANNOUNCEMENTS</h2>
-          </div>
-          <div id="home-announcements-list" class="space-y-4">
-            <!-- Firebase data will load here -->
-            <p class="text-sm text-gray-400 italic">Loading announcements...</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="page-about" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-12">
-      <div class="text-center space-y-3">
-        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-brandNavy">ABOUT THE ENGLISH READING CLUB</h1>
-        <div class="h-1 w-24 bg-brandGold mx-auto"></div>
-      </div>
-
-      <div id="about-content-display" class="bg-white p-8 md:p-12 rounded-2xl border border-brandGold/30 shadow-lg space-y-6 text-gray-700 leading-relaxed">
-      </div>
-    </section>
-    
-    <section id="page-events" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">UPCOMING EVENTS</h1>
-        <p class="text-sm text-gray-600">Mark your calendars for our upcoming literary gatherings, competitions, and special assemblies.</p>
-      </div>
-
-      <div id="events-list" class="grid md:grid-cols-2 gap-8">
-      </div>
-    </section>
-
-    <section id="page-activities" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">ACTIVITY SERIES</h1>
-        <p class="text-sm text-gray-600">Chronicle of literary workshops, storytelling sessions, and public speaking competitions.</p>
-      </div>
-
-      <div id="activities-list" class="grid md:grid-cols-2 gap-8">
-      </div>
-    </section>
-
-    <section id="page-gallery" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">ACTIVITY GALLERY</h1>
-        <p class="text-sm text-gray-600">Visual archives of student workshops, competitions, and literary events.</p>
-      </div>
-
-      <div id="gallery-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      </div>
-    </section>
-
-    <section id="page-books" class="page-view hidden max-w-7xl mx-auto px-4 py-16 space-y-10">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">SUGGESTED BOOKS</h1>
-        <p class="text-sm text-gray-600">Curated digital library recommendations for students across reading levels.</p>
-      </div>
-
-      <div id="books-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-      </div>
-    </section>
-
-    <section id="page-students" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-8">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">CLUB MEMBERS</h1>
-        <p class="text-sm text-gray-600">Registered student participants in the English Reading Club.</p>
-      </div>
-
-      <div class="bg-white rounded-2xl shadow border border-brandGold/30 overflow-hidden">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-brandNavy text-brandGold text-xs font-semibold uppercase tracking-wider">
-              <th class="py-4 px-6">Student Name</th>
-              <th class="py-4 px-6">Class</th>
-            </tr>
-          </thead>
-          <tbody id="public-students-table" class="divide-y divide-gray-100 text-sm">
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="page-achievements" class="page-view hidden max-w-5xl mx-auto px-4 py-16 space-y-10">
-      <div class="text-center space-y-2">
-        <h1 class="text-3xl font-serif font-bold text-brandNavy">STUDENT ACHIEVEMENTS</h1>
-        <p class="text-sm text-gray-600">Celebrating excellence in English literature, debates, and creative writing.</p>
-      </div>
-
-      <div id="achievements-list" class="space-y-6">
-      </div>
-    </section>
-
-    <section id="page-admin" class="page-view hidden max-w-7xl mx-auto px-4 py-12 space-y-8">
-      <div class="bg-brandNavy text-white p-6 rounded-2xl border-2 border-brandGold flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl">
-        <div class="flex items-center gap-4">
-          <img src="logo.jpeg" alt="Admin Badge" class="h-12 w-12 rounded-full border border-brandGold object-cover bg-white" onerror="this.src='https://ui-avatars.com/api/?name=Admin&background=D4AF37&color=0B192C'" />
-          <div>
-            <h1 class="text-2xl font-serif font-bold text-brandCream">ADMINISTRATION DASHBOARD</h1>
-            <p class="text-xs text-brandGold">PM SHRI KV NO. 1 AFS GORAKHPUR • ENGLISH READING CLUB</p>
-          </div>
-        </div>
-        <button onclick="adminLogout()" class="flex items-center gap-2 bg-red-600/80 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition-colors">
-          <i data-lucide="log-out" class="w-4 h-4"></i> LOGOUT
-        </button>
-      </div>
-
-      <div class="flex border-b border-gray-300 gap-4 overflow-x-auto pb-1">
-        <button onclick="switchAdminTab('overview')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-brandGold text-brandNavy whitespace-nowrap" data-tab="overview">OVERVIEW</button>
-        <button onclick="switchAdminTab('students')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="students">STUDENTS</button>
-        <button onclick="switchAdminTab('events')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="events">EVENTS</button>
-        <button onclick="switchAdminTab('activities')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="activities">ACTIVITIES</button>
-        <button onclick="switchAdminTab('books')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="books">BOOKS</button>
-        <button onclick="switchAdminTab('announcements')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="announcements">ANNOUNCEMENTS</button>
-        <button onclick="switchAdminTab('security')" class="admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap" data-tab="security">SECURITY</button>
-      </div>
-
-      <div id="admin-tab-overview" class="admin-tab-content space-y-6">
-        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
-            <div class="flex justify-between items-center text-gray-400">
-              <span class="text-xs font-bold uppercase text-gray-500">Total Members</span>
-              <i data-lucide="users" class="w-5 h-5 text-brandGold"></i>
+        <!-- Page 5: A Special Quote -->
+        <section id="quote" class="section cinematic">
+            <div class="quote-content reveal">
+                <h2>"The best teachers don't just teach minds — they touch hearts, inspire dreams and shape futures."</h2>
+                <p>— With heartfelt gratitude, Aviral Khurana Sir ❤️</p>
             </div>
-            <div id="stat-students" class="text-3xl font-serif font-bold text-brandNavy">0</div>
-          </div>
+        </section>
 
-          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
-            <div class="flex justify-between items-center text-gray-400">
-              <span class="text-xs font-bold uppercase text-gray-500">Events Scheduled</span>
-              <i data-lucide="calendar" class="w-5 h-5 text-brandGold"></i>
+        <!-- Page 6: Final Surprise -->
+        <section id="surprise" class="section">
+            <h2 class="reveal">One Last Surprise… 🎁</h2>
+            <div class="gift-container reveal" id="gift-box">
+                <div class="gift">
+                    <div class="gift-lid"></div>
+                    <div class="gift-box"></div>
+                    <div class="gift-ribbon-v"></div>
+                    <div class="gift-ribbon-h"></div>
+                </div>
             </div>
-            <div id="stat-events" class="text-3xl font-serif font-bold text-brandNavy">0</div>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
-            <div class="flex justify-between items-center text-gray-400">
-              <span class="text-xs font-bold uppercase text-gray-500">Books Listed</span>
-              <i data-lucide="book-open" class="w-5 h-5 text-brandGold"></i>
+            <button id="open-gift-btn" class="glow-btn reveal">CLICK TO OPEN ❤️</button>
+            <div id="final-message" class="hidden">
+                <h1>THANK YOU, AVIRAL KHURANA SIR ❤️</h1>
+                <h3>Happy Teacher's Day!</h3>
+                <p>Your lessons may end when the class ends, but your impact stays with us forever.</p>
             </div>
-            <div id="stat-books" class="text-3xl font-serif font-bold text-brandNavy">0</div>
-          </div>
+        </section>
 
-          <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md space-y-2">
-            <div class="flex justify-between items-center text-gray-400">
-              <span class="text-xs font-bold uppercase text-gray-500">Security</span>
-              <i data-lucide="shield-check" class="w-5 h-5 text-brandGold"></i>
-            </div>
-            <div class="text-lg font-serif font-bold text-green-600">VERIFIED</div>
-          </div>
-        </div>
-      </div>
-
-      <div id="admin-tab-students" class="admin-tab-content hidden space-y-8">
-        <form onsubmit="handleAddStudent(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
-          <h3 class="text-base font-serif font-bold text-brandNavy">Add Student Member (Private Record)</h3>
-          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <input type="text" id="admin-st-name" placeholder="Student Name" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-st-class" placeholder="Class (e.g. VIII-A)" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-st-phone" placeholder="Phone (Private)" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold" required />
-            <select id="admin-st-quality" class="border p-2.5 rounded bg-gray-50 focus:bg-white border-gray-300 outline-none focus:border-brandGold">
-              <option value="Excellent">Excellent</option>
-              <option value="Very Good">Very Good</option>
-              <option value="Good">Good</option>
-              <option value="Need Improvement">Need Improvement</option>
-            </select>
-          </div>
-          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ ADD STUDENT RECORD</button>
-        </form>
-
-        <div class="bg-white rounded-xl shadow border border-brandGold/30 overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-brandNavy text-brandGold text-xs font-semibold uppercase">
-                <th class="py-4 px-6">Name</th>
-                <th class="py-4 px-6">Class</th>
-                <th class="py-4 px-6">Phone (Private)</th>
-                <th class="py-4 px-6">Quality (Private)</th>
-                <th class="py-4 px-6 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody id="admin-students-table" class="divide-y divide-gray-100 text-sm">
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      <div id="admin-tab-events" class="admin-tab-content hidden space-y-8">
-        <form id="admin-event-form" onsubmit="handleSaveEvent(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4 relative">
-          <input type="hidden" id="admin-ev-id" value="" />
-          <div class="flex justify-between items-center">
-            <h3 id="admin-ev-form-title" class="text-base font-serif font-bold text-brandNavy">Schedule New Event</h3>
-            <button type="button" id="admin-ev-cancel-btn" onclick="resetEventForm()" class="hidden text-xs text-red-600 font-bold hover:underline">CANCEL EDIT</button>
-          </div>
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-            <input type="text" id="admin-ev-title" placeholder="Event Title" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="date" id="admin-ev-date" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-ev-time" placeholder="Time (e.g. 10:00 AM)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-ev-venue" placeholder="Venue (e.g. Assembly Ground)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="file" id="admin-ev-image" accept="image/*" title="Upload Image" class="border p-1.5 rounded border-gray-300 outline-none focus:border-brandGold bg-white text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brandGold/10 file:text-brandGold hover:file:bg-brandGold/20 cursor-pointer" />
-          </div>
-          <textarea id="admin-ev-desc" placeholder="Event Description..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-24" required></textarea>
-          <button type="submit" id="admin-ev-submit-btn" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ ADD EVENT</button>
-        </form>
-
-        <div id="admin-events-list" class="space-y-4">
-        </div>
-      </div>
-
-      <div id="admin-tab-activities" class="admin-tab-content hidden space-y-8">
-        <form onsubmit="handleAddActivity(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
-          <h3 class="text-base font-serif font-bold text-brandNavy">Create New Activity Series Event</h3>
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-            <input type="text" id="admin-act-title" placeholder="Activity Title" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="date" id="admin-act-date" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-act-cat" placeholder="Category (e.g. Storytelling)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-act-participants" placeholder="Participants (e.g. Classes VI - VIII)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
-            <input type="text" id="admin-act-coordinator" placeholder="Coordinator" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
-            <input type="file" id="admin-act-image" accept="image/*" title="Upload Image" class="border p-1.5 rounded border-gray-300 outline-none focus:border-brandGold bg-white text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brandGold/10 file:text-brandGold hover:file:bg-brandGold/20 cursor-pointer" />
-          </div>
-          <textarea id="admin-act-desc" placeholder="Activity Description..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-24" required></textarea>
-          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ PUBLISH ACTIVITY</button>
-        </form>
-
-        <div id="admin-activities-list" class="space-y-4">
-        </div>
-      </div>
-
-      <div id="admin-tab-books" class="admin-tab-content hidden space-y-8">
-        <form onsubmit="handleAddBook(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
-          <h3 class="text-base font-serif font-bold text-brandNavy">Add Book to Digital Bookshelf</h3>
-          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-            <input type="text" id="admin-book-title" placeholder="Book Title" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-book-author" placeholder="Author" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-book-genre" placeholder="Genre (e.g. Fiction)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" required />
-            <input type="text" id="admin-book-recommended" placeholder="Recommended By" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
-            <input type="text" id="admin-book-level" placeholder="Reading Level (e.g. Intermediate)" class="border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold" />
-            <input type="file" id="admin-book-cover" accept="image/*" title="Upload Image" class="border p-1.5 rounded border-gray-300 outline-none focus:border-brandGold bg-white text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brandGold/10 file:text-brandGold hover:file:bg-brandGold/20 cursor-pointer" />
-          </div>
-          <textarea id="admin-book-review" placeholder="Short Book Review..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-20" required></textarea>
-          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ ADD BOOK</button>
-        </form>
-
-        <div id="admin-books-list" class="space-y-4">
-        </div>
-      </div>
-
-      <div id="admin-tab-announcements" class="admin-tab-content hidden space-y-8">
-        <form onsubmit="handleAddAnnouncement(event)" class="bg-white p-6 rounded-xl border border-brandGold/30 shadow space-y-4">
-          <h3 class="text-base font-serif font-bold text-brandNavy">Post New Notice / Announcement (LIVE)</h3>
-          <input type="text" id="admin-ann-title" placeholder="Announcement Title" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
-          <textarea id="admin-ann-content" placeholder="Content details..." class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm h-20" required></textarea>
-          <button type="submit" class="bg-brandNavy text-brandGold font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">+ POST LIVE ANNOUNCEMENT</button>
-        </form>
-
-        <div id="admin-announcements-list" class="space-y-4">
-          <p class="text-sm text-gray-400 italic">Loading from Firebase...</p>
-        </div>
-      </div>
-
-      <div id="admin-tab-security" class="admin-tab-content hidden max-w-xl mx-auto space-y-6">
-        <form onsubmit="handleChangePassword(event)" class="bg-white p-8 rounded-2xl border border-brandGold/30 shadow-lg space-y-4">
-          <h3 class="text-lg font-serif font-bold text-brandNavy">Change Administrator Password</h3>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Current Password</label>
-            <input type="password" id="admin-curr-pass" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">New Password</label>
-            <input type="password" id="admin-new-pass" class="w-full border p-2.5 rounded border-gray-300 outline-none focus:border-brandGold text-sm" required />
-          </div>
-          <button type="submit" class="w-full bg-brandNavy text-brandGold font-bold py-3 rounded-lg text-xs uppercase tracking-wider hover:bg-brandMutedBlue transition-colors">UPDATE PASSWORD</button>
-        </form>
-      </div>
-
-    </section>
-
-  </main>
-
-  <div id="login-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-brandNavy text-white w-full max-w-md rounded-2xl border-2 border-brandGold p-8 shadow-2xl relative space-y-6">
-      <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="text-center space-y-2">
-        <img src="logo.jpeg" alt="Logo" class="h-16 w-16 mx-auto rounded-full border border-brandGold object-cover bg-white" />
-        <h2 class="text-2xl font-serif font-bold text-brandCream">ADMIN LOGIN</h2>
-        <p class="text-xs text-brandGold">Enter credentials to unlock administrative controls</p>
-      </div>
-
-      <div id="login-error" class="hidden bg-red-600/30 border border-red-500 text-red-200 text-xs p-3 rounded text-center">
-        Invalid Admin ID or Password.
-      </div>
-
-      <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-sm">
-        <div>
-          <label class="block text-xs font-semibold text-brandGold mb-1">ADMIN ID</label>
-          <input type="text" id="login-id" class="w-full bg-brandMutedBlue border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-brandGold" placeholder="e.g. KVS-1-2026" required />
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-brandGold mb-1">PASSWORD</label>
-          <div class="relative">
-            <input type="password" id="login-pass" class="w-full bg-brandMutedBlue border border-gray-600 rounded px-3 py-2 text-white outline-none focus:border-brandGold" placeholder="••••••••" required />
-            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-2.5 text-gray-400 hover:text-white">
-              <i id="pass-eye-icon" data-lucide="eye" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-
-        <button type="submit" class="w-full py-3 bg-brandGold text-brandNavy font-bold rounded-lg hover:bg-yellow-500 transition-colors tracking-wide uppercase text-xs">SIGN IN</button>
-      </form>
+        <footer style="text-align: center; padding: 20px;">
+            <p>Made with ❤️ specially for you.</p>
+        </footer>
     </div>
-  </div>
 
-  <footer class="bg-brandNavy text-white border-t-2 border-brandGold pt-12 pb-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-      <img src="logo.jpeg" alt="Logo Footer" class="h-16 w-16 mx-auto rounded-full border-2 border-brandGold object-cover bg-white" />
-      <div class="text-xl font-serif font-bold text-brandCream">PM SHRI KV NO. 1 AFS GORAKHPUR</div>
-      <div class="text-xs text-brandGold font-semibold tracking-widest uppercase">ENGLISH READING CLUB</div>
-      <div class="text-xs text-gray-300 font-medium tracking-widest">SPEAK • EXPRESS • INSPIRE</div>
-      <div class="text-xs text-gray-400">Gorakhpur, Uttar Pradesh, India</div>
-
-      <div class="pt-6 border-t border-gray-800 text-[11px] text-gray-400">
-        © <span id="current-year">2026</span> PM SHRI KV NO. 1 AFS Gorakhpur English Reading Club. All Rights Reserved.
-      </div>
+    <!-- Floating Buttons -->
+    <div class="floating-controls">
+        <button id="music-btn" class="icon-btn">🎵</button>
+        <button id="secret-btn" class="icon-btn">🔒</button>
     </div>
-  </footer>
 
-  <script>
-    // --- FIREBASE CONFIGURATION ---
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-   const firebaseConfig = {
-     apiKey: "AIzaSyDLNDVlqLmSVJmnvtmO5RcBdDYj3p-bUY4",
-     authDomain: "english-f185b.firebaseapp.com",
-     projectId: "english-f185b",
-     storageBucket: "english-f185b.firebasestorage.app",
-     messagingSenderId: "356304377414",
-     appId: "1:356304377414:web:f2b0e1c7c7b3663ec31c47",
-     measurementId: "G-Z4871HMF9G"
-   };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-
-
-    // --- System Data State ---
-    const state = {
-      isAdminLoggedIn: false,
-      adminCredentials: {
-        id: "KVS-1-2026",
-        pass: "AVIRAL123"
-      },
-      aboutContent: {
-        intro: "The English Reading Club at PM SHRI KV No. 1 AFS Gorakhpur is dedicated to fostering a lifelong love for reading, enhancing creative expression, and cultivating confident communicators.",
-        mission: "Our mission is to create a vibrant literary ecosystem where students engage with classic and contemporary literature, refine public speaking ability, expand vocabulary, and articulate ideas effectively."
-      },
-      events: [
-        {
-          id: "1",
-          title: "Annual Literary Fest 2026",
-          date: "2026-09-20",
-          time: "09:00 AM",
-          venue: "School Auditorium",
-          description: "Join us for our biggest event of the year featuring debates, poetry recitation, and book exchange programs.",
-          coverImage: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=800"
-        }
-      ],
-      students: [
-        { id: "1", name: "Pragyan Srivastav", class: "12-D", phone: "7897036657", quality: "Excellent" },
-        { id: "2", name: "Aaditya Tyagi", class: "N/A", phone: "9505012665", quality: "Excellent" },
-        { id: "3", name: "Pallav Raj Upadhyay", class: "8-E", phone: "8767704225", quality: "Excellent" },
-        { id: "4", name: "Keshavendra Kumar Singh", class: "8-E", phone: "7355524556", quality: "Excellent" },
-        { id: "5", name: "Kirty Tripathi", class: "12-A", phone: "8604227725", quality: "Excellent" },
-        { id: "6", name: "Ruchika Tiwari", class: "10-B", phone: "9161490133", quality: "Excellent" },
-        { id: "7", name: "Varsha Soni", class: "10-B", phone: "9140886991", quality: "Excellent" },
-        { id: "8", name: "Akshita Singh", class: "9-C", phone: "9473540614", quality: "Excellent" },
-        { id: "9", name: "Atulya Rai", class: "10", phone: "9125727652", quality: "Excellent" },
-        { id: "10", name: "Prateek Yadav", class: "11", phone: "8762017554", quality: "Excellent" },
-        { id: "11", name: "Akshat Tripathi", class: "12", phone: "8787378319", quality: "Excellent" },
-        { id: "12", name: "Alvina", class: "11-B", phone: "8948538044", quality: "Excellent" },
-        { id: "13", name: "Kumari Anuj Yadav", class: "11-B", phone: "6202601235", quality: "Excellent" },
-        { id: "14", name: "Arushi Pandey", class: "11-D", phone: "9990254216", quality: "Excellent" },
-        { id: "15", name: "Ayushi Pandey", class: "11-A", phone: "9990254216", quality: "Excellent" },
-        { id: "16", name: "Pranjal", class: "9-A", phone: "9535891307", quality: "Excellent" },
-        { id: "17", name: "Shivam Singh", class: "9-A", phone: "8700993490", quality: "Excellent" },
-        { id: "18", name: "Aaradhy Chaturvedi", class: "9-A", phone: "8808863708", quality: "Excellent" },
-        { id: "19", name: "Anmol Singh", class: "9-A", phone: "6391211002", quality: "Excellent" },
-        { id: "20", name: "Aman Kumar", class: "9-A", phone: "8009853054", quality: "Excellent" },
-        { id: "21", name: "Somya Singh", class: "9-C", phone: "9516876030", quality: "Excellent" },
-        { id: "22", name: "Ananya Sahu", class: "9-C", phone: "9519576740", quality: "Excellent" },
-        { id: "23", name: "Shivangi Raj", class: "9-C", phone: "8960053419", quality: "Excellent" },
-        { id: "24", name: "Tanishq", class: "8-D", phone: "7011270673", quality: "Excellent" },
-        { id: "25", name: "Sahil", class: "8-D", phone: "7987440613", quality: "Excellent" },
-        { id: "26", name: "Dev Mishra", class: "12-B", phone: "6388664751", quality: "Excellent" },
-        { id: "27", name: "Ujjwal Mishra", class: "10-E", phone: "7903267802", quality: "Excellent" },
-        { id: "28", name: "Ved Mishra", class: "10-E", phone: "8252122543", quality: "Excellent" },
-        { id: "29", name: "Kartikey Tiwari", class: "12-D", phone: "9555803561", quality: "Excellent" },
-        { id: "30", name: "Shivansh Singh", class: "12-B", phone: "N/A", quality: "Excellent" }
-      ],
-      activities: [
-        {
-          id: "1",
-          title: "STORYTELLING SESSION",
-          date: "12 August 2026",
-          category: "Expression",
-          description: "Students participated in an interactive storytelling session designed to improve confidence, vocabulary, and expression.",
-          participants: "Classes VI to VIII",
-          coordinator: "English Department",
-          coverImage: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=800"
-        }
-      ],
-      books: [
-        {
-          id: "1",
-          title: "The Blue Umbrella",
-          author: "Ruskin Bond",
-          genre: "Fiction",
-          recommendedBy: "Club Coordinator",
-          review: "A heartwarming novella that captures Indian rural life and human emotion beautifully.",
-          level: "Intermediate",
-          coverImage: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600"
-        }
-      ],
-      announcements: [], // Will be populated by Firebase
-      achievements: [
-        { id: "1", title: "Regional Debate Champions 2026", student: "Aarav Sharma & Team", desc: "Secured First Position in the Inter-School KVS Regional Debate Competition." }
-      ]
-    };
-
-    // Firebase Listener for Announcements
-    function listenToFirebaseAnnouncements() {
-      database.ref('announcements').on('value', (snapshot) => {
-        const data = snapshot.val();
-        let arr = [];
-        if (data) {
-          for (let key in data) {
-            arr.push({ id: key, ...data[key] });
-          }
-          // Reverse to show latest announcements at the top
-          arr.reverse();
-        }
-        state.announcements = arr;
-        renderAllContent(); // Re-render the UI with the new data
-      });
-    }
-
-
-    // Initialize Page
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-      
-      // Start listening to Firebase for live announcements
-      listenToFirebaseAnnouncements();
-      
-      // Render initial static content
-      renderAllContent();
-    });
-
-    // Navigation Handler
-    function navigateTo(pageId) {
-      document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
-      const targetPage = document.getElementById(`page-${pageId}`);
-      if (targetPage) targetPage.classList.remove('hidden');
-
-      // Update Nav Buttons
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        if (btn.dataset.target === pageId) {
-          btn.className = "nav-btn text-brandGold font-bold border-b-2 border-brandGold pb-1";
-        } else {
-          btn.className = "nav-btn text-gray-300 hover:text-brandGold transition-colors py-1";
-        }
-      });
-
-      // Close mobile menu
-      document.getElementById('mobile-menu').classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-
-    // Portal Access Handler
-    function openSettingsPortal() {
-      if (state.isAdminLoggedIn) {
-        navigateTo('admin');
-      } else {
-        document.getElementById('login-modal').classList.remove('hidden');
-      }
-    }
-
-    function closeLoginModal() {
-      document.getElementById('login-modal').classList.add('hidden');
-      document.getElementById('login-error').classList.add('hidden');
-    }
-
-    function togglePasswordVisibility() {
-      const passInput = document.getElementById('login-pass');
-      const eyeIcon = document.getElementById('pass-eye-icon');
-      if (passInput.type === 'password') {
-        passInput.type = 'text';
-      } else {
-        passInput.type = 'password';
-      }
-    }
-
-    // Auth Handling
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      const idInput = document.getElementById('login-id').value;
-      const passInput = document.getElementById('login-pass').value;
-
-      if (idInput === state.adminCredentials.id && passInput === state.adminCredentials.pass) {
-        state.isAdminLoggedIn = true;
-        closeLoginModal();
-        showToast("Authenticated as Administrator");
-        navigateTo('admin');
-        renderAdminTables();
-      } else {
-        document.getElementById('login-error').classList.remove('hidden');
-      }
-    }
-
-    function adminLogout() {
-      state.isAdminLoggedIn = false;
-      showToast("Logged out successfully");
-      navigateTo('home');
-    }
-
-    // Render Data Across Components
-    function renderAllContent() {
-      // 1. About Content
-      document.getElementById('about-content-display').innerHTML = `
-        <p class="text-lg font-serif italic text-brandNavy border-l-4 border-brandGold pl-4">
-          "${state.aboutContent.intro}"
-        </p>
-        <h2 class="text-xl font-serif font-bold text-brandNavy pt-4">Our Vision & Mission</h2>
-        <p>${state.aboutContent.mission}</p>
-      `;
-
-      // 2. Public Events Grid (Clicking image opens gallery)
-      const eventsList = document.getElementById('events-list');
-      eventsList.innerHTML = state.events.map(ev => `
-        <div class="bg-white rounded-xl overflow-hidden border border-brandGold/30 shadow-md flex flex-col">
-          ${ev.coverImage ? `<a href="javascript:void(0)" onclick="navigateTo('gallery')"><img src="${ev.coverImage}" class="h-56 w-full object-cover cursor-pointer hover:opacity-90 transition-opacity" alt="Event Cover" title="Click to view in Gallery" /></a>` : ''}
-          <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center text-xs font-semibold text-brandGold uppercase tracking-wider mb-2">
-                <span><i data-lucide="calendar" class="w-3 h-3 inline mr-1"></i>${escapeHtml(ev.date)}</span>
-                <span><i data-lucide="clock" class="w-3 h-3 inline mr-1"></i>${escapeHtml(ev.time)}</span>
-              </div>
-              <h2 class="text-xl font-serif font-bold text-brandNavy mb-2">${escapeHtml(ev.title)}</h2>
-              <p class="text-gray-600 text-sm leading-relaxed">${escapeHtml(ev.description)}</p>
-            </div>
-            <div class="pt-4 border-t border-gray-100 text-xs text-gray-500">
-              <span class="font-semibold text-gray-700"><i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i>Venue:</span> ${escapeHtml(ev.venue)}
-            </div>
-          </div>
+    <!-- Secret Modal -->
+    <div id="secret-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="close-modal">×</span>
+            <h3>A Secret Message</h3>
+            <p>Sir, if you're reading this, just know that your efforts are appreciated more than words can express. ❤️</p>
         </div>
-      `).join('');
+    </div>
 
-      // 3. Public Students (Excludes Phone & Quality)
-      const publicTable = document.getElementById('public-students-table');
-      publicTable.innerHTML = state.students.map(s => `
-        <tr class="hover:bg-gray-50">
-          <td class="py-4 px-6 font-medium text-brandNavy">${escapeHtml(s.name)}</td>
-          <td class="py-4 px-6 text-gray-600">${escapeHtml(s.class)}</td>
-        </tr>
-      `).join('');
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. WELCOME SCREEN TO MAIN ---
+            const welcomeSection = document.getElementById('welcome');
+            const mainContent = document.getElementById('main-content');
+            const mainNav = document.getElementById('main-nav');
+            const openBtn = document.getElementById('open-surprise-btn');
 
-      // 4. Activities Public Grid
-      const actList = document.getElementById('activities-list');
-      actList.innerHTML = state.activities.map(a => `
-        <div class="bg-white rounded-xl overflow-hidden border border-brandGold/30 shadow-md flex flex-col">
-          ${a.coverImage ? `<img src="${a.coverImage}" class="h-56 w-full object-cover" alt="Activity Cover" />` : ''}
-          <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center text-xs font-semibold text-brandGold uppercase tracking-wider mb-2">
-                <span>${escapeHtml(a.category)}</span>
-                <span>${escapeHtml(a.date)}</span>
-              </div>
-              <h2 class="text-xl font-serif font-bold text-brandNavy mb-2">${escapeHtml(a.title)}</h2>
-              <p class="text-gray-600 text-sm leading-relaxed">${escapeHtml(a.description)}</p>
-            </div>
-            <div class="pt-4 border-t border-gray-100 text-xs text-gray-500 space-y-1">
-              <div><span class="font-semibold text-gray-700">Participants:</span> ${escapeHtml(a.participants || 'N/A')}</div>
-              <div><span class="font-semibold text-gray-700">Coordinator:</span> ${escapeHtml(a.coordinator || 'N/A')}</div>
-            </div>
-          </div>
-        </div>
-      `).join('');
+            openBtn.addEventListener('click', () => {
+                fireConfetti();
+                welcomeSection.style.transition = "opacity 1s ease";
+                welcomeSection.style.opacity = "0";
+                setTimeout(() => {
+                    welcomeSection.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    mainNav.classList.remove('hidden');
+                    triggerFadeUps();
+                }, 1000);
+            });
 
-      // 5. Gallery Rendering (Populated automatically from events and activities)
-      const galleryGrid = document.getElementById('gallery-grid');
-      const galleryImages = [
-        ...state.events.filter(e => e.coverImage).map(e => ({ title: e.title, img: e.coverImage, type: 'Event' })),
-        ...state.activities.filter(a => a.coverImage).map(a => ({ title: a.title, img: a.coverImage, type: 'Activity' }))
-      ];
-      
-      if (galleryImages.length > 0) {
-        galleryGrid.innerHTML = galleryImages.map(item => `
-          <div class="rounded-xl overflow-hidden shadow-md border border-brandGold/30 group relative">
-            <img src="${item.img}" alt="${escapeHtml(item.title)}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-brandNavy/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
-              <span class="text-[10px] text-brandGold font-bold tracking-wider uppercase">${escapeHtml(item.type)}</span>
-              <h3 class="font-serif font-bold text-sm leading-tight">${escapeHtml(item.title)}</h3>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        galleryGrid.innerHTML = '<p class="text-gray-500 col-span-full text-center py-8">No images available in the gallery yet.</p>';
-      }
+            // --- 2. SCROLL REVEAL & FADE UPS ---
+            function triggerFadeUps() {
+                const fadeEls = document.querySelectorAll('.fade-up');
+                fadeEls.forEach(el => el.classList.add('visible'));
+            }
 
-      // 6. Books Public Grid
-      const booksGrid = document.getElementById('books-grid');
-      booksGrid.innerHTML = state.books.map(b => `
-        <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow-md flex flex-col justify-between space-y-4">
-          <div class="space-y-4">
-            ${b.coverImage ? `<img src="${b.coverImage}" class="h-56 mx-auto object-cover rounded shadow border" />` : ''}
-            <div>
-              <span class="text-xs font-bold text-brandGold uppercase tracking-wider">${escapeHtml(b.genre)}</span>
-              <h3 class="text-lg font-serif font-bold text-brandNavy">${escapeHtml(b.title)}</h3>
-              <p class="text-xs text-gray-500 italic">By ${escapeHtml(b.author)}</p>
-            </div>
-            <p class="text-xs text-gray-600 leading-relaxed">${escapeHtml(b.review)}</p>
-          </div>
-          <div class="pt-4 border-t border-gray-100 text-xs text-gray-500 flex justify-between">
-            <span>Level: <strong>${escapeHtml(b.level || 'General')}</strong></span>
-            <span>Rec: ${escapeHtml(b.recommendedBy || 'Club')}</span>
-          </div>
-        </div>
-      `).join('');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-      // 7. Announcements List (Firebase synced)
-      const annList = document.getElementById('home-announcements-list');
-      if(state.announcements.length === 0) {
-          annList.innerHTML = `<p class="text-sm text-gray-500 italic">No recent announcements.</p>`;
-      } else {
-          annList.innerHTML = state.announcements.map(an => `
-            <div class="border-l-2 border-brandGold pl-4 space-y-1">
-              <h4 class="font-serif font-bold text-brandCream text-sm">${escapeHtml(an.title)}</h4>
-              <p class="text-xs text-gray-300">${escapeHtml(an.content)}</p>
-              <span class="text-[10px] text-brandGold">${escapeHtml(an.date)}</span>
-            </div>
-          `).join('');
-      }
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-      // 8. Achievements List
-      const achList = document.getElementById('achievements-list');
-      achList.innerHTML = state.achievements.map(ac => `
-        <div class="bg-white p-6 rounded-xl border border-brandGold/30 shadow flex items-center gap-4">
-          <div class="h-12 w-12 bg-brandNavy text-brandGold rounded-full flex items-center justify-center flex-shrink-0 border border-brandGold">
-            <i data-lucide="award" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <h3 class="font-serif font-bold text-brandNavy text-base">${escapeHtml(ac.title)}</h3>
-            <p class="text-xs font-bold text-brandGold">${escapeHtml(ac.student)}</p>
-            <p class="text-xs text-gray-600 pt-1">${escapeHtml(ac.desc)}</p>
-          </div>
-        </div>
-      `).join('');
 
-      // 9. Admin Render
-      renderAdminTables();
-      lucide.createIcons();
-    }
+            // --- 3. FINAL GIFT SURPRISE ---
+            const giftBtn = document.getElementById('open-gift-btn');
+            const giftBox = document.getElementById('gift-box');
+            const finalMsg = document.getElementById('final-message');
 
-    // Render Private Admin Tables
-    function renderAdminTables() {
-      // Statistics
-      document.getElementById('stat-students').textContent = state.students.length;
-      document.getElementById('stat-events').textContent = state.events.length;
-      document.getElementById('stat-books').textContent = state.books.length;
+            giftBtn.addEventListener('click', () => {
+                document.querySelector('.gift').classList.add('gift-open');
+                fireConfetti(100);
+                giftBtn.classList.add('hidden');
+                finalMsg.classList.remove('hidden');
+                document.getElementById('surprise').style.background = "radial-gradient(circle, var(--pink), var(--cream))";
+            });
 
-      // Admin Student Table
-      const adminStTable = document.getElementById('admin-students-table');
-      adminStTable.innerHTML = state.students.map(s => `
-        <tr class="hover:bg-gray-50">
-          <td class="py-3 px-6 font-medium text-brandNavy">${escapeHtml(s.name)}</td>
-          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.class)}</td>
-          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.phone)}</td>
-          <td class="py-3 px-6 text-gray-600">${escapeHtml(s.quality)}</td>
-          <td class="py-3 px-6 text-right">
-            <button onclick="deleteStudent('${s.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-          </td>
-        </tr>
-      `).join('');
-      
-      // Admin Events List with Edit capability
-      const adminEvList = document.getElementById('admin-events-list');
-      adminEvList.innerHTML = state.events.map(ev => `
-        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
-          <div>
-            <strong class="text-brandNavy text-sm">${escapeHtml(ev.title)}</strong> (${escapeHtml(ev.date)})
-            <p class="text-gray-500">${escapeHtml(ev.venue)} | ${escapeHtml(ev.time)}</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <button onclick="editEvent('${ev.id}')" class="text-blue-600 hover:text-blue-800"><i data-lucide="edit" class="w-4 h-4"></i></button>
-            <button onclick="deleteEvent('${ev.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-          </div>
-        </div>
-      `).join('');
+            // --- 4. SECRET MODAL ---
+            const secretBtn = document.getElementById('secret-btn');
+            const secretModal = document.getElementById('secret-modal');
+            const closeModal = document.querySelector('.close-modal');
 
-      // Admin Activities List
-      const adminActList = document.getElementById('admin-activities-list');
-      adminActList.innerHTML = state.activities.map(a => `
-        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
-          <div>
-            <strong class="text-brandNavy text-sm">${escapeHtml(a.title)}</strong> (${escapeHtml(a.date)})
-            <p class="text-gray-500">${escapeHtml(a.category)}</p>
-          </div>
-          <button onclick="deleteActivity('${a.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-        </div>
-      `).join('');
+            secretBtn.addEventListener('click', () => secretModal.classList.remove('hidden'));
+            closeModal.addEventListener('click', () => secretModal.classList.add('hidden'));
+            secretModal.addEventListener('click', (e) => {
+                if(e.target === secretModal) secretModal.classList.add('hidden');
+            });
 
-      // Admin Books List
-      const adminBookList = document.getElementById('admin-books-list');
-      adminBookList.innerHTML = state.books.map(b => `
-        <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
-          <div>
-            <strong class="text-brandNavy text-sm">${escapeHtml(b.title)}</strong> - ${escapeHtml(b.author)}
-            <p class="text-gray-500">${escapeHtml(b.genre)}</p>
-          </div>
-          <button onclick="deleteBook('${b.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-        </div>
-      `).join('');
+            // --- 5. SIMPLE CONFETTI ENGINE ---
+            function fireConfetti(amount = 50) {
+                const colors = ['#F4B942', '#DBEAFE', '#FCE7F3', '#172554', '#ff9a44'];
+                const container = document.getElementById('confetti-container');
+                
+                for (let i = 0; i < amount; i++) {
+                    const conf = document.createElement('div');
+                    conf.classList.add('confetti');
+                    conf.style.left = Math.random() * 100 + 'vw';
+                    conf.style.top = -10 + 'px';
+                    conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    
+                    // Random shapes (squares or circles)
+                    if(Math.random() > 0.5) conf.style.borderRadius = '50%';
+                    
+                    container.appendChild(conf);
 
-      // Admin Announcements List (Firebase synced)
-      const adminAnnList = document.getElementById('admin-announcements-list');
-      if(state.announcements.length === 0) {
-          adminAnnList.innerHTML = `<p class="text-sm text-gray-500 italic">No announcements found in Firebase.</p>`;
-      } else {
-          adminAnnList.innerHTML = state.announcements.map(an => `
-            <div class="bg-white p-4 rounded-lg border border-gray-200 flex justify-between items-center text-xs">
-              <div>
-                <strong class="text-brandNavy text-sm">${escapeHtml(an.title)}</strong>
-                <p class="text-gray-500">${escapeHtml(an.content)}</p>
-              </div>
-              <button onclick="deleteAnnouncement('${an.id}')" class="text-red-600 hover:text-red-800"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
-            </div>
-          `).join('');
-      }
+                    // Cleanup
+                    setTimeout(() => {
+                        conf.remove();
+                    }, 5000);
+                }
+            }
 
-      lucide.createIcons();
-    }
-
-    // Switch Admin Sub-tabs
-    function switchAdminTab(tabId) {
-      document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
-      document.getElementById(`admin-tab-${tabId}`).classList.remove('hidden');
-
-      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-        if (btn.dataset.tab === tabId) {
-          btn.className = "admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-brandGold text-brandNavy whitespace-nowrap";
-        } else {
-          btn.className = "admin-tab-btn pb-3 text-xs font-bold tracking-wider uppercase border-b-2 border-transparent text-gray-500 hover:text-brandNavy whitespace-nowrap";
-        }
-      });
-    }
-
-    // Dynamic Admin Handlers
-    function handleAddStudent(e) {
-      e.preventDefault();
-      const name = document.getElementById('admin-st-name').value;
-      const cls = document.getElementById('admin-st-class').value;
-      const phone = document.getElementById('admin-st-phone').value;
-      const quality = document.getElementById('admin-st-quality').value;
-
-      state.students.push({ id: Date.now().toString(), name, class: cls, phone, quality });
-      e.target.reset();
-      showToast("Student record added successfully");
-      renderAllContent();
-    }
-
-    function deleteStudent(id) {
-      if (confirm("Are you sure you want to permanently delete this student record?")) {
-        state.students = state.students.filter(s => s.id !== id);
-        showToast("Student deleted successfully");
-        renderAllContent();
-      }
-    }
-    
-    // Event Management Logic (Add & Edit)
-    function editEvent(id) {
-      const ev = state.events.find(e => e.id === id);
-      if (ev) {
-        document.getElementById('admin-ev-id').value = ev.id;
-        document.getElementById('admin-ev-title').value = ev.title;
-        document.getElementById('admin-ev-date').value = ev.date;
-        document.getElementById('admin-ev-time').value = ev.time;
-        document.getElementById('admin-ev-venue').value = ev.venue;
-        // File inputs cannot be set programmatically due to browser security
-        document.getElementById('admin-ev-desc').value = ev.description;
-        
-        document.getElementById('admin-ev-form-title').innerText = "Edit Scheduled Event";
-        document.getElementById('admin-ev-submit-btn').innerHTML = "<i data-lucide='save' class='w-4 h-4 inline'></i> SAVE CHANGES";
-        document.getElementById('admin-ev-cancel-btn').classList.remove('hidden');
-        lucide.createIcons();
-        window.scrollTo(0, document.getElementById('admin-tab-events').offsetTop);
-      }
-    }
-
-    function resetEventForm() {
-      document.getElementById('admin-event-form').reset();
-      document.getElementById('admin-ev-id').value = "";
-      document.getElementById('admin-ev-form-title').innerText = "Schedule New Event";
-      document.getElementById('admin-ev-submit-btn').innerHTML = "+ ADD EVENT";
-      document.getElementById('admin-ev-cancel-btn').classList.add('hidden');
-    }
-
-    function handleSaveEvent(e) {
-      e.preventDefault();
-      const id = document.getElementById('admin-ev-id').value;
-      const title = document.getElementById('admin-ev-title').value;
-      const date = document.getElementById('admin-ev-date').value;
-      const time = document.getElementById('admin-ev-time').value;
-      const venue = document.getElementById('admin-ev-venue').value;
-      const description = document.getElementById('admin-ev-desc').value;
-      const fileInput = document.getElementById('admin-ev-image');
-
-      const finishSave = (coverImage) => {
-        if (id) {
-          // Update existing
-          const eventIndex = state.events.findIndex(ev => ev.id === id);
-          if (eventIndex !== -1) {
-            state.events[eventIndex] = { id, title, date, time, venue, coverImage, description };
-            showToast("Event updated successfully");
-          }
-        } else {
-          // Create new
-          state.events.push({ id: Date.now().toString(), title, date, time, venue, coverImage, description });
-          showToast("Event scheduled successfully");
-        }
-        
-        resetEventForm();
-        renderAllContent();
-      };
-
-      if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (event) => finishSave(event.target.result);
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        let existingImg = "";
-        if (id) {
-           const ev = state.events.find(e => e.id === id);
-           if (ev) existingImg = ev.coverImage || "";
-        }
-        finishSave(existingImg);
-      }
-    }
-
-    function deleteEvent(id) {
-      if (confirm("Delete this scheduled event?")) {
-        state.events = state.events.filter(ev => ev.id !== id);
-        showToast("Event deleted");
-        renderAllContent();
-      }
-    }
-
-    function handleAddActivity(e) {
-      e.preventDefault();
-      const title = document.getElementById('admin-act-title').value;
-      const date = document.getElementById('admin-act-date').value;
-      const category = document.getElementById('admin-act-cat').value;
-      const participants = document.getElementById('admin-act-participants').value;
-      const coordinator = document.getElementById('admin-act-coordinator').value;
-      const description = document.getElementById('admin-act-desc').value;
-      const fileInput = document.getElementById('admin-act-image');
-
-      const finishSave = (coverImage) => {
-        state.activities.push({ id: Date.now().toString(), title, date, category, participants, coordinator, coverImage, description });
-        e.target.reset();
-        showToast("Activity published successfully");
-        renderAllContent();
-      };
-
-      if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (event) => finishSave(event.target.result);
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        finishSave("");
-      }
-    }
-
-    function deleteActivity(id) {
-      if (confirm("Delete activity entry?")) {
-        state.activities = state.activities.filter(a => a.id !== id);
-        showToast("Activity deleted");
-        renderAllContent();
-      }
-    }
-
-    function handleAddBook(e) {
-      e.preventDefault();
-      const title = document.getElementById('admin-book-title').value;
-      const author = document.getElementById('admin-book-author').value;
-      const genre = document.getElementById('admin-book-genre').value;
-      const recommendedBy = document.getElementById('admin-book-recommended').value;
-      const level = document.getElementById('admin-book-level').value;
-      const review = document.getElementById('admin-book-review').value;
-      const fileInput = document.getElementById('admin-book-cover');
-
-      const finishSave = (coverImage) => {
-        state.books.push({ id: Date.now().toString(), title, author, genre, recommendedBy, level, coverImage, review });
-        e.target.reset();
-        showToast("Book added to digital library");
-        renderAllContent();
-      };
-
-      if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (event) => finishSave(event.target.result);
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        finishSave("");
-      }
-    }
-
-    function deleteBook(id) {
-      if (confirm("Remove book from database?")) {
-        state.books = state.books.filter(b => b.id !== id);
-        showToast("Book deleted");
-        renderAllContent();
-      }
-    }
-
-    // --- Firebase Live Announcement Handling ---
-    function handleAddAnnouncement(e) {
-      e.preventDefault();
-      const title = document.getElementById('admin-ann-title').value;
-      const content = document.getElementById('admin-ann-content').value;
-
-      const newRef = database.ref('announcements').push();
-      newRef.set({
-        title: title,
-        content: content,
-        date: new Date().toISOString().split('T')[0]
-      }).then(() => {
-        e.target.reset();
-        showToast("Announcement published LIVE!");
-      }).catch(err => {
-        console.error(err);
-        alert("Error posting announcement: " + err.message);
-      });
-    }
-
-    function deleteAnnouncement(id) {
-      if (confirm("Delete this LIVE announcement from the database?")) {
-        database.ref('announcements/' + id).remove()
-        .then(() => {
-           showToast("Announcement deleted");
-        }).catch(err => console.error(err));
-      }
-    }
-
-    function handleChangePassword(e) {
-      e.preventDefault();
-      const curr = document.getElementById('admin-curr-pass').value;
-      const next = document.getElementById('admin-new-pass').value;
-
-      if (curr === state.adminCredentials.pass) {
-        state.adminCredentials.pass = next;
-        e.target.reset();
-        showToast("Password changed successfully");
-      } else {
-        alert("Incorrect current password");
-      }
-    }
-
-    // Utilities
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-message').textContent = msg;
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
-      }, 3000);
-    }
-
-    function escapeHtml(str) {
-      if (!str) return '';
-      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
-  </script>
+            // --- 6. MUSIC CONTROLS ---
+            const musicBtn = document.getElementById('music-btn');
+            let isPlaying = false;
+            musicBtn.addEventListener('click', () => {
+                isPlaying = !isPlaying;
+                musicBtn.innerText = isPlaying ? "⏸️" : "🎵";
+                // Note: To make this functional, add an Audio element and use .play() / .pause()
+            });
+        });
+    </script>
 </body>
 </html>
