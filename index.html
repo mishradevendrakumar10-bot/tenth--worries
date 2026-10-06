@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Debate Score Counter</title>
+    <title>Storytelling Score Counter</title>
     
     <!-- PDF Generation Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -133,7 +133,7 @@
             background: var(--white); border: 1px solid var(--gray-border); border-radius: 10px;
             padding: 15px; display: flex; flex-direction: column; align-items: center;
         }
-        .criterion-card h4 { font-size: 1.1rem; color: var(--navy); margin-bottom: 15px; text-transform: uppercase;}
+        .criterion-card h4 { font-size: 1.1rem; color: var(--navy); margin-bottom: 15px; text-transform: uppercase; text-align: center;}
         
         .counter-controls { display: flex; align-items: center; gap: 20px; width: 100%; justify-content: center; }
 
@@ -194,9 +194,9 @@
             width: 100%;
         }
         
-        /* Force a desktop width so html2canvas doesn't squish the tables on mobile */
+        /* Adjusted width for Portrait A4 format */
         #pdf-content {
-            width: 1040px; 
+            width: 800px; 
             background: #ffffff;
             padding: 40px;
             color: #000;
@@ -211,12 +211,12 @@
     <div id="app-container">
         <header class="app-header">
             <div class="header-left">
-                <h2>DEBATE COUNTER</h2>
-                <h3>SCORING PAD</h3>
+                <h2>STORYTELLING</h2>
+                <h3>COMPETITION SCORING</h3>
             </div>
             <div class="header-right">
                 Judges:
-                <strong>Alok Singh<br>Aviral Khurana</strong>
+                <strong>Aviral Khurana<br>Mrs Vinu Gupta</strong>
             </div>
         </header>
 
@@ -226,22 +226,15 @@
 
         <div class="student-selector-container">
             <div class="student-selector-header">
-                <label for="student-dropdown">Select Speaker</label>
-                <span class="progress-text">COMPLETED: <span id="progress-count">0 / 8</span></span>
+                <label for="student-dropdown">Select Participant</label>
+                <span class="progress-text">COMPLETED: <span id="progress-count">0 / 5</span></span>
             </div>
             <select id="student-dropdown">
-                <optgroup label="SIDE PROPOSITION">
-                    <option value="p1">Arushi (Principal Speaker)</option>
-                    <option value="p2">Ayushi (Speaker 2)</option>
-                    <option value="p3">Nancy (Speaker 3)</option>
-                    <option value="p4">Alankrita (Speaker 4)</option>
-                </optgroup>
-                <optgroup label="SIDE OPPOSITION">
-                    <option value="o1">Pragyan (Principal Speaker)</option>
-                    <option value="o2">Tamanna (Speaker 2)</option>
-                    <option value="o3">Dev (Speaker 3)</option>
-                    <option value="o4">Shrishti (Speaker 4)</option>
-                </optgroup>
+                <option value="p1">Tanishq</option>
+                <option value="p2">Sahil</option>
+                <option value="p3">Pallaw</option>
+                <option value="p4">Akshita</option>
+                <option value="p5">Ved Mishra</option>
             </select>
         </div>
 
@@ -251,7 +244,7 @@
             <section class="total-score-card">
                 <div class="score-row">
                     <span class="score-label">TOTAL SCORE</span>
-                    <span class="score-value"><span id="total-score">0</span> / 60</span>
+                    <span class="score-value"><span id="total-score">0</span> / 40</span>
                 </div>
                 <div class="score-row average-row">
                     <span class="score-label">AVERAGE</span>
@@ -261,60 +254,40 @@
 
             <button id="save-btn" class="btn-large btn-primary">Save Score & Next</button>
             <button id="export-pdf-btn" class="btn-large btn-pdf hidden">📥 Download Final PDF</button>
-            <button id="reset-btn" class="btn-large btn-reset">Reset Current Speaker</button>
+            <button id="reset-btn" class="btn-large btn-reset">Reset Current Participant</button>
         </main>
     </div>
 
     <!-- HIDDEN PDF TEMPLATE -->
     <div id="pdf-wrapper">
         <div id="pdf-content">
-            <h1 style="text-align: center; margin-bottom: 5px; font-size: 26px;">DEBATE COMPETITION - FINAL SCORECARD</h1>
+            <h1 style="text-align: center; margin-bottom: 5px; font-size: 26px;">STORYTELLING COMPETITION - FINAL SCORECARD</h1>
             <p style="text-align: center; font-size: 16px; margin-bottom: 30px;">
-                <strong>Judges:</strong> Alok Singh & Aviral Khurana &nbsp;|&nbsp; <strong>Date:</strong> <span id="pdf-date"></span>
+                <strong>Judges:</strong> Aviral Khurana & Mrs Vinu Gupta &nbsp;|&nbsp; <strong>Date:</strong> <span id="pdf-date"></span>
             </p>
 
-            <h2 style="font-size: 20px; margin-bottom: 10px; border-bottom: 2px solid #000; padding-bottom: 5px; color: #1e293b;">SIDE PROPOSITION</h2>
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 35px; font-size: 15px;">
                 <thead>
                     <tr style="background-color: #f1f5f9;">
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: left;">Speaker Role</th>
+                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: left;">Participant Name</th>
                         <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Content (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Argument (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">English (10)</th>
+                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Expression (10)</th>
+                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Body Lang. (10)</th>
                         <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Fluency (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Confidence (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Rebuttal (10)</th>
-                        <th style="border: 2px solid #0f172a; padding: 12px; text-align: center; background: #e2e8f0;">TOTAL (/60)</th>
+                        <th style="border: 2px solid #0f172a; padding: 12px; text-align: center; background: #e2e8f0;">TOTAL (/40)</th>
                     </tr>
                 </thead>
                 <tbody id="pdf-prop-body"></tbody>
             </table>
 
-            <h2 style="font-size: 20px; margin-bottom: 10px; border-bottom: 2px solid #000; padding-bottom: 5px; color: #1e293b;">SIDE OPPOSITION</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 50px; font-size: 15px;">
-                <thead>
-                    <tr style="background-color: #f1f5f9;">
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: left;">Speaker Role</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Content (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Argument (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">English (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Fluency (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Confidence (10)</th>
-                        <th style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">Rebuttal (10)</th>
-                        <th style="border: 2px solid #0f172a; padding: 12px; text-align: center; background: #e2e8f0;">TOTAL (/60)</th>
-                    </tr>
-                </thead>
-                <tbody id="pdf-opp-body"></tbody>
-            </table>
-
             <div style="display: flex; justify-content: space-between; margin-top: 50px;">
                 <div style="text-align: center;">
                     <p>_______________________________</p>
-                    <p style="margin-top: 8px; font-weight: bold; font-size: 16px;">Signature (Alok Singh)</p>
+                    <p style="margin-top: 8px; font-weight: bold; font-size: 16px;">Signature (Aviral Khurana)</p>
                 </div>
                 <div style="text-align: center;">
                     <p>_______________________________</p>
-                    <p style="margin-top: 8px; font-weight: bold; font-size: 16px;">Signature (Aviral Khurana)</p>
+                    <p style="margin-top: 8px; font-weight: bold; font-size: 16px;">Signature (Mrs Vinu Gupta)</p>
                 </div>
             </div>
         </div>
@@ -322,28 +295,24 @@
 
     <script>
         // ==================================================
-        // DATA STRUCTURE
+        // DATA STRUCTURE FOR STORYTELLING
         // ==================================================
         const CRITERIA = [
-            { id: 'content', label: 'CONTENT & KNOWLEDGE' },
-            { id: 'argument', label: 'ARGUMENT & LOGIC' },
-            { id: 'english', label: 'ENGLISH & VOCABULARY' },
-            { id: 'fluency', label: 'FLUENCY' },
-            { id: 'confidence', label: 'CONFIDENCE' },
-            { id: 'rebuttal', label: 'REBUTTAL' }
+            { id: 'content', label: 'CONTENT & THEME' },
+            { id: 'expression', label: 'VOICE & EXPRESSION' },
+            { id: 'bodylang', label: 'BODY LANGUAGE' },
+            { id: 'fluency', label: 'FLUENCY & PRONUNCIATION' }
         ];
 
         let scoresData = {
-            'p1': {}, 'p2': {}, 'p3': {}, 'p4': {},
-            'o1': {}, 'o2': {}, 'o3': {}, 'o4': {}
+            'p1': {}, 'p2': {}, 'p3': {}, 'p4': {}, 'p5': {}
         }; 
 
         let savedStatus = {
-            'p1': false, 'p2': false, 'p3': false, 'p4': false,
-            'o1': false, 'o2': false, 'o3': false, 'o4': false
+            'p1': false, 'p2': false, 'p3': false, 'p4': false, 'p5': false
         };
 
-        const studentOrder = ['p1', 'p2', 'p3', 'p4', 'o1', 'o2', 'o3', 'o4'];
+        const studentOrder = ['p1', 'p2', 'p3', 'p4', 'p5'];
         let currentStudent = 'p1';
 
         // ==================================================
@@ -453,7 +422,7 @@
         }
 
         function resetCurrentScore() {
-            if(confirm("Are you sure you want to reset this speaker's score to zero?")) {
+            if(confirm("Are you sure you want to reset this participant's score to zero?")) {
                 CRITERIA.forEach(c => {
                     scoresData[currentStudent][c.id] = 0;
                     document.getElementById(`score-${c.id}`).value = '0';
@@ -475,14 +444,14 @@
             }
 
             const completedCount = Object.values(savedStatus).filter(status => status === true).length;
-            document.getElementById('progress-count').textContent = `${completedCount} / 8`;
-            document.getElementById('progress-fill').style.width = `${(completedCount / 8) * 100}%`;
+            document.getElementById('progress-count').textContent = `${completedCount} / 5`;
+            document.getElementById('progress-fill').style.width = `${(completedCount / 5) * 100}%`;
 
             const saveBtn = document.getElementById('save-btn');
             saveBtn.textContent = '✓ SAVED';
             saveBtn.style.backgroundColor = 'var(--success)';
 
-            if (completedCount === 8) {
+            if (completedCount === 5) {
                 document.getElementById('export-pdf-btn').classList.remove('hidden');
                 saveBtn.style.display = 'none'; 
                 setTimeout(() => { saveBtn.style.display = 'block'; saveBtn.textContent = 'Update Score'; }, 1000);
@@ -490,11 +459,11 @@
 
             setTimeout(() => {
                 let currentIndex = studentOrder.indexOf(currentStudent);
-                let nextIndex = (currentIndex + 1) % 8;
+                let nextIndex = (currentIndex + 1) % 5;
                 
                 let foundUnsaved = false;
-                for (let i = 1; i <= 8; i++) {
-                    let checkIdx = (currentIndex + i) % 8;
+                for (let i = 1; i <= 5; i++) {
+                    let checkIdx = (currentIndex + i) % 5;
                     if (!savedStatus[studentOrder[checkIdx]]) {
                         nextIndex = checkIdx;
                         foundUnsaved = true;
@@ -509,7 +478,7 @@
         }
 
         // ==================================================
-        // FOOLPROOF PDF GENERATION 
+        // PDF GENERATION 
         // ==================================================
         function getStudentNameClean(id) {
             const select = document.getElementById('student-dropdown');
@@ -532,18 +501,15 @@
                 <tr>
                     <td style="border: 1px solid #94a3b8; padding: 12px; font-weight: bold;">${name}</td>
                     <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.content}</td>
-                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.argument}</td>
-                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.english}</td>
+                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.expression}</td>
+                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.bodylang}</td>
                     <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.fluency}</td>
-                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.confidence}</td>
-                    <td style="border: 1px solid #94a3b8; padding: 12px; text-align: center;">${sd.rebuttal}</td>
                     <td style="border: 2px solid #0f172a; padding: 12px; text-align: center; font-weight: 900; font-size: 16px; background: #e2e8f0;">${total}</td>
                 </tr>
             `;
         }
 
         function generatePDF() {
-            // Change button text to show it's working
             const pdfBtn = document.getElementById('export-pdf-btn');
             pdfBtn.textContent = '⏳ Generating PDF...';
             
@@ -552,40 +518,30 @@
 
             const propBody = document.getElementById('pdf-prop-body');
             propBody.innerHTML = '';
-            ['p1', 'p2', 'p3', 'p4'].forEach(id => {
+            ['p1', 'p2', 'p3', 'p4', 'p5'].forEach(id => {
                 propBody.innerHTML += generateDetailedRowHTML(id);
             });
 
-            const oppBody = document.getElementById('pdf-opp-body');
-            oppBody.innerHTML = '';
-            ['o1', 'o2', 'o3', 'o4'].forEach(id => {
-                oppBody.innerHTML += generateDetailedRowHTML(id);
-            });
-
-            // VERY IMPORTANT: Temporarily show the PDF container so html2canvas can capture it properly
             const wrapper = document.getElementById('pdf-wrapper');
             const pdfElement = document.getElementById('pdf-content');
             wrapper.style.display = 'block';
 
-            // Scroll to top to avoid cutting off the image
             window.scrollTo(0,0);
 
-            // Adding a timeout ensures the browser renders the display:block BEFORE taking the screenshot
             setTimeout(() => {
                 const opt = {
                     margin:       0.4,
-                    filename:     `Debate_Scorecard_${dateStr.replace(/ /g, '_')}.pdf`,
+                    filename:     `Storytelling_Scorecard_${dateStr.replace(/ /g, '_')}.pdf`,
                     image:        { type: 'jpeg', quality: 0.98 },
                     html2canvas:  { scale: 2, useCORS: true },
-                    jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+                    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' } 
                 };
 
                 html2pdf().set(opt).from(pdfElement).save().then(() => {
-                    // Hide it again after downloading
                     wrapper.style.display = 'none';
-                    pdfBtn.textContent = '📥 Download Final PDF'; // Reset text
+                    pdfBtn.textContent = '📥 Download Final PDF';
                 });
-            }, 500); // 500ms delay guarantees the table is drawn completely
+            }, 500); 
         }
     </script>
 </body>
