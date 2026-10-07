@@ -38,6 +38,7 @@
             padding: 10px;
             display: flex;
             justify-content: center;
+            overflow-x: hidden;
         }
 
         #app-container {
@@ -191,17 +192,20 @@
         /* --- EXPORT PDF CONTAINER --- */
         #pdf-wrapper {
             display: none; 
-            width: 100%;
+            position: absolute;
+            top: -9999px;
+            left: 0; /* Keep it left aligned to avoid cropping */
+            z-index: -999;
         }
         
-        /* Adjusted width for Portrait A4 format */
         #pdf-content {
-            width: 800px; 
+            width: 750px; /* Safe width for Portrait A4 */
             background: #ffffff;
-            padding: 40px;
+            padding: 30px;
             color: #000;
             font-family: Arial, sans-serif;
-            margin: 0 auto;
+            margin: 0; /* REMOVED margin: 0 auto; to prevent negative margins on small screens cutting off the left side */
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -227,14 +231,16 @@
         <div class="student-selector-container">
             <div class="student-selector-header">
                 <label for="student-dropdown">Select Participant</label>
-                <span class="progress-text">COMPLETED: <span id="progress-count">0 / 5</span></span>
+                <span class="progress-text">COMPLETED: <span id="progress-count">0 / 7</span></span>
             </div>
             <select id="student-dropdown">
-                <option value="p1">Tanishq</option>
-                <option value="p2">Sahil</option>
-                <option value="p3">Pallaw</option>
-                <option value="p4">Akshita</option>
-                <option value="p5">Ved Mishra</option>
+                <option value="p1">Tanishq 8D</option>
+                <option value="p2">Sahil 8D</option>
+                <option value="p3">Pallaw 8E</option>
+                <option value="p4">Akshita Singh 9C</option>
+                <option value="p5">Ved Mishra 10E</option>
+                <option value="p6">Shivam Singh 9A</option>
+                <option value="p7">Aditya Tyagi 7A</option>
             </select>
         </div>
 
@@ -266,7 +272,7 @@
                 <strong>Judges:</strong> Aviral Khurana & Mrs Vinu Gupta &nbsp;|&nbsp; <strong>Date:</strong> <span id="pdf-date"></span>
             </p>
 
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 35px; font-size: 15px;">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px; font-size: 15px;">
                 <thead>
                     <tr style="background-color: #f1f5f9;">
                         <th style="border: 1px solid #94a3b8; padding: 12px; text-align: left;">Participant Name</th>
@@ -280,7 +286,7 @@
                 <tbody id="pdf-prop-body"></tbody>
             </table>
 
-            <div style="display: flex; justify-content: space-between; margin-top: 50px;">
+            <div style="display: flex; justify-content: space-between; margin-top: 50px; padding: 0 20px;">
                 <div style="text-align: center;">
                     <p>_______________________________</p>
                     <p style="margin-top: 8px; font-weight: bold; font-size: 16px;">Signature (Aviral Khurana)</p>
@@ -305,15 +311,16 @@
         ];
 
         let scoresData = {
-            'p1': {}, 'p2': {}, 'p3': {}, 'p4': {}, 'p5': {}
+            'p1': {}, 'p2': {}, 'p3': {}, 'p4': {}, 'p5': {}, 'p6': {}, 'p7': {}
         }; 
 
         let savedStatus = {
-            'p1': false, 'p2': false, 'p3': false, 'p4': false, 'p5': false
+            'p1': false, 'p2': false, 'p3': false, 'p4': false, 'p5': false, 'p6': false, 'p7': false
         };
 
-        const studentOrder = ['p1', 'p2', 'p3', 'p4', 'p5'];
+        const studentOrder = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7'];
         let currentStudent = 'p1';
+        const TOTAL_STUDENTS = 7;
 
         // ==================================================
         // INITIALIZATION
@@ -444,14 +451,14 @@
             }
 
             const completedCount = Object.values(savedStatus).filter(status => status === true).length;
-            document.getElementById('progress-count').textContent = `${completedCount} / 5`;
-            document.getElementById('progress-fill').style.width = `${(completedCount / 5) * 100}%`;
+            document.getElementById('progress-count').textContent = `${completedCount} / ${TOTAL_STUDENTS}`;
+            document.getElementById('progress-fill').style.width = `${(completedCount / TOTAL_STUDENTS) * 100}%`;
 
             const saveBtn = document.getElementById('save-btn');
             saveBtn.textContent = '✓ SAVED';
             saveBtn.style.backgroundColor = 'var(--success)';
 
-            if (completedCount === 5) {
+            if (completedCount === TOTAL_STUDENTS) {
                 document.getElementById('export-pdf-btn').classList.remove('hidden');
                 saveBtn.style.display = 'none'; 
                 setTimeout(() => { saveBtn.style.display = 'block'; saveBtn.textContent = 'Update Score'; }, 1000);
@@ -459,11 +466,11 @@
 
             setTimeout(() => {
                 let currentIndex = studentOrder.indexOf(currentStudent);
-                let nextIndex = (currentIndex + 1) % 5;
+                let nextIndex = (currentIndex + 1) % TOTAL_STUDENTS;
                 
                 let foundUnsaved = false;
-                for (let i = 1; i <= 5; i++) {
-                    let checkIdx = (currentIndex + i) % 5;
+                for (let i = 1; i <= TOTAL_STUDENTS; i++) {
+                    let checkIdx = (currentIndex + i) % TOTAL_STUDENTS;
                     if (!savedStatus[studentOrder[checkIdx]]) {
                         nextIndex = checkIdx;
                         foundUnsaved = true;
@@ -518,7 +525,8 @@
 
             const propBody = document.getElementById('pdf-prop-body');
             propBody.innerHTML = '';
-            ['p1', 'p2', 'p3', 'p4', 'p5'].forEach(id => {
+            
+            studentOrder.forEach(id => {
                 propBody.innerHTML += generateDetailedRowHTML(id);
             });
 
@@ -530,7 +538,7 @@
 
             setTimeout(() => {
                 const opt = {
-                    margin:       0.4,
+                    margin:       0.3,
                     filename:     `Storytelling_Scorecard_${dateStr.replace(/ /g, '_')}.pdf`,
                     image:        { type: 'jpeg', quality: 0.98 },
                     html2canvas:  { scale: 2, useCORS: true },
